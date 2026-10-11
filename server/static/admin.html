@@ -641,10 +641,14 @@
   async function saveTelegramSettings() {
     const token = document.getElementById('tgBotToken').value.trim();
     const chatId = document.getElementById('tgChatId').value.trim();
-    if (!token && !chatId) {
-      showToast('Please enter Bot Token or Chat/Channel ID');
+    if (!token || !chatId) {
+      showToast('Bot Token மற்றும் Channel ID இரண்டையும் உள்ளிடவும்!');
       return;
     }
+
+    const badge = document.getElementById('tgStatusBadge');
+    if (badge) badge.innerText = 'Testing Connection...';
+    showToast('Testing Telegram Connection...');
 
     try {
       const res = await fetch('/api/telegram/config', {
@@ -653,11 +657,19 @@
         body: JSON.stringify({ bot_token: token, chat_id: chatId })
       });
       const data = await res.json();
-      showToast(data.message);
+      if (!res.ok) {
+        showToast(data.detail || 'Telegram Connection Failed');
+        if (badge) {
+          badge.innerText = 'Connection Failed';
+          badge.className = 'badge btn-danger';
+        }
+        return;
+      }
+      showToast(data.message || 'Telegram Cloud Connected!');
       loadTelegramSettings();
-      setTimeout(closeTgModal, 600);
+      setTimeout(closeTgModal, 1000);
     } catch(e) {
-      showToast('Failed to save Telegram config');
+      showToast('Error: ' + e.message + ' (Check Python server)');
     }
   }
 

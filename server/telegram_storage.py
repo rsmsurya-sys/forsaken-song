@@ -32,6 +32,46 @@ def save_telegram_config(bot_token: str, chat_id: str):
         "chat_id": chat_id.strip()
     }, indent=2), encoding="utf-8")
 
+def test_telegram_connection(bot_token: str, chat_id: str) -> Dict[str, Any]:
+    bot_token = bot_token.strip()
+    chat_id = chat_id.strip()
+
+    if not bot_token:
+        return {"ok": False, "error": "Bot Token empty-ஆ இருக்கு. @BotFather-லிருந்து கிடைத்த Token-ஐ Paste பண்ணுங்க."}
+    if not chat_id:
+        return {"ok": False, "error": "Chat/Channel ID empty-ஆ இருக்கு. Channel ID கொடுத்து சேமிக்கவும்."}
+
+    # 1. Test Bot Token via getMe
+    try:
+        me_res = requests.get(f"https://api.telegram.org/bot{bot_token}/getMe", timeout=12)
+        me_data = me_res.json()
+        if not me_data.get("ok"):
+            return {"ok": False, "error": f"Invalid Bot Token: {me_data.get('description', 'Unauthorized')}. Bot Token சரியாக உள்ளதா என பார்க்கவும்."}
+        bot_user = me_data["result"].get("username", "Bot")
+    except Exception as e:
+        return {"ok": False, "error": f"Telegram Server-ஐ தொடர்பு கொள்ள முடியவில்லை: {str(e)}"}
+
+    # 2. Test Channel Access via getChat
+    try:
+        chat_res = requests.get(f"https://api.telegram.org/bot{bot_token}/getChat?chat_id={chat_id}", timeout=12)
+        chat_data = chat_res.json()
+        if not chat_data.get("ok"):
+            desc = chat_data.get("description", "Chat not found")
+            return {
+                "ok": False, 
+                "error": f"Channel Error ({desc}): உங்க Bot-ஐ (@{bot_user}) Channel-ல் Admin ஆக சேர்க்கவும் மற்றும் Chat ID சரியா (-100...) என பார்க்கவும்."
+            }
+        chat_title = chat_data["result"].get("title", chat_id)
+    except Exception as e:
+        return {"ok": False, "error": f"Channel சரிபார்க்க முடியவில்லை: {str(e)}"}
+
+    return {
+        "ok": True,
+        "bot_username": bot_user,
+        "chat_title": chat_title,
+        "message": f"வெற்றிகரமாக இணைக்கப்பட்டது! Bot: @{bot_user} | Channel: {chat_title}"
+    }
+
 def upload_audio_to_telegram(file_path: Path, title: str, artist: str, duration: int = 0) -> Optional[str]:
     """
     Uploads an audio file to the configured Telegram channel/chat.

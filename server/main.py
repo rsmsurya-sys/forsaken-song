@@ -323,9 +323,12 @@ async def get_tg_settings():
 
 @app.post("/api/telegram/config")
 async def save_tg_settings(req: TelegramSettingsReq):
-    from server.telegram_storage import save_telegram_config
+    from server.telegram_storage import save_telegram_config, test_telegram_connection
+    test = test_telegram_connection(req.bot_token, req.chat_id)
+    if not test.get("ok"):
+        raise HTTPException(status_code=400, detail=test.get("error", "Telegram connection failed"))
     save_telegram_config(req.bot_token, req.chat_id)
-    return {"message": "Telegram Cloud credentials saved successfully!", "status": "active"}
+    return {"message": test.get("message", "Telegram Cloud credentials saved successfully!"), "status": "active", "bot": test.get("bot_username")}
 
 @app.post("/api/download")
 async def trigger_download(req: DownloadRequest, background_tasks: BackgroundTasks):
