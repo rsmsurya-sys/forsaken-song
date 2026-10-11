@@ -374,3 +374,11 @@ async def remove_song(song_id: int):
 
 # Mount static folder
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+def main():
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("server.main:app", host="0.0.0.0", port=port)
+
+if __name__ == "__main__":
+    main()

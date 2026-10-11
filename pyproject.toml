@@ -58,7 +58,8 @@ Repository = "https://github.com/spotDL/spotify-downloader.git"
 Documentation = "https://spotdl.rtfd.io/en/latest/"
 
 [project.scripts]
-spotdl = "spotdl:console_entry_point"
+spotdl = "spotdl.console.entry_point:console_entry_point"
+server = "server.main:main"
 
 [dependency-groups]
 dev = [

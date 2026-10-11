@@ -41,6 +41,14 @@ def console_entry_point():
     """
     Entry point for the console. With profile flag, it runs the code with cProfile.
     """
+    import os
+    # If launched on cloud web host (Render, etc.) or without CLI arguments, run FastAPI web server!
+    spotdl_commands = {"download", "save", "sync", "meta", "url"}
+    has_subcommand = any(arg in spotdl_commands for arg in sys.argv[1:])
+    if len(sys.argv) <= 1 or (os.getenv("PORT") and not has_subcommand):
+        from server.main import main
+        main()
+        return
 
     if "--profile" in sys.argv:
         with cProfile.Profile() as profile:
