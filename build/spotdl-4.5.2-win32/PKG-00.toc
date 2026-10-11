@@ -1,0 +1,1464 @@
+('C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+ '(clone)\\build\\spotdl-4.5.2-win32\\spotdl-4.5.2-win32.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('__main__',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\__main__.py',
+   'PYSOURCE'),
+  ('python314.dll', 'C:\\Python314\\python314.dll', 'BINARY'),
+  ('Cryptodome\\Cipher\\_chacha20.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_chacha20.pyd',
+   'BINARY'),
+  ('Cryptodome\\PublicKey\\_ed448.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\PublicKey\\_ed448.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_ofb.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_ofb.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_SHA512.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_SHA512.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_Salsa20.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_Salsa20.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_arc2.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_arc2.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_RIPEMD160.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_RIPEMD160.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_des3.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_des3.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_SHA1.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_SHA1.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_ghash_portable.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_ghash_portable.pyd',
+   'BINARY'),
+  ('Cryptodome\\Util\\_strxor.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Util\\_strxor.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_ecb.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_ecb.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_cast.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_cast.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_SHA384.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_SHA384.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_SHA256.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_SHA256.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_pkcs1_decode.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_pkcs1_decode.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_poly1305.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_poly1305.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_BLAKE2s.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_BLAKE2s.pyd',
+   'BINARY'),
+  ('Cryptodome\\Protocol\\_scrypt.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Protocol\\_scrypt.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_ocb.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_ocb.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_cbc.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_cbc.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_ghash_clmul.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_ghash_clmul.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_SHA224.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_SHA224.pyd',
+   'BINARY'),
+  ('Cryptodome\\PublicKey\\_ed25519.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\PublicKey\\_ed25519.pyd',
+   'BINARY'),
+  ('Cryptodome\\PublicKey\\_curve25519.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\PublicKey\\_curve25519.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_ARC4.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_ARC4.pyd',
+   'BINARY'),
+  ('Cryptodome\\PublicKey\\_curve448.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\PublicKey\\_curve448.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_aesni.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_aesni.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_des.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_des.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_BLAKE2b.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_BLAKE2b.pyd',
+   'BINARY'),
+  ('Cryptodome\\Util\\_cpuid_c.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Util\\_cpuid_c.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_MD4.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_MD4.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_aes.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_aes.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_cfb.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_cfb.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_ctr.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_ctr.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_blowfish.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_blowfish.pyd',
+   'BINARY'),
+  ('Cryptodome\\Cipher\\_raw_eksblowfish.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Cipher\\_raw_eksblowfish.pyd',
+   'BINARY'),
+  ('Cryptodome\\Math\\_modexp.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Math\\_modexp.pyd',
+   'BINARY'),
+  ('Cryptodome\\PublicKey\\_ec_ws.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\PublicKey\\_ec_ws.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_keccak.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_keccak.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_MD5.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_MD5.pyd',
+   'BINARY'),
+  ('Cryptodome\\Hash\\_MD2.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\Cryptodome\\Hash\\_MD2.pyd',
+   'BINARY'),
+  ('_decimal.pyd', 'C:\\Python314\\DLLs\\_decimal.pyd', 'EXTENSION'),
+  ('_hashlib.pyd', 'C:\\Python314\\DLLs\\_hashlib.pyd', 'EXTENSION'),
+  ('_ssl.pyd', 'C:\\Python314\\DLLs\\_ssl.pyd', 'EXTENSION'),
+  ('select.pyd', 'C:\\Python314\\DLLs\\select.pyd', 'EXTENSION'),
+  ('_socket.pyd', 'C:\\Python314\\DLLs\\_socket.pyd', 'EXTENSION'),
+  ('unicodedata.pyd', 'C:\\Python314\\DLLs\\unicodedata.pyd', 'EXTENSION'),
+  ('_zstd.pyd', 'C:\\Python314\\DLLs\\_zstd.pyd', 'EXTENSION'),
+  ('_lzma.pyd', 'C:\\Python314\\DLLs\\_lzma.pyd', 'EXTENSION'),
+  ('_bz2.pyd', 'C:\\Python314\\DLLs\\_bz2.pyd', 'EXTENSION'),
+  ('_overlapped.pyd', 'C:\\Python314\\DLLs\\_overlapped.pyd', 'EXTENSION'),
+  ('_asyncio.pyd', 'C:\\Python314\\DLLs\\_asyncio.pyd', 'EXTENSION'),
+  ('_queue.pyd', 'C:\\Python314\\DLLs\\_queue.pyd', 'EXTENSION'),
+  ('_ctypes.pyd', 'C:\\Python314\\DLLs\\_ctypes.pyd', 'EXTENSION'),
+  ('_multiprocessing.pyd',
+   'C:\\Python314\\DLLs\\_multiprocessing.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd', 'C:\\Python314\\DLLs\\pyexpat.pyd', 'EXTENSION'),
+  ('_wmi.pyd', 'C:\\Python314\\DLLs\\_wmi.pyd', 'EXTENSION'),
+  ('_uuid.pyd', 'C:\\Python314\\DLLs\\_uuid.pyd', 'EXTENSION'),
+  ('81d243bd2c585b0f4821__mypyc.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\81d243bd2c585b0f4821__mypyc.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\cd.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\charset_normalizer\\cd.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\md.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\charset_normalizer\\md.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('_sqlite3.pyd', 'C:\\Python314\\DLLs\\_sqlite3.pyd', 'EXTENSION'),
+  ('_brotli.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\_brotli.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('bson\\_cbson.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\bson\\_cbson.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('pymongo\\_cmessage.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo\\_cmessage.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_imagingft.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_imagingft.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_imaging.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_imaging.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_webp.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_webp.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_imagingtk.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_imagingtk.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_avif.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_avif.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_imagingcms.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_imagingcms.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('PIL\\_imagingmath.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\PIL\\_imagingmath.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('_elementtree.pyd', 'C:\\Python314\\DLLs\\_elementtree.pyd', 'EXTENSION'),
+  ('curl_cffi\\_wrapper.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\_wrapper.pyd',
+   'EXTENSION'),
+  ('_cffi_backend.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\_cffi_backend.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\distance\\_initialize_cpp.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\distance\\_initialize_cpp.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\distance\\metrics_cpp.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\distance\\metrics_cpp.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\distance\\metrics_cpp_avx2.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\distance\\metrics_cpp_avx2.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\fuzz_cpp.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\fuzz_cpp.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\fuzz_cpp_avx2.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\fuzz_cpp_avx2.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\_feature_detector_cpp.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\_feature_detector_cpp.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\utils_cpp.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\utils_cpp.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('rapidfuzz\\process_cpp_impl.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\rapidfuzz\\process_cpp_impl.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('wrapt\\_wrappers.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\wrapt\\_wrappers.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('markupsafe\\_speedups.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe\\_speedups.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('yaml\\_yaml.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\yaml\\_yaml.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\__init__.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\__init__.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\join.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\join.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\meet.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\meet.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\erasetype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\erasetype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\typevartuples.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\typevartuples.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\subtypes.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\subtypes.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\solve.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\solve.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\graph_utils.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\graph_utils.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checkmember.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checkmember.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\messages.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\messages.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\typetraverser.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\typetraverser.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\operators.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\operators.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\errors.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\errors.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\scope.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\scope.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\error_formatter.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\error_formatter.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\cache.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\cache.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('librt\\internal.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\librt\\internal.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checker_shared.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checker_shared.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\message_registry.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\message_registry.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\typestate.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\typestate.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\types_utils.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\types_utils.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checker_state.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checker_state.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\constraints.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\constraints.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\infer.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\infer.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\argmap.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\argmap.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\applytype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\applytype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\type_visitor.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\type_visitor.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\state.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\state.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\maptype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\maptype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\expandtype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\expandtype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\typeops.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\typeops.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\copytype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\copytype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\defaults.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\defaults.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\util.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\util.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\typevars.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\typevars.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\types.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\types.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\server\\trigger.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\server\\trigger.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\semanal.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\semanal.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\visitor.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\visitor.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\typeanal.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\typeanal.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\tvar_scope.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\tvar_scope.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\semanal_typeddict.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\semanal_typeddict.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\semanal_shared.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\semanal_shared.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\semanal_newtype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\semanal_newtype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\semanal_namedtuple.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\semanal_namedtuple.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\semanal_enum.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\semanal_enum.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\reachability.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\reachability.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\traverser.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\traverser.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\literals.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\literals.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\patterns.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\patterns.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\mro.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\mro.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\exprtotype.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\exprtotype.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\fastparse.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\fastparse.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\sharedparse.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\sharedparse.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\constant_fold.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\constant_fold.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\plugins\\dataclasses.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\plugins\\dataclasses.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checker.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checker.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\treetransform.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\treetransform.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checkpattern.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checkpattern.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\binder.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\binder.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checkexpr.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checkexpr.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\lookup.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\lookup.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\checkstrformat.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\checkstrformat.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\parse.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\parse.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\nativeparse.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\nativeparse.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\plugins\\common.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\plugins\\common.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\fixup.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\fixup.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\plugin.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\plugin.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\options.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\options.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\nodes.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\nodes.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\strconv.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\strconv.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('mypy\\errorcodes.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\mypy\\errorcodes.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('_zoneinfo.pyd', 'C:\\Python314\\DLLs\\_zoneinfo.pyd', 'EXTENSION'),
+  ('pydantic_core\\_pydantic_core.cp314-win_amd64.pyd',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic_core\\_pydantic_core.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll', 'C:\\Python314\\VCRUNTIME140.dll', 'BINARY'),
+  ('libcrypto-3.dll', 'C:\\Python314\\DLLs\\libcrypto-3.dll', 'BINARY'),
+  ('libssl-3.dll', 'C:\\Python314\\DLLs\\libssl-3.dll', 'BINARY'),
+  ('libffi-8.dll', 'C:\\Python314\\DLLs\\libffi-8.dll', 'BINARY'),
+  ('VCRUNTIME140_1.dll', 'C:\\Python314\\VCRUNTIME140_1.dll', 'BINARY'),
+  ('sqlite3.dll', 'C:\\Python314\\DLLs\\sqlite3.dll', 'BINARY'),
+  ('python3.dll', 'C:\\Python314\\python3.dll', 'BINARY'),
+  ('MSVCP140.dll', 'C:\\WINDOWS\\system32\\MSVCP140.dll', 'BINARY'),
+  ('curl_cffi-0.15.0.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\METADATA',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\RECORD',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\REQUESTED',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\WHEEL',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\entry_points.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\entry_points.txt',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('curl_cffi-0.15.0.dist-info\\top_level.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi-0.15.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('curl_cffi\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\__init__.py',
+   'DATA'),
+  ('curl_cffi\\__main__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\__main__.py',
+   'DATA'),
+  ('curl_cffi\\__version__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\__version__.py',
+   'DATA'),
+  ('curl_cffi\\_asyncio_selector.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\_asyncio_selector.py',
+   'DATA'),
+  ('curl_cffi\\aio.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\aio.py',
+   'DATA'),
+  ('curl_cffi\\cli\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\cli\\__init__.py',
+   'DATA'),
+  ('curl_cffi\\cli\\doctor.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\cli\\doctor.py',
+   'DATA'),
+  ('curl_cffi\\cli\\output.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\cli\\output.py',
+   'DATA'),
+  ('curl_cffi\\cli\\parse.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\cli\\parse.py',
+   'DATA'),
+  ('curl_cffi\\cli\\request.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\cli\\request.py',
+   'DATA'),
+  ('curl_cffi\\cli\\run.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\cli\\run.py',
+   'DATA'),
+  ('curl_cffi\\const.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\const.py',
+   'DATA'),
+  ('curl_cffi\\curl.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\curl.py',
+   'DATA'),
+  ('curl_cffi\\py.typed',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\py.typed',
+   'DATA'),
+  ('curl_cffi\\requests\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\__init__.py',
+   'DATA'),
+  ('curl_cffi\\requests\\cookies.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\cookies.py',
+   'DATA'),
+  ('curl_cffi\\requests\\errors.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\errors.py',
+   'DATA'),
+  ('curl_cffi\\requests\\exceptions.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\exceptions.py',
+   'DATA'),
+  ('curl_cffi\\requests\\headers.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\headers.py',
+   'DATA'),
+  ('curl_cffi\\requests\\impersonate.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\impersonate.py',
+   'DATA'),
+  ('curl_cffi\\requests\\models.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\models.py',
+   'DATA'),
+  ('curl_cffi\\requests\\session.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\session.py',
+   'DATA'),
+  ('curl_cffi\\requests\\utils.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\utils.py',
+   'DATA'),
+  ('curl_cffi\\requests\\websockets.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\requests\\websockets.py',
+   'DATA'),
+  ('curl_cffi\\utils.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\curl_cffi\\utils.py',
+   'DATA'),
+  ('pykakasi\\data\\halfkana3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\halfkana3.db',
+   'DATA'),
+  ('pykakasi\\data\\hepburndict3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\hepburndict3.db',
+   'DATA'),
+  ('pykakasi\\data\\hepburnhira3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\hepburnhira3.db',
+   'DATA'),
+  ('pykakasi\\data\\itaijidict4.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\itaijidict4.db',
+   'DATA'),
+  ('pykakasi\\data\\kanwadict4.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\kanwadict4.db',
+   'DATA'),
+  ('pykakasi\\data\\kunreidict3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\kunreidict3.db',
+   'DATA'),
+  ('pykakasi\\data\\kunreihira3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\kunreihira3.db',
+   'DATA'),
+  ('pykakasi\\data\\passportdict3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\passportdict3.db',
+   'DATA'),
+  ('pykakasi\\data\\passporthira3.db',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pykakasi\\data\\passporthira3.db',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\INSTALLER',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\METADATA',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\RECORD',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\REQUESTED',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\WHEEL',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('spotapi-1.2.8.dist-info\\top_level.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi-1.2.8.dist-info\\top_level.txt',
+   'DATA'),
+  ('spotapi\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\__init__.py',
+   'DATA'),
+  ('spotapi\\_tests\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\_tests\\__init__.py',
+   'DATA'),
+  ('spotapi\\_tests\\annotations_test.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\_tests\\annotations_test.py',
+   'DATA'),
+  ('spotapi\\_tests\\client_refresh_test.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\_tests\\client_refresh_test.py',
+   'DATA'),
+  ('spotapi\\album.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\album.py',
+   'DATA'),
+  ('spotapi\\artist.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\artist.py',
+   'DATA'),
+  ('spotapi\\client.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\client.py',
+   'DATA'),
+  ('spotapi\\creator.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\creator.py',
+   'DATA'),
+  ('spotapi\\data\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\data\\__init__.py',
+   'DATA'),
+  ('spotapi\\data\\data.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\data\\data.py',
+   'DATA'),
+  ('spotapi\\data\\interfaces.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\data\\interfaces.py',
+   'DATA'),
+  ('spotapi\\exceptions\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\exceptions\\__init__.py',
+   'DATA'),
+  ('spotapi\\exceptions\\errors.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\exceptions\\errors.py',
+   'DATA'),
+  ('spotapi\\family.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\family.py',
+   'DATA'),
+  ('spotapi\\http\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\http\\__init__.py',
+   'DATA'),
+  ('spotapi\\http\\data.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\http\\data.py',
+   'DATA'),
+  ('spotapi\\http\\request.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\http\\request.py',
+   'DATA'),
+  ('spotapi\\login.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\login.py',
+   'DATA'),
+  ('spotapi\\password.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\password.py',
+   'DATA'),
+  ('spotapi\\player.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\player.py',
+   'DATA'),
+  ('spotapi\\playlist.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\playlist.py',
+   'DATA'),
+  ('spotapi\\podcast.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\podcast.py',
+   'DATA'),
+  ('spotapi\\public.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\public.py',
+   'DATA'),
+  ('spotapi\\solvers\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\solvers\\__init__.py',
+   'DATA'),
+  ('spotapi\\solvers\\capmonster.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\solvers\\capmonster.py',
+   'DATA'),
+  ('spotapi\\solvers\\capsolver.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\solvers\\capsolver.py',
+   'DATA'),
+  ('spotapi\\song.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\song.py',
+   'DATA'),
+  ('spotapi\\status.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\status.py',
+   'DATA'),
+  ('spotapi\\types\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\types\\__init__.py',
+   'DATA'),
+  ('spotapi\\types\\alias.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\types\\alias.py',
+   'DATA'),
+  ('spotapi\\types\\annotations.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\types\\annotations.py',
+   'DATA'),
+  ('spotapi\\types\\data.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\types\\data.py',
+   'DATA'),
+  ('spotapi\\types\\interfaces.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\types\\interfaces.py',
+   'DATA'),
+  ('spotapi\\user.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\user.py',
+   'DATA'),
+  ('spotapi\\utils\\__init__.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\utils\\__init__.py',
+   'DATA'),
+  ('spotapi\\utils\\logger.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\utils\\logger.py',
+   'DATA'),
+  ('spotapi\\utils\\saver.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\utils\\saver.py',
+   'DATA'),
+  ('spotapi\\utils\\strings.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\utils\\strings.py',
+   'DATA'),
+  ('spotapi\\websocket.py',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\spotapi\\websocket.py',
+   'DATA'),
+  ('spotdl\\web\\components\\base.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\base.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\download-list.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\download-list.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\downloads.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\downloads.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\footer.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\footer.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\home.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\home.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\navbar.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\navbar.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\search-input-rotating-placeholder.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\search-input-rotating-placeholder.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\search-list.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\search-list.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\search.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\search.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\settings-content.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\settings-content.html.j2',
+   'DATA'),
+  ('spotdl\\web\\components\\settings.html',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\settings.html',
+   'DATA'),
+  ('spotdl\\web\\components\\status-disconnected.html.j2',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\components\\status-disconnected.html.j2',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\daisyui@5.css',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\daisyui@5.css',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\datastar.js',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\datastar.js',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon.ico',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon.ico',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\android-chrome-192x192.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\android-chrome-192x192.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\android-chrome-512x512.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\android-chrome-512x512.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\apple-touch-icon.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\apple-touch-icon.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\browserconfig.xml',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\browserconfig.xml',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\favicon-16x16.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\favicon-16x16.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\favicon-32x32.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\favicon-32x32.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\favicon.ico',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\favicon.ico',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-144x144.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-144x144.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-150x150.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-150x150.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-310x150.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-310x150.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-310x310.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-310x310.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-70x70.png',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\mstile-70x70.png',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\safari-pinned-tab.svg',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\safari-pinned-tab.svg',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\favicon_package_v0.16\\site.webmanifest',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\favicon_package_v0.16\\site.webmanifest',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\iconify-icon\\iconify-icon.min.js',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\iconify-icon\\iconify-icon.min.js',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\spotdl.svg',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\spotdl.svg',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\tailwindcss\\browser@4.js',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\tailwindcss\\browser@4.js',
+   'DATA'),
+  ('spotdl\\web\\static\\assets\\themes.css',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\spotdl\\web\\static\\assets\\themes.css',
+   'DATA'),
+  ('ytmusicapi\\locales\\README.rst',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\README.rst',
+   'DATA'),
+  ('ytmusicapi\\locales\\ar\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\ar\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\cs\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\cs\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\de\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\de\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\en\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\en\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\es\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\es\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\fr\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\fr\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\hi\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\hi\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\it\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\it\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ja\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\ja\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ko\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\ko\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\nl\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\nl\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\pt\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\pt\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ru\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\ru\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\tr\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\tr\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\ur\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\ur\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\zh_CN\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\zh_CN\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('ytmusicapi\\locales\\zh_TW\\LC_MESSAGES\\base.mo',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi\\locales\\zh_TW\\LC_MESSAGES\\base.mo',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'DATA'),
+  ('setuptools\\_vendor\\jaraco\\text\\Lorem ipsum.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\Lorem '
+   'ipsum.txt',
+   'DATA'),
+  ('certifi\\cacert.pem',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\certifi\\cacert.pem',
+   'DATA'),
+  ('certifi\\py.typed',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\certifi\\py.typed',
+   'DATA'),
+  ('yt_dlp_ejs\\yt\\solver\\core.min.js',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\yt_dlp_ejs\\yt\\solver\\core.min.js',
+   'DATA'),
+  ('yt_dlp_ejs\\yt\\solver\\lib.min.js',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\yt_dlp_ejs\\yt\\solver\\lib.min.js',
+   'DATA'),
+  ('text_unidecode\\data.bin',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\text_unidecode\\data.bin',
+   'DATA'),
+  ('dateutil\\zoneinfo\\dateutil-zoneinfo.tar.gz',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\dateutil\\zoneinfo\\dateutil-zoneinfo.tar.gz',
+   'DATA'),
+  ('pydantic-2.13.4.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic-2.13.4.dist-info\\METADATA',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('websockets-14.2.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\RECORD',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('websockets-14.2.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\INSTALLER',
+   'DATA'),
+  ('pymongo-4.17.0.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo-4.17.0.dist-info\\WHEEL',
+   'DATA'),
+  ('pymongo-4.17.0.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo-4.17.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('websockets-14.2.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\METADATA',
+   'DATA'),
+  ('click-8.3.3.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\click-8.3.3.dist-info\\RECORD',
+   'DATA'),
+  ('click-8.3.3.dist-info\\licenses\\LICENSE.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\click-8.3.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('pymongo-4.17.0.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo-4.17.0.dist-info\\METADATA',
+   'DATA'),
+  ('click-8.3.3.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\click-8.3.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('pydantic-2.13.4.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic-2.13.4.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('pymongo-4.17.0.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo-4.17.0.dist-info\\RECORD',
+   'DATA'),
+  ('pymongo-4.17.0.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo-4.17.0.dist-info\\REQUESTED',
+   'DATA'),
+  ('websockets-14.2.dist-info\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\LICENSE',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\RECORD',
+   'DATA'),
+  ('websockets-14.2.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\WHEEL',
+   'DATA'),
+  ('click-8.3.3.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\click-8.3.3.dist-info\\WHEEL',
+   'DATA'),
+  ('pydantic-2.13.4.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic-2.13.4.dist-info\\WHEEL',
+   'DATA'),
+  ('pydantic-2.13.4.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic-2.13.4.dist-info\\INSTALLER',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\REQUESTED',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\METADATA',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\WHEEL',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\WHEEL',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('pydantic-2.13.4.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic-2.13.4.dist-info\\REQUESTED',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\RECORD',
+   'DATA'),
+  ('websockets-14.2.dist-info\\top_level.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\top_level.txt',
+   'DATA'),
+  ('redis-7.4.0.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\redis-7.4.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('click-8.3.3.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\click-8.3.3.dist-info\\METADATA',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\METADATA',
+   'DATA'),
+  ('redis-7.4.0.dist-info\\WHEEL',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\redis-7.4.0.dist-info\\WHEEL',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('redis-7.4.0.dist-info\\METADATA',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\redis-7.4.0.dist-info\\METADATA',
+   'DATA'),
+  ('redis-7.4.0.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\redis-7.4.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\entry_points.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\entry_points.txt',
+   'DATA'),
+  ('ytmusicapi-1.12.1.dist-info\\top_level.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\ytmusicapi-1.12.1.dist-info\\top_level.txt',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\top_level.txt',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\top_level.txt',
+   'DATA'),
+  ('redis-7.4.0.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\redis-7.4.0.dist-info\\REQUESTED',
+   'DATA'),
+  ('pymongo-4.17.0.dist-info\\INSTALLER',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pymongo-4.17.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('pydantic-2.13.4.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\pydantic-2.13.4.dist-info\\RECORD',
+   'DATA'),
+  ('click-8.3.3.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\click-8.3.3.dist-info\\REQUESTED',
+   'DATA'),
+  ('redis-7.4.0.dist-info\\RECORD',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\redis-7.4.0.dist-info\\RECORD',
+   'DATA'),
+  ('websockets-14.2.dist-info\\REQUESTED',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\.venv\\Lib\\site-packages\\websockets-14.2.dist-info\\REQUESTED',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\RSM_F\\OneDrive\\Documents\\GitHub\\forsaken__song '
+   '(clone)\\build\\spotdl-4.5.2-win32\\base_library.zip',
+   'DATA')],
+ 'python314.dll',
+ False,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)

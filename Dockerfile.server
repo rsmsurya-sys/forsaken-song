@@ -1,0 +1,53 @@
+FROM python:3.14-slim-bookworm
+
+LABEL maintainer="Forsaken Song Team"
+
+ARG UID=1000
+ARG GID=1000
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies (FFmpeg is required for spotdl audio conversion)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    ffmpeg \
+    openssl \
+    aria2 \
+    g++ \
+    git \
+    libffi-dev \
+    zlib1g-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv and dependencies
+RUN pip install --no-cache-dir --upgrade pip uv wheel
+
+# Create non-root spotdl user
+RUN groupadd -g $GID spotdl && \
+    useradd -m -u $UID -g $GID spotdl
+
+WORKDIR /app
+
+# Copy application files
+COPY . .
+
+# Install dependencies using uv
+RUN uv sync --no-dev
+
+# Set permissions
+RUN chown -R spotdl:spotdl /app
+RUN mkdir -p /music && chown spotdl:spotdl /music
+
+VOLUME /music
+
+USER spotdl
+
+# Install Deno inside container for yt-dlp compatibility
+RUN uv run --project /app --no-dev --frozen --no-sync spotdl --download-deno
+
+EXPOSE 8000
+
+# Run FastAPI streaming server
+CMD ["uv", "run", "--project", "/app", "--no-dev", "--frozen", "--no-sync", "uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "8000"]
