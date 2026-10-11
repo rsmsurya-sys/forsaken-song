@@ -140,6 +140,20 @@ async def serve_favicon():
         return FileResponse(logo_path, media_type="image/png")
     raise HTTPException(status_code=404, detail="Favicon not found")
 
+@app.get("/style.css", include_in_schema=False)
+async def serve_root_style():
+    style_path = STATIC_DIR / "style.css"
+    if style_path.exists():
+        return FileResponse(style_path, media_type="text/css")
+    raise HTTPException(status_code=404, detail="Style not found")
+
+@app.get("/logo.png", include_in_schema=False)
+async def serve_root_logo():
+    logo_path = STATIC_DIR / "logo.png"
+    if logo_path.exists():
+        return FileResponse(logo_path, media_type="image/png")
+    raise HTTPException(status_code=404, detail="Logo not found")
+
 # API endpoints
 @app.get("/api/info")
 async def get_node_info():
