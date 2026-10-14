@@ -431,27 +431,41 @@
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
-  async function loadWorker() {
+  // Safe JSON Fetch Helper (Guarantees no JSON parsing errors)
+  async function safeFetchJson(url, options = {}) {
     try {
-      const res = await fetch('/api/info');
-      const d = await res.json();
-      document.getElementById('statWorker').innerText = `${d.worker} (${d.hostname})`;
-    } catch(e) {
+      const res = await fetch(url, options);
+      const text = await res.text();
+      let data = null;
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch (jsonErr) {
+        return { ok: false, status: res.status, data: null, error: 'Server returned non-JSON response' };
+      }
+      return { ok: res.ok, status: res.status, data: data, error: res.ok ? null : (data && data.detail ? data.detail : 'Request failed') };
+    } catch (netErr) {
+      return { ok: false, status: 0, data: null, error: netErr.message || 'Network error' };
+    }
+  }
+
+  async function loadWorker() {
+    const res = await safeFetchJson('/api/info');
+    if (res.ok && res.data) {
+      document.getElementById('statWorker').innerText = `${res.data.worker} (${res.data.hostname})`;
+    } else {
       document.getElementById('statWorker').innerText = 'Backend Active';
     }
   }
 
   async function fetchAdminData() {
-    try {
-      const res = await fetch('/api/songs');
-      allSongs = await res.json();
+    const res = await safeFetchJson('/api/songs');
+    if (res.ok && Array.isArray(res.data)) {
+      allSongs = res.data;
       renderAdminSongs(allSongs);
 
       document.getElementById('statSongsCount').innerText = allSongs.length;
       const totalBytes = allSongs.reduce((acc, s) => acc + (s.filesize || 0), 0);
       document.getElementById('statStorageSize').innerText = (totalBytes / (1024 * 1024)).toFixed(1) + ' MB';
-    } catch (e) {
-      console.error(e);
     }
   }
 
@@ -464,7 +478,7 @@
 
     tbody.innerHTML = list.map(s => `
       <tr>
-        <td><img src="/api/cover/${s.id}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"></td>
+        <td><img src="/api/cover/${s.id}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'"></td>
         <td><strong style="color:#fff;">${s.title}</strong><div style="font-size:0.75rem; color:var(--text-muted);">${s.filename}</div></td>
         <td>${s.artist}</td>
         <td><span class="badge ${s.source === 'spotdl' ? 'badge-green' : 'badge-purple'}">${s.source}</span></td>
@@ -490,26 +504,23 @@
 
   async function rescanLibrary() {
     showToast('Scanning music folder...');
-    try {
-      const res = await fetch('/api/scan', { method: 'POST' });
-      const data = await res.json();
-      showToast(data.message);
+    const res = await safeFetchJson('/api/scan', { method: 'POST' });
+    if (res.ok && res.data) {
+      showToast(res.data.message || 'Scan completed');
       fetchAdminData();
-    } catch(e) {
+    } else {
       showToast('Error scanning library');
     }
   }
 
   async function deleteSong(id) {
     if (!confirm('Are you sure you want to delete this track from library?')) return;
-    try {
-      const res = await fetch(`/api/songs/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        showToast('Song deleted successfully!');
-        fetchAdminData();
-      }
-    } catch (e) {
-      showToast('Failed to delete song');
+    const res = await safeFetchJson(`/api/songs/${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      showToast('Song deleted successfully!');
+      fetchAdminData();
+    } else {
+      showToast(res.error || 'Failed to delete song');
     }
   }
 
@@ -517,24 +528,24 @@
   async function handleFileUpload(files) {
     if (!files.length) return;
     const statusDiv = document.getElementById('uploadStatus');
-    statusDiv.innerHTML = `<span style="color:var(--accent-primary);">Uploading ${files.length} file(s)...</span>`;
+    statusDiv.innerHTML = `<span style="color:var(--sp-green);">Uploading ${files.length} file(s)...</span>`;
 
     const formData = new FormData();
     for (let f of files) {
       formData.append('files', f);
     }
 
-    try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData
-      });
-      const data = await res.json();
-      statusDiv.innerHTML = `<span style="color:var(--accent-emerald);">Successfully uploaded and indexed ${data.uploaded} song(s)!</span>`;
-      showToast(`Uploaded ${data.uploaded} song(s)!`);
+    const res = await safeFetchJson('/api/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (res.ok && res.data) {
+      statusDiv.innerHTML = `<span style="color:var(--sp-green);">Successfully uploaded and indexed ${res.data.uploaded} song(s)!</span>`;
+      showToast(`Uploaded ${res.data.uploaded} song(s)!`);
       fetchAdminData();
-    } catch (e) {
-      statusDiv.innerHTML = `<span style="color:#ef4444;">Upload error: ${e.message}</span>`;
+    } else {
+      statusDiv.innerHTML = `<span style="color:#ef4444;">Upload error: ${res.error || 'Unknown error'}</span>`;
     }
   }
 
@@ -554,26 +565,25 @@
     const q = input.value.trim();
     if (!q) return;
 
-    try {
-      const res = await fetch('/api/download', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: q })
-      });
-      if (res.ok) {
-        showToast('Download started in background!');
-        input.value = '';
-        fetchTasks();
-      }
-    } catch(e) {
-      showToast('Failed to start download');
+    const res = await safeFetchJson('/api/download', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: q })
+    });
+
+    if (res.ok) {
+      showToast('Download started in background!');
+      input.value = '';
+      fetchTasks();
+    } else {
+      showToast(res.error || 'Failed to start download');
     }
   }
 
   async function fetchTasks() {
-    try {
-      const res = await fetch('/api/tasks');
-      const tasks = await res.json();
+    const res = await safeFetchJson('/api/tasks');
+    if (res.ok && Array.isArray(res.data)) {
+      const tasks = res.data;
       const container = document.getElementById('taskList');
       if (!tasks.length) {
         container.innerHTML = `<div style="color:var(--text-muted); font-size:0.85rem;">No active downloads</div>`;
@@ -591,7 +601,7 @@
           </span>
         </div>
       `).join('');
-    } catch(e) {}
+    }
   }
 
   function openTgModal() {
@@ -609,9 +619,9 @@
   }
 
   async function loadTelegramSettings() {
-    try {
-      const res = await fetch('/api/telegram/config');
-      const data = await res.json();
+    const res = await safeFetchJson('/api/telegram/config');
+    if (res.ok && res.data) {
+      const data = res.data;
       const badge = document.getElementById('tgStatusBadge');
       const navBadge = document.getElementById('tgNavBadge');
       if (data.configured) {
@@ -635,7 +645,7 @@
           navBadge.className = 'badge badge-purple';
         }
       }
-    } catch(e) {}
+    }
   }
 
   async function saveTelegramSettings() {
@@ -650,27 +660,23 @@
     if (badge) badge.innerText = 'Testing Connection...';
     showToast('Testing Telegram Connection...');
 
-    try {
-      const res = await fetch('/api/telegram/config', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ bot_token: token, chat_id: chatId })
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        showToast(data.detail || 'Telegram Connection Failed');
-        if (badge) {
-          badge.innerText = 'Connection Failed';
-          badge.className = 'badge btn-danger';
-        }
-        return;
+    const res = await safeFetchJson('/api/telegram/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ bot_token: token, chat_id: chatId })
+    });
+
+    if (!res.ok) {
+      showToast(res.error || 'Telegram Connection Failed');
+      if (badge) {
+        badge.innerText = 'Connection Failed';
+        badge.className = 'badge btn-danger';
       }
-      showToast(data.message || 'Telegram Cloud Connected!');
-      loadTelegramSettings();
-      setTimeout(closeTgModal, 1000);
-    } catch(e) {
-      showToast('Error: ' + e.message + ' (Check Python server)');
+      return;
     }
+    showToast(res.data.message || 'Telegram Cloud Connected!');
+    loadTelegramSettings();
+    setTimeout(closeTgModal, 1000);
   }
 
   // Auto-refresh tasks every 3 seconds

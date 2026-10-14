@@ -44,7 +44,10 @@ def test_telegram_connection(bot_token: str, chat_id: str) -> Dict[str, Any]:
     # 1. Test Bot Token via getMe
     try:
         me_res = requests.get(f"https://api.telegram.org/bot{bot_token}/getMe", timeout=12)
-        me_data = me_res.json()
+        try:
+            me_data = me_res.json()
+        except Exception:
+            return {"ok": False, "error": f"Telegram API response is not valid JSON (HTTP {me_res.status_code}). Please check internet or firewall."}
         if not me_data.get("ok"):
             return {"ok": False, "error": f"Invalid Bot Token: {me_data.get('description', 'Unauthorized')}. Bot Token சரியாக உள்ளதா என பார்க்கவும்."}
         bot_user = me_data["result"].get("username", "Bot")
@@ -54,7 +57,10 @@ def test_telegram_connection(bot_token: str, chat_id: str) -> Dict[str, Any]:
     # 2. Test Channel Access via getChat
     try:
         chat_res = requests.get(f"https://api.telegram.org/bot{bot_token}/getChat?chat_id={chat_id}", timeout=12)
-        chat_data = chat_res.json()
+        try:
+            chat_data = chat_res.json()
+        except Exception:
+            return {"ok": False, "error": f"Telegram Channel response is not valid JSON (HTTP {chat_res.status_code})."}
         if not chat_data.get("ok"):
             desc = chat_data.get("description", "Chat not found")
             return {
@@ -99,7 +105,10 @@ def upload_audio_to_telegram(file_path: Path, title: str, artist: str, duration:
             res = requests.post(url, files=files, data=data, timeout=120)
             
         if res.status_code == 200:
-            result = res.json()
+            try:
+                result = res.json()
+            except Exception:
+                result = {}
             if result.get("ok"):
                 audio_obj = result["result"].get("audio") or result["result"].get("document")
                 if audio_obj:
@@ -124,7 +133,10 @@ def get_telegram_file_stream_url(file_id: str) -> Optional[str]:
     try:
         res = requests.get(url, timeout=15)
         if res.status_code == 200:
-            data = res.json()
+            try:
+                data = res.json()
+            except Exception:
+                data = {}
             if data.get("ok") and "file_path" in data.get("result", {}):
                 file_path = data["result"]["file_path"]
                 return f"https://api.telegram.org/file/bot{token}/{file_path}"

@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Forsaken Music - Android Mobile Player</title>
+  <title>Forsaken Music - Spotify Mobile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="/static/logo.png">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" type="image/png" href="/logo.png">
   <style>
     body {
-      padding-bottom: 150px; /* Space for mini player + nav bar */
+      background-color: var(--fk-bg-root);
+      color: #fff;
+      padding-bottom: 140px; /* Space for sticky mini player and bottom bar */
       user-select: none;
     }
 
+    /* Modern Mobile Header */
     .mobile-header {
       padding: 16px 20px;
       display: flex;
@@ -25,9 +27,10 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(10, 11, 16, 0.85);
+      background: rgba(12, 13, 20, 0.92);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-glass);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--fk-border-subtle);
     }
 
     .mobile-brand {
@@ -35,38 +38,41 @@
       align-items: center;
       gap: 10px;
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
+      letter-spacing: -0.5px;
     }
 
     .mobile-brand-icon {
       width: 32px;
       height: 32px;
-      border-radius: 10px;
-      background: var(--accent-gradient);
+      border-radius: 8px;
+      background: var(--fk-gradient-aurora);
+      color: #040914;
       display: grid;
       place-items: center;
+      box-shadow: 0 0 14px rgba(0, 242, 254, 0.4);
     }
 
+    /* Search Bar */
     .mobile-search-bar {
-      margin: 16px 20px;
+      margin: 14px 16px;
       position: relative;
     }
 
     .mobile-search-bar input {
       width: 100%;
-      padding: 12px 18px 12px 42px;
+      padding: 10px 16px 10px 40px;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-glass);
+      background: #242424;
+      border: 1px solid transparent;
       color: #fff;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       outline: none;
-      transition: var(--transition-smooth);
     }
 
     .mobile-search-bar input:focus {
-      border-color: var(--accent-primary);
-      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+      background: #2a2a2a;
     }
 
     .mobile-search-bar svg {
@@ -74,57 +80,97 @@
       left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-muted);
+      color: var(--sp-text-muted);
     }
 
-    /* Track Cards List */
+    /* Playlist Pills */
+    .playlist-pills-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .playlist-pill {
+      background: #242424;
+      color: #b3b3b3;
+      border: none;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .playlist-pill.active {
+      background: #fff;
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* Track List */
     .track-list {
       padding: 0 16px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .track-card {
+    .track-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px;
-      border-radius: var(--radius-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border-glass);
-      transition: var(--transition-smooth);
+      padding: 8px 10px;
+      border-radius: var(--radius-xs);
+      background: var(--sp-surface);
+      cursor: pointer;
+      transition: var(--transition);
     }
 
-    .track-card.active {
-      border-color: var(--accent-primary);
-      background: rgba(139, 92, 246, 0.15);
-      box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+    .track-item:active {
+      background: var(--sp-surface-hover);
     }
 
-    .track-left {
+    .track-item.active-track {
+      background: rgba(0, 242, 254, 0.12);
+      border-left: 3px solid var(--fk-cyan);
+    }
+
+    .track-item.active-track .track-name {
+      color: var(--fk-cyan);
+    }
+
+    .track-info-group {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       overflow: hidden;
       flex: 1;
     }
 
     .track-thumb {
-      width: 50px;
-      height: 50px;
-      border-radius: var(--radius-sm);
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-xs);
       object-fit: cover;
       flex-shrink: 0;
+      background: #1c1d2c;
     }
 
     .track-meta {
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
+      gap: 2px;
     }
 
-    .track-title {
-      font-weight: 700;
-      font-size: 0.95rem;
+    .track-name {
+      font-weight: 600;
+      font-size: 0.92rem;
       color: #fff;
       white-space: nowrap;
       overflow: hidden;
@@ -132,557 +178,443 @@
     }
 
     .track-artist {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
+      font-size: 0.78rem;
+      color: var(--fk-text-muted);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .track-play-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: var(--radius-full);
-      background: var(--accent-gradient);
-      border: none;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-
-    /* Docked Mini Player */
-    .mini-player {
+    /* Floating Capsule Mini Player */
+    .spotify-mobile-mini-player {
       position: fixed;
-      bottom: 64px; /* above bottom nav */
+      bottom: 66px;
       left: 12px;
       right: 12px;
-      height: 64px;
-      border-radius: var(--radius-md);
-      background: rgba(22, 25, 38, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(19, 20, 31, 0.92);
+      backdrop-filter: blur(28px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: var(--shadow-card);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 14px;
-      z-index: 90;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.8), 0 0 16px rgba(0, 242, 254, 0.15);
+      z-index: 100;
       cursor: pointer;
-    }
-
-    .mini-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
       overflow: hidden;
-      flex: 1;
     }
 
-    .mini-thumb {
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      object-fit: cover;
+    .mini-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--fk-gradient-aurora);
+      width: 0%;
+      transition: width 0.1s linear;
     }
 
-    .mini-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .mini-btn {
-      background: transparent;
-      border: none;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-    }
-
-    /* Fullscreen Drawer Player */
+    /* Fullscreen Player Drawer */
     .full-player-drawer {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle at top, #1e1b4b 0%, #0a0b10 100%);
+      inset: 0;
+      background: linear-gradient(180deg, #10192e 0%, #0d0f17 50%, #08090d 100%);
       z-index: 200;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
       display: flex;
       flex-direction: column;
-      padding: 24px;
+      padding: 24px 20px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.3, 0, 0, 1);
+      overflow-y: auto;
     }
 
-    .full-player-drawer.open {
+    .full-player-drawer.active {
       transform: translateY(0);
     }
 
-    .drawer-header {
+    .drawer-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
-    .vinyl-container {
-      margin: auto;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: #000;
-      border: 8px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 0 50px rgba(139, 92, 246, 0.35);
-      position: relative;
-      display: grid;
-      place-items: center;
+    .drawer-art-container {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 30px;
+      aspect-ratio: 1/1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
     }
 
-    .vinyl-art {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+    .drawer-art-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
-    .drawer-meta {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .drawer-title {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .drawer-artist {
-      font-size: 1rem;
-      color: var(--text-secondary);
-    }
-
-    .drawer-progress-container {
-      margin-bottom: 24px;
-    }
-
-    .drawer-progress-bar {
-      height: 8px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .drawer-progress-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--accent-gradient);
-    }
-
-    .drawer-time {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-    }
-
-    .drawer-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 28px;
-      margin-bottom: 20px;
-    }
-
-    .drawer-play-btn {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: var(--accent-gradient);
-      border: none;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      box-shadow: var(--shadow-glow);
-    }
-
-    /* Bottom Nav */
+    /* Mobile Bottom Nav */
     .mobile-bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
-      width: 100%;
-      height: 60px;
-      background: rgba(14, 16, 26, 0.95);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid var(--border-glass);
+      right: 0;
+      height: 56px;
+      background: rgba(18, 18, 18, 0.98);
+      border-top: 1px solid var(--sp-border);
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      z-index: 100;
+      justify-content: space-around;
+      z-index: 90;
     }
 
-    .bottom-nav-item {
+    .nav-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .bottom-nav-item.active {
-      color: var(--accent-primary);
-    }
-
-    /* Playlist Pills */
-    .playlist-pill-container {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 0 16px 14px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .playlist-pill-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    .playlist-pill {
-      white-space: nowrap;
-      padding: 7px 16px;
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      gap: 3px;
+      color: var(--sp-text-muted);
+      font-size: 0.7rem;
+      background: transparent;
+      border: none;
       cursor: pointer;
-      flex-shrink: 0;
-      transition: all 0.2s;
     }
 
-    .playlist-pill.active {
-      background: var(--accent-gradient);
+    .nav-btn.active {
       color: #fff;
-      border-color: transparent;
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
-    }
-
-    .playlist-pill.create-pill {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Modals for Mobile */
-    .mobile-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.2s;
-    }
-
-    .mobile-modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mobile-modal-card {
-      background: #18181b;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 18px;
-      padding: 22px;
-      width: 88%;
-      max-width: 360px;
     }
   </style>
 </head>
 <body>
 
+  <!-- Audio Element -->
+  <audio id="audioElement" preload="metadata"></audio>
+
   <!-- Mobile Header -->
   <header class="mobile-header">
-    <div class="mobile-brand" style="display:flex; align-items:center;">
-      <a href="/mobile" style="display:flex; align-items:center; text-decoration:none;">
-        <img src="/static/logo.png" onerror="this.onerror=null;this.src='/logo.png';" alt="Forsaken Song" style="max-height: 38px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.4));">
-      </a>
+    <div class="mobile-brand">
+      <div class="mobile-brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+      </div>
+      <span>Forsaken</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="/desktop" class="badge badge-purple" style="text-decoration:none;">Desktop</a>
+      <a href="/admin" class="badge badge-green" style="text-decoration:none;">Admin</a>
     </div>
   </header>
 
-  <!-- Search -->
+  <!-- Search Bar -->
   <div class="mobile-search-bar">
     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    <input type="text" placeholder="Search track or artist..." oninput="handleSearch(this.value)">
+    <input type="text" id="mobileSearchInput" placeholder="Find in library..." oninput="handleSearch(this.value)">
   </div>
 
-  <!-- Playlist Pills Filter Bar -->
-  <div class="playlist-pill-container" id="mobilePillContainer">
-    <button id="pillAllSongs" class="playlist-pill active" onclick="loadAllSongsMobile()">All Tracks</button>
-    <button class="playlist-pill create-pill" onclick="openCreatePlaylistMobile()">+ Create</button>
-    <div id="mobileCustomPills" style="display:flex; gap:8px;"></div>
+  <!-- Playlist & AI Mode Pills -->
+  <div class="playlist-pills-scroll" id="pillsContainer">
+    <button class="playlist-pill active" id="pillAll" onclick="setPlaylistFilter(null)">All Tracks</button>
+    <button class="playlist-pill" id="pillLiked" onclick="setPlaylistFilter('liked')">Liked</button>
+    <button class="playlist-pill" style="color:var(--fk-cyan); border:1px solid rgba(0,242,254,0.4);" onclick="openMobileAi('mood')">🧠 AI Mood</button>
+    <button class="playlist-pill" style="color:var(--fk-emerald); border:1px solid rgba(0,230,118,0.4);" onclick="openMobileAi('flow')">⚡ Flow 60m</button>
+    <button class="playlist-pill" style="color:var(--fk-cyan); border:1px solid rgba(0,242,254,0.4);" onclick="openMobileAi('discover')">🔎 Discover</button>
+    <button class="playlist-pill" style="color:#ff007f; border:1px solid rgba(255,0,127,0.4);" onclick="openMobileAi('room')">🎧 Party Room</button>
+    <button class="playlist-pill" id="pillCloud" onclick="setPlaylistFilter('cloud')">☁️ Cloud</button>
+    <button class="playlist-pill" onclick="openCreateModal()">+ Playlist</button>
   </div>
 
-  <!-- Songs List -->
-  <div class="track-list" id="mobileTrackList">
-    <!-- Populated via JS -->
+  <!-- Track List -->
+  <div class="track-list" id="trackList">
+    <!-- Dynamically populated -->
   </div>
 
-  <!-- Docked Mini Player -->
-  <div class="mini-player" id="miniPlayer" onclick="openDrawer()">
-    <div class="mini-left">
-      <img id="miniCover" class="mini-thumb" src="/api/cover/0" alt="Cover">
+  <!-- FLOATING MINI PLAYER -->
+  <div class="spotify-mobile-mini-player" id="mobileMiniPlayer" onclick="openFullDrawer()" style="display:none;">
+    <div style="display:flex; align-items:center; gap:10px; overflow:hidden; flex:1;">
+      <img id="miniCover" src="/api/cover/0" style="width:40px; height:40px; border-radius:4px; object-fit:cover;" onerror="this.src='/static/logo.png'">
       <div style="overflow:hidden;">
-        <div id="miniTitle" style="font-weight:700; font-size:0.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">No song playing</div>
-        <div id="miniArtist" style="font-size:0.75rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Tap to select</div>
+        <div id="miniTitle" style="font-weight:700; font-size:0.86rem; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Title</div>
+        <div id="miniArtist" style="font-size:0.75rem; color:var(--sp-text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Artist</div>
       </div>
     </div>
-    <div class="mini-right" onclick="event.stopPropagation();">
-      <button class="mini-btn" onclick="togglePlay()">
-        <svg id="miniPlayIcon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="miniPauseIcon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    <div style="display:flex; align-items:center; gap:8px;" onclick="event.stopPropagation()">
+      <button class="btn-icon" onclick="togglePlayPause()" style="color:#fff;">
+        <svg id="miniPlayIcon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
       </button>
-      <button class="mini-btn" onclick="playNext()">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+    </div>
+    <div class="mini-progress-bar" id="miniProgressBar"></div>
+  </div>
+
+  <!-- FULLSCREEN NOW PLAYING DRAWER -->
+  <div class="full-player-drawer" id="fullDrawer">
+    <div class="drawer-top-bar">
+      <button class="btn-icon" onclick="closeFullDrawer()">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <span style="font-size:0.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Playing from Library</span>
+      <button class="btn-icon" onclick="closeFullDrawer()">✕</button>
+    </div>
+
+    <div class="drawer-art-container">
+      <img id="drawerArt" src="/api/cover/0" class="drawer-art-img" alt="Cover" onerror="this.src='/static/logo.png'">
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <h2 id="drawerTitle" style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:4px;">Song Title</h2>
+      <p id="drawerArtist" style="color:var(--sp-text-muted); font-size:1rem;">Artist Name</p>
+    </div>
+
+    <!-- Scrubber -->
+    <div class="player-scrubber-row" style="margin-bottom:24px;">
+      <span class="player-time" id="drawerCurrentTime">0:00</span>
+      <div class="spotify-slider-wrap" onclick="seekAudio(event)" style="flex:1;">
+        <div class="spotify-slider-track">
+          <div class="spotify-slider-fill" id="drawerFill"></div>
+        </div>
+      </div>
+      <span class="player-time" id="drawerDuration">0:00</span>
+    </div>
+
+    <!-- Playback Controls -->
+    <div class="player-controls-row" style="justify-content:space-around; width:100%; margin-bottom:24px;">
+      <button class="btn-icon" onclick="playPrev()">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 6 6 18 8 18 8 6 6 6"></polygon><polygon points="18 6 10 12 18 18 18 6"></polygon></svg>
+      </button>
+      <button class="btn-player-play" onclick="togglePlayPause()" style="width:58px; height:58px;">
+        <svg id="drawerPlayIcon" width="28" height="28" fill="currentColor" viewBox="0 0 24 24" style="margin-left:2px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </button>
+      <button class="btn-icon" onclick="playNext()">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 6 14 12 6 18 6 6"></polygon><polygon points="16 6 16 18 18 18 18 6 16 6"></polygon></svg>
       </button>
     </div>
   </div>
 
-  <!-- Fullscreen Expandable Drawer Player -->
-  <div class="full-player-drawer" id="playerDrawer">
-    <div class="drawer-header">
-      <button class="mini-btn" onclick="closeDrawer()">
-        <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-      </button>
-      <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Now Playing</span>
-      <div style="width: 28px;"></div>
-    </div>
-
-    <div class="vinyl-container">
-      <img id="drawerVinyl" class="vinyl-art" src="/api/cover/0" alt="Art">
-    </div>
-
-    <div class="drawer-meta">
-      <div class="drawer-title" id="drawerTitle">Track Title</div>
-      <div class="drawer-artist" id="drawerArtist">Artist Name</div>
-    </div>
-
-    <div class="drawer-progress-container">
-      <div class="drawer-progress-bar" onclick="seekAudio(event)">
-        <div class="drawer-progress-fill" id="drawerProgressFill"></div>
-      </div>
-      <div class="drawer-time">
-        <span id="drawerCurrentTime">0:00</span>
-        <span id="drawerTotalDuration">0:00</span>
-      </div>
-    </div>
-
-    <div class="drawer-controls">
-      <button class="mini-btn" onclick="playPrev()">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-      <button class="drawer-play-btn" onclick="togglePlay()">
-        <svg id="drawerPlayIcon" width="30" height="30" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="drawerPauseIcon" width="30" height="30" fill="currentColor" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <button class="mini-btn" onclick="playNext()">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Bottom Navigation -->
+  <!-- Bottom Nav -->
   <nav class="mobile-bottom-nav">
-    <a href="/mobile" class="bottom-nav-item active">
-      <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Home
-    </a>
-    <a href="/desktop" class="bottom-nav-item">
-      <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
-      Desktop
-    </a>
+    <button class="nav-btn active" id="mobNavHome" onclick="setPlaylistFilter(null)">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nav-btn" onclick="openMobileAi('mood')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M8 14s1.5 2 4 2 4-2 4-2"></path></svg>
+      <span>AI Mood</span>
+    </button>
+    <button class="nav-btn" onclick="openMobileAi('flow')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+      <span>Flow ⚡</span>
+    </button>
+    <button class="nav-btn" onclick="openMobileAi('discover')">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Discover</span>
+    </button>
+    <button class="nav-btn" onclick="window.location.href='/admin'">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Admin</span>
+    </button>
   </nav>
 
-  <audio id="audioElement" preload="metadata"></audio>
-
-  <!-- Mobile Create Playlist Modal -->
-  <div id="mobileCreateModal" class="mobile-modal-overlay" onclick="if(event.target===this) this.classList.remove('active')">
-    <div class="mobile-modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <h3 style="font-size:1.15rem; font-weight:800; color:#fff;">New Playlist</h3>
-        <button onclick="document.getElementById('mobileCreateModal').classList.remove('active')" style="background:transparent; border:none; color:var(--text-muted); font-size:1.4rem;">&times;</button>
-      </div>
-      <input type="text" id="mobilePlaylistNameInput" placeholder="Playlist name..." style="width:100%; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:10px; padding:12px; color:#fff; font-size:0.95rem; margin-bottom:18px; outline:none;" onkeydown="if(event.key==='Enter') submitCreatePlaylistMobile()">
-      <div style="display:flex; justify-content:flex-end; gap:8px;">
-        <button class="btn btn-secondary" style="padding:8px 14px;" onclick="document.getElementById('mobileCreateModal').classList.remove('active')">Cancel</button>
-        <button class="btn btn-primary" style="padding:8px 16px;" onclick="submitCreatePlaylistMobile()">Create</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Add To Playlist Modal -->
-  <div id="mobileAddToModal" class="mobile-modal-overlay" onclick="if(event.target===this) this.classList.remove('active')">
-    <div class="mobile-modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-        <h3 style="font-size:1.15rem; font-weight:800; color:#fff;">Add to Playlist</h3>
-        <button onclick="document.getElementById('mobileAddToModal').classList.remove('active')" style="background:transparent; border:none; color:var(--text-muted); font-size:1.4rem;">&times;</button>
-      </div>
-      <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:14px;">Song: <span id="mobileModalSongTitle" style="color:#fff; font-weight:700;"></span></div>
-      <div id="mobileModalPlaylistList" style="max-height:200px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; margin-bottom:16px;"></div>
-      <div style="display:flex; justify-content:flex-end;">
-        <button class="btn btn-secondary" style="padding:6px 14px;" onclick="document.getElementById('mobileAddToModal').classList.remove('active')">Done</button>
+  <!-- MOBILE AI PROMPT MODAL -->
+  <div class="spotify-modal" id="mobileAiModal">
+    <div class="spotify-modal-content">
+      <h3 style="font-weight:800; font-size:1.2rem; color:#fff; margin-bottom:8px;" id="mobileAiTitle">AI Engine</h3>
+      <p style="color:var(--sp-text-muted); font-size:0.85rem; margin-bottom:14px;" id="mobileAiSubtitle">Describe your context or situation.</p>
+      <input type="text" id="mobileAiInput" class="spotify-modal-input" placeholder="e.g. Find Tamil songs with powerful vocals...">
+      <div class="spotify-modal-actions">
+        <button class="btn btn-pill" onclick="closeMobileAi()">Cancel</button>
+        <button class="btn btn-aurora" onclick="executeMobileAi()">Synthesize</button>
       </div>
     </div>
   </div>
 
   <script>
     let songs = [];
+    let displayed = [];
     let playlists = [];
-    let currentPlaylistId = null;
+    let liked = new Set(JSON.parse(localStorage.getItem('forsaken_liked_songs') || '[]'));
+    let activeFilter = null;
     let currentIndex = -1;
-    let activeMobileSongId = null;
     const audio = document.getElementById('audioElement');
 
-    async function fetchPlaylistsMobile() {
+    // Safe JSON Fetch
+    async function safeFetchJson(url, opts = {}) {
       try {
-        const res = await fetch('/api/playlists');
-        playlists = await res.json();
-        renderPlaylistPills();
+        const res = await fetch(url, opts);
+        const text = await res.text();
+        try {
+          return { ok: res.ok, data: JSON.parse(text) };
+        } catch {
+          return { ok: false, data: null };
+        }
       } catch (e) {
-        console.error(e);
+        return { ok: false, data: null };
       }
     }
 
-    function renderPlaylistPills() {
-      const container = document.getElementById('mobileCustomPills');
-      container.innerHTML = playlists.map(p => `
-        <button class="playlist-pill ${currentPlaylistId === p.id ? 'active' : ''}" onclick="loadPlaylistMobile(${p.id})">
-          ${p.name} (${p.song_count || 0})
-        </button>
+    async function loadData() {
+      const [resSongs, resPlaylists] = await Promise.all([
+        safeFetchJson('/api/songs'),
+        safeFetchJson('/api/playlists')
+      ]);
+
+      if (resSongs.ok && Array.isArray(resSongs.data)) songs = resSongs.data;
+      if (resPlaylists.ok && Array.isArray(resPlaylists.data)) playlists = resPlaylists.data;
+      applyFilter();
+    }
+
+    function applyFilter() {
+      if (activeFilter === 'liked') {
+        displayed = songs.filter(s => liked.has(s.id));
+      } else if (activeFilter === 'cloud') {
+        displayed = songs.filter(s => s.telegram_file_id || s.source === 'telegram');
+      } else if (typeof activeFilter === 'number') {
+        // specific playlist
+        loadPlaylistSongs(activeFilter);
+        return;
+      } else {
+        displayed = songs;
+      }
+      renderTracks();
+    }
+
+    async function loadPlaylistSongs(pid) {
+      const res = await safeFetchJson(`/api/playlists/${pid}`);
+      if (res.ok && res.data && res.data.songs) {
+        displayed = res.data.songs;
+      }
+      renderTracks();
+    }
+
+    function renderTracks() {
+      const list = document.getElementById('trackList');
+      if (!displayed.length) {
+        list.innerHTML = `<div style="text-align:center; padding:40px 10px; color:var(--sp-text-muted);">No songs found in this view.</div>`;
+        return;
+      }
+      list.innerHTML = displayed.map((s, idx) => `
+        <div class="track-item ${currentIndex === idx ? 'active-track' : ''}" onclick="playSong(${idx})">
+          <div class="track-info-group">
+            <img src="/api/cover/${s.id}" class="track-thumb" onerror="this.src='/static/logo.png'">
+            <div class="track-meta">
+              <div class="track-name">${escapeHtml(s.title)}</div>
+              <div class="track-artist">${escapeHtml(s.artist || 'Unknown')} ${s.telegram_file_id ? '• ☁️ Cloud' : ''}</div>
+            </div>
+          </div>
+          <span style="font-size:0.75rem; color:var(--sp-text-muted);">${formatTime(s.duration)}</span>
+        </div>
       `).join('');
     }
 
-    async function loadAllSongsMobile() {
-      currentPlaylistId = null;
-      document.getElementById('pillAllSongs').classList.add('active');
-      renderPlaylistPills();
-      await fetchSongs();
+    function playSong(idx) {
+      if (idx < 0 || idx >= displayed.length) return;
+      currentIndex = idx;
+      const s = displayed[idx];
+
+      audio.src = `/api/stream/${s.id}`;
+      audio.play();
+
+      document.getElementById('mobileMiniPlayer').style.display = 'flex';
+      document.getElementById('miniTitle').innerText = s.title;
+      document.getElementById('miniArtist').innerText = s.artist || 'Unknown';
+      document.getElementById('miniCover').src = `/api/cover/${s.id}`;
+
+      document.getElementById('drawerTitle').innerText = s.title;
+      document.getElementById('drawerArtist').innerText = s.artist || 'Unknown';
+      document.getElementById('drawerArt').src = `/api/cover/${s.id}`;
+      broadcastMobilePlayback(s, true, 0);
+
+      renderTracks();
     }
 
-    async function loadPlaylistMobile(id) {
-      try {
-        currentPlaylistId = id;
-        document.getElementById('pillAllSongs').classList.remove('active');
-        renderPlaylistPills();
-        const res = await fetch(`/api/playlists/${id}`);
-        const data = await res.json();
-        songs = data.songs;
-        currentIndex = -1;
-        renderSongs();
-      } catch(e) {
-        console.error(e);
-      }
-    }
-
-    function openCreatePlaylistMobile() {
-      document.getElementById('mobileCreateModal').classList.add('active');
-      const input = document.getElementById('mobilePlaylistNameInput');
-      input.value = '';
-      setTimeout(() => input.focus(), 60);
-    }
-
-    async function submitCreatePlaylistMobile() {
-      const input = document.getElementById('mobilePlaylistNameInput');
-      const name = input.value.trim();
-      if (!name) return;
-      try {
-        const res = await fetch('/api/playlists', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name })
-        });
-        const data = await res.json();
-        document.getElementById('mobileCreateModal').classList.remove('active');
-        await fetchPlaylistsMobile();
-        if (data.id) loadPlaylistMobile(data.id);
-      } catch(e) {
-        alert('Failed to create playlist');
-      }
-    }
-
-    function openAddToPlaylistMobile(e, songId, title) {
-      e.stopPropagation();
-      activeMobileSongId = songId;
-      document.getElementById('mobileModalSongTitle').innerText = title;
-      const listEl = document.getElementById('mobileModalPlaylistList');
-      if (!playlists.length) {
-        listEl.innerHTML = `<div style="font-size:0.85rem; color:var(--text-muted); padding:10px 0;">No playlists yet. Tap <b>+ Create</b> above to make one!</div>`;
-      } else {
-        listEl.innerHTML = playlists.map(p => `
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:rgba(255,255,255,0.04); border-radius:8px;">
-            <div style="font-weight:600; font-size:0.85rem; color:#fff;">${p.name}</div>
-            <button id="mobAddBtn_${p.id}" class="btn btn-secondary" style="padding:4px 10px; font-size:0.75rem;" onclick="addSongToPlaylistMobile(${p.id}, ${songId})">+ Add</button>
-          </div>
-        `).join('');
-      }
-      document.getElementById('mobileAddToModal').classList.add('active');
-    }
-
-    async function addSongToPlaylistMobile(playlistId, songId) {
-      try {
-        const btn = document.getElementById(`mobAddBtn_${playlistId}`);
-        if (btn) btn.innerText = 'Adding...';
-        await fetch(`/api/playlists/${playlistId}/songs`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ song_id: songId })
-        });
-        if (btn) {
-          btn.innerText = 'Added ✓';
-          btn.style.color = '#4ade80';
+    function togglePlayPause() {
+      if (audio.paused) {
+        audio.play();
+        updatePlayIcons(true);
+        if (currentIndex !== -1 && displayed[currentIndex]) {
+          broadcastMobilePlayback(displayed[currentIndex], true, audio.currentTime);
         }
-        fetchPlaylistsMobile();
-      } catch(e) {
-        alert('Error adding song');
+      } else {
+        audio.pause();
+        updatePlayIcons(false);
+        if (currentIndex !== -1 && displayed[currentIndex]) {
+          broadcastMobilePlayback(displayed[currentIndex], false, audio.currentTime);
+        }
       }
     }
 
-    async function removeSongFromCurrentPlaylistMobile(e, songId) {
-      e.stopPropagation();
-      if (!currentPlaylistId) return;
-      try {
-        await fetch(`/api/playlists/${currentPlaylistId}/songs/${songId}`, { method: 'DELETE' });
-        fetchPlaylistsMobile();
-        loadPlaylistMobile(currentPlaylistId);
-      } catch(e) {
-        alert('Error removing song');
-      }
+    function playNext() {
+      let next = currentIndex + 1;
+      if (next >= displayed.length) next = 0;
+      playSong(next);
     }
 
-    async function fetchSongs(q = '') {
-      try {
-        const url = q ? `/api/songs?q=${encodeURIComponent(q)}` : '/api/songs';
-        const res = await fetch(url);
-        songs = await res.json();
-        renderSongs();
-      } catch (e) {
-        console.error(e);
+    function playPrev() {
+      if (audio.currentTime > 3) {
+        audio.currentTime = 0;
+        return;
       }
+      let prev = currentIndex - 1;
+      if (prev < 0) prev = displayed.length - 1;
+      playSong(prev);
+    }
+
+    function updatePlayIcons(playing) {
+      const pauseSvg = `<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>`;
+      const playSvg = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
+      document.getElementById('miniPlayIcon').innerHTML = playing ? pauseSvg : playSvg;
+      document.getElementById('drawerPlayIcon').innerHTML = playing ? pauseSvg : playSvg;
+    }
+
+    audio.addEventListener('play', () => updatePlayIcons(true));
+    audio.addEventListener('pause', () => updatePlayIcons(false));
+    audio.addEventListener('ended', playNext);
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      document.getElementById('miniProgressBar').style.width = `${pct}%`;
+      document.getElementById('drawerFill').style.width = `${pct}%`;
+      document.getElementById('drawerCurrentTime').innerText = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      document.getElementById('drawerDuration').innerText = formatTime(audio.duration);
+    });
+
+    function seekAudio(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (audio.duration) audio.currentTime = pos * audio.duration;
+    }
+
+    function openFullDrawer() {
+      document.getElementById('fullDrawer').classList.add('active');
+    }
+
+    function closeFullDrawer() {
+      document.getElementById('fullDrawer').classList.remove('active');
+    }
+
+    function setPlaylistFilter(filter) {
+      activeFilter = filter;
+      document.getElementById('pillAll').classList.toggle('active', filter === null);
+      document.getElementById('pillLiked').classList.toggle('active', filter === 'liked');
+      document.getElementById('pillCloud').classList.toggle('active', filter === 'cloud');
+      applyFilter();
+    }
+
+    function handleSearch(q) {
+      const term = q.toLowerCase().trim();
+      if (!term) {
+        applyFilter();
+        return;
+      }
+      displayed = songs.filter(s => 
+        (s.title && s.title.toLowerCase().includes(term)) ||
+        (s.artist && s.artist.toLowerCase().includes(term))
+      );
+      renderTracks();
     }
 
     function formatTime(s) {
@@ -692,148 +624,160 @@
       return `${m}:${sec < 10 ? '0' : ''}${sec}`;
     }
 
-    function renderSongs() {
-      const container = document.getElementById('mobileTrackList');
-      if (!songs.length) {
-        const msg = currentPlaylistId 
-          ? `No songs in this playlist yet.<br><br><button class="btn btn-secondary" onclick="loadAllSongsMobile()">Go to All Tracks</button>`
-          : `No songs in library.<br><br><a href="/admin" class="btn btn-primary">Go to Admin Upload</a>`;
-        container.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-muted);">${msg}</div>`;
-        return;
-      }
-
-      container.innerHTML = songs.map((s, idx) => `
-        <div class="track-card ${currentIndex === idx ? 'active' : ''}" onclick="playSong(${idx})">
-          <div class="track-left">
-            <img class="track-thumb" src="/api/cover/${s.id}" alt="Cover">
-            <div class="track-meta">
-              <div class="track-title">${s.title}</div>
-              <div class="track-artist">${s.artist} • ${formatTime(s.duration)}</div>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <button class="track-play-btn" style="background:rgba(255,255,255,0.08); border:none;" onclick="openAddToPlaylistMobile(event, ${s.id}, '${s.title.replace(/'/g, "\\'")}')" title="Add to playlist">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </button>
-            ${currentPlaylistId ? `
-              <button class="track-play-btn" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" onclick="removeSongFromCurrentPlaylistMobile(event, ${s.id})" title="Remove from playlist">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              </button>
-            ` : ''}
-            <button class="track-play-btn">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-          </div>
-        </div>
-      `).join('');
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    function playSong(idx) {
-      if (idx < 0 || idx >= songs.length) return;
-      currentIndex = idx;
-      const s = songs[currentIndex];
+    let currentMobileAiMode = 'mood';
 
-      document.getElementById('miniTitle').innerText = s.title;
-      document.getElementById('miniArtist').innerText = s.artist;
-      document.getElementById('miniCover').src = `/api/cover/${s.id}`;
+    function openMobileAi(mode) {
+      currentMobileAiMode = mode;
+      const modal = document.getElementById('mobileAiModal');
+      const title = document.getElementById('mobileAiTitle');
+      const sub = document.getElementById('mobileAiSubtitle');
+      const input = document.getElementById('mobileAiInput');
 
-      document.getElementById('drawerTitle').innerText = s.title;
-      document.getElementById('drawerArtist').innerText = s.artist;
-      document.getElementById('drawerVinyl').src = `/api/cover/${s.id}`;
+      if (mode === 'mood') {
+        title.innerText = 'AI Mood Engine 🧠';
+        sub.innerText = 'How are you feeling right now? (e.g. Chill rain walk, Sad & lonely, High energy workout)';
+        input.placeholder = 'Describe your mood or emotional vibe...';
+      } else if (mode === 'flow') {
+        title.innerText = 'Forsaken Flow ⚡';
+        sub.innerText = 'Choose your session intent (e.g. Deep coding, Evening study, Gym power)';
+        input.placeholder = 'e.g. 60-min deep coding focus...';
+      } else if (mode === 'discover') {
+        title.innerText = 'AI Conversational Discovery 🔎';
+        sub.innerText = 'Describe situation, vocal characteristics, or evening walk without endless scrolling';
+        input.placeholder = 'e.g. Tamil songs with powerful vocals...';
+      } else if (mode === 'room') {
+        title.innerText = 'Party Mode (Live Sync Room) 🎧';
+        sub.innerText = 'Enter your friend\'s Room ID to tune in, or leave empty to create a new room and be Host!';
+        input.placeholder = 'e.g. FK-8921 or leave empty to Create...';
+      }
+      modal.classList.add('active');
+      setTimeout(() => input.focus(), 150);
+    }
 
-      audio.src = `/api/stream/${s.id}`;
-      audio.play();
-      updatePlayState(true);
-      renderSongs();
+    function closeMobileAi() {
+      document.getElementById('mobileAiModal').classList.remove('active');
+    }
 
-      // Android Media Session setup (Notification & Lock Screen controls!)
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: s.title,
-          artist: s.artist,
-          album: s.album || 'Forsaken Music',
-          artwork: [{ src: `/api/cover/${s.id}`, sizes: '512x512', type: 'image/jpeg' }]
+    let mobileRoomCode = null;
+    let isMobileHost = false;
+    let mobileWs = null;
+    let isSyncingMobileRemote = false;
+
+    function connectMobileRoom(code) {
+      if (mobileWs) { try { mobileWs.close(); } catch(e){} }
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      mobileWs = new WebSocket(`${protocol}//${window.location.host}/ws/room/${code}`);
+
+      mobileWs.onmessage = (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          if (msg.type === "SYNC_PLAYBACK" || msg.type === "ROOM_STATE") {
+            if (isMobileHost) return;
+            const song = msg.song;
+            if (song) {
+              isSyncingMobileRemote = true;
+              audio.src = `/api/stream/${song.id}`;
+              document.getElementById('miniTitle').innerText = song.title;
+              document.getElementById('miniArtist').innerText = song.artist || 'Unknown';
+              document.getElementById('miniCover').src = `/api/cover/${song.id}`;
+              document.getElementById('drawerTitle').innerText = song.title;
+              document.getElementById('drawerArtist').innerText = song.artist || 'Unknown';
+              document.getElementById('drawerArt').src = `/api/cover/${song.id}`;
+              document.getElementById('mobileMiniPlayer').style.display = 'flex';
+
+              if (Math.abs(audio.currentTime - (msg.time || 0)) > 1.5) {
+                audio.currentTime = msg.time || 0;
+              }
+              if (msg.is_playing && audio.paused) {
+                audio.play().catch(console.warn);
+              } else if (!msg.is_playing && !audio.paused) {
+                audio.pause();
+              }
+              setTimeout(() => { isSyncingMobileRemote = false; }, 400);
+            }
+          }
+        } catch(e) {}
+      };
+    }
+
+    function broadcastMobilePlayback(song, isPlaying, time) {
+      if (!isMobileHost || !mobileWs || mobileWs.readyState !== WebSocket.OPEN || isSyncingMobileRemote) return;
+      try {
+        mobileWs.send(JSON.stringify({
+          type: "SYNC_PLAYBACK",
+          song: song,
+          is_playing: isPlaying,
+          time: time || 0
+        }));
+      } catch(e) {}
+    }
+
+    async function executeMobileAi() {
+      const q = document.getElementById('mobileAiInput').value.trim();
+      closeMobileAi();
+
+      if (currentMobileAiMode === 'mood' && q) {
+        const res = await safeFetchJson('/api/ai/mood', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: q, shift_mode: 'stay' })
         });
-
-        navigator.mediaSession.setActionHandler('play', () => { audio.play(); updatePlayState(true); });
-        navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); updatePlayState(false); });
-        navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
-        navigator.mediaSession.setActionHandler('previoustrack', () => playPrev());
+        if (res.ok && res.data && res.data.songs) {
+          displayed = res.data.songs;
+          renderTracks();
+          if (displayed.length) playSong(0);
+        }
+      } else if (currentMobileAiMode === 'flow') {
+        const res = await safeFetchJson('/api/ai/flow', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ duration_minutes: 60, intent: q || 'focus' })
+        });
+        if (res.ok && res.data && res.data.stages) {
+          let flowList = [];
+          res.data.stages.forEach(st => { if (st.tracks) flowList = flowList.concat(st.tracks); });
+          displayed = flowList;
+          renderTracks();
+          if (displayed.length) playSong(0);
+        }
+      } else if (currentMobileAiMode === 'discover' && q) {
+        const res = await safeFetchJson('/api/ai/discover', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: q, max_results: 15 })
+        });
+        if (res.ok && res.data && res.data.songs) {
+          displayed = res.data.songs;
+          renderTracks();
+          if (displayed.length) playSong(0);
+        }
+      } else if (currentMobileAiMode === 'room') {
+        if (!q) {
+          const res = await safeFetchJson('/api/rooms/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ custom_code: null, name: "Mobile Party Pod" })
+          });
+          if (res.ok && res.data) {
+            mobileRoomCode = res.data.room_code;
+            isMobileHost = true;
+            connectMobileRoom(mobileRoomCode);
+            alert(`🎉 Room Created: ${mobileRoomCode}\nShare this Room ID with your friend! Whatever song you play will sync to them.`);
+          }
+        } else {
+          mobileRoomCode = q.toUpperCase();
+          isMobileHost = false;
+          connectMobileRoom(mobileRoomCode);
+          alert(`🎧 Connected to Room ${mobileRoomCode}! Syncing with host in real-time.`);
+        }
       }
     }
 
-    function togglePlay() {
-      if (!audio.src) {
-        if (songs.length) playSong(0);
-        return;
-      }
-      if (audio.paused) {
-        audio.play();
-        updatePlayState(true);
-      } else {
-        audio.pause();
-        updatePlayState(false);
-      }
-    }
-
-    function updatePlayState(playing) {
-      document.getElementById('miniPlayIcon').style.display = playing ? 'none' : 'block';
-      document.getElementById('miniPauseIcon').style.display = playing ? 'block' : 'none';
-      document.getElementById('drawerPlayIcon').style.display = playing ? 'none' : 'block';
-      document.getElementById('drawerPauseIcon').style.display = playing ? 'block' : 'none';
-
-      const vinyl = document.getElementById('drawerVinyl');
-      if (playing) vinyl.classList.add('spinning');
-      else vinyl.classList.remove('spinning');
-    }
-
-    function playNext() {
-      if (!songs.length) return;
-      playSong((currentIndex + 1) % songs.length);
-    }
-
-    function playPrev() {
-      if (!songs.length) return;
-      playSong((currentIndex - 1 + songs.length) % songs.length);
-    }
-
-    function openDrawer() {
-      document.getElementById('playerDrawer').classList.add('open');
-    }
-
-    function closeDrawer() {
-      document.getElementById('playerDrawer').classList.remove('open');
-    }
-
-    function seekAudio(e) {
-      const container = e.currentTarget;
-      const rect = container.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const ratio = clickX / rect.width;
-      if (audio.duration) {
-        audio.currentTime = ratio * audio.duration;
-      }
-    }
-
-    let searchTimer;
-    function handleSearch(val) {
-      clearTimeout(searchTimer);
-      searchTimer = setTimeout(() => fetchSongs(val), 250);
-    }
-
-    audio.addEventListener('timeupdate', () => {
-      const cur = audio.currentTime;
-      const tot = audio.duration || 0;
-      document.getElementById('drawerCurrentTime').innerText = formatTime(cur);
-      document.getElementById('drawerTotalDuration').innerText = formatTime(tot);
-      const pct = tot > 0 ? (cur / tot) * 100 : 0;
-      document.getElementById('drawerProgressFill').style.width = `${pct}%`;
-    });
-
-    audio.addEventListener('ended', () => playNext());
-
-    fetchPlaylistsMobile();
-    fetchSongs();
+    loadData();
   </script>
 </body>
 </html>

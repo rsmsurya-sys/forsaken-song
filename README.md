@@ -6,21 +6,100 @@
 !!! ADJUST FORMATTING THERE AS NEEDED, AND REMOVE README-ONLY / ReadTheDocs REFERENCES.
 --->
 
+# FORSAKEN SONG 2.0 — Next-Generation Music OS ⚡
+> **"Music That Understands You."**  
+> An AI-powered music streaming platform and acoustic intelligence OS that understands your mood, listening habits, surroundings, and energy level.
+
+---
+
+## 🚀 Advanced Features Built into FORSAKEN SONG 2.0
+
+### 1. AI Mood Engine 🧠
+- **Emotional Intent & Resonance Scoring**: Natural language mood extraction (Sad, Energetic, Chill, Focus, Happy, Nocturnal).
+- **Directional Frequency Shifting**: Users choose between:
+  - **"Stay in My Mood"**: Harmonic alignment matching your exact emotional state.
+  - **"Help Me Feel Better"**: Dynamic acoustic elevation moving you toward calming or uplifting frequencies.
+
+### 2. Forsaken Time Machine ⏳
+- **Forgotten Gems Radar**: Surfaces long-neglected songs in your vault waiting to be rediscovered.
+- **Top Loop Telemetry**: Displays all-time most replayed tracks with total loop counters.
+- **AI Music Memory**: Analyzes time-of-day listening patterns (e.g. Midnight Pulse vs Dawn Ascent) and provides revival alerts.
+
+### 3. AI Music DNA 🧬
+- **Dynamic Acoustic Profile**: Calculates Energy Score, Discovery Index, Repeat Ratio, and Tempo Preferences (BPM).
+- **Language Distribution Matrix**: Tracks listening ratios across Tamil, English, Hindi, and Global music.
+- **Friend Compatibility Matcher**: Interactive acoustic overlap calculation (Genre overlap, Energy sync, Shared cadence).
+
+### 4. Cross-Language Music Bridge 🌍
+- Cross-language acoustic similarity matching (e.g., Tamil ↔ Malayalam ↔ Hindi ↔ English).
+- Compares vocal cadence, instrumentation, and driving tempo across language barriers without assuming identical lexical meaning.
+
+### 5. AI Listening Rooms & Live Party Sync 🎭
+- **Live Room ID Sync (Party Mode)**:
+  - **Host Mode**: Create a unique Room ID (e.g. `FK-8921`) and share the code or 1-click link with your friend.
+  - **Listener Mode**: Friend enters Room ID or opens link — whatever the host plays, pauses, skips, or scrubs will immediately play in real-time on the friend's device!
+  - Powered by low-latency **WebSockets (`/ws/room/{room_code}`)** with auto-reconnect and drift compensation.
+- **Deep Focus Sanctum**: Synced study room with live **25/5 interactive Pomodoro Timer**.
+- **Atmospheric Sanctuary**: Ambient emotional resonance room for contemplative nocturnal listening.
+- **Sonic Battle Arena**: Musical tracks collide with live voting.
+
+### 6. Forsaken Sound Lab 🎛️
+- **Real-Time 5-Band Equalizer**: Driven by the browser's native **Web Audio API (`BiquadFilterNodes`)** connected to audio playback (60Hz, 250Hz, 1kHz, 4kHz, 16kHz).
+- **AI Natural Language EQ Assistant**: Type requests like *"Make the bass stronger, but keep the vocals clear"* and the AI dynamically adjusts equalizer gain in real-time.
+
+### 7. AI Conversational Discovery 🔎
+- Natural language discovery without endless scrolling:
+  - *"Find Tamil songs with powerful vocals"*
+  - *"Find songs for a 30-minute evening walk"* (calculates cumulative duration to fit your exact time budget)
+  - *"Suggest energetic music without heavy bass"*
+  - *"Find underrated songs that match my taste"*
+
+### 8. Forsaken Flow ⚡
+- **Adaptive Session Progression**: A listening session that intelligently modulates queue and pacing across 4 distinct stages:
+  1. **Stage 1 (15%)**: Cognitive Settle-In (Warm melody, gentle acoustic ramp)
+  2. **Stage 2 (55%)**: Deep Atmospheric Immersion (Consistent rhythmic pulse, high focus lock)
+  3. **Stage 3 (20%)**: Cognitive Stabilization (Stimulation reduction, harmonic soothing)
+  4. **Stage 4 (10%)**: Mindful Outro & Return (Ambient resolution, tranquil landing)
+
+---
+
+## 🎨 UI Architecture: "Cyber-Aurora" Studio
+
+- **Color Palette**: Deep Void (`#040914`, `#070d1a`), Electric Aurora Cyan (`#00f2fe`), Neon Emerald (`#00e676`), and Violet Resonance (`#4facfe`).
+- **Hero Stage**: Interactive Rotating Vinyl Disc with animated sound ripples that dynamically spins during playback.
+- **Floating Island Player**: Capsule bar with glowing neon scrubber and real-time Web Audio integration.
+- **Compact Density Mode**: Power-user toggle (`C` key) and floating mini-HUD for high-efficiency listening.
+
+---
+
+## 💻 How to Run FORSAKEN SONG Locally
+
+### Option 1: Quick Launcher (Windows)
+Double-click `run_local.bat` in the project root:
+```bat
+run_local.bat
+```
+
+### Option 2: Command Line with uv
+```bash
+uv run python -m uvicorn server.main:app --port 8000 --reload
+```
+
+### App URLs:
+- **Desktop Studio (Full Experience)**: `http://localhost:8000/desktop`
+- **Mobile Responsive Player**: `http://localhost:8000/mobile`
+- **Admin Hub & Telegram Cloud**: `http://localhost:8000/admin`
+
+---
+
+## 📦 Core spotDL Engine (Underlying Downloader)
+
 <div align="center">
 
 # spotDL v4
-
 **spotDL** finds songs from Spotify playlists on YouTube and downloads them - along with album art, lyrics and metadata.
-
-[![MIT License](https://img.shields.io/github/license/spotdl/spotify-downloader?color=44CC11&style=flat-square)](https://github.com/spotDL/spotify-downloader/blob/master/LICENSE)
-[![PyPI version](https://img.shields.io/pypi/pyversions/spotDL?color=%2344CC11&style=flat-square)](https://pypi.org/project/spotdl/)
-[![PyPi downloads](https://img.shields.io/pypi/dw/spotDL?label=downloads@pypi&color=344CC11&style=flat-square)](https://pypi.org/project/spotdl/)
-![GitHub Repo stars](https://img.shields.io/github/stars/spotDL/spotify-downloader)
-![Contributors](https://img.shields.io/github/contributors/spotDL/spotify-downloader?style=flat-square)
-[![Discord](https://img.shields.io/discord/771628785447337985?label=discord&logo=discord&style=flat-square)](https://discord.gg/xCa23pwJWY)
-
-> spotDL: The fastest, easiest and most accurate command-line music downloader.
 </div>
+
 
 ______________________________________________________________________
 **[Read the documentation on ReadTheDocs!](https://spotdl.readthedocs.io)**

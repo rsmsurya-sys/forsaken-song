@@ -3,1000 +3,2853 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forsaken Music - Desktop Studio Player</title>
+  <title>Forsaken 2.0 - Music That Understands You</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="/static/logo.png">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" type="image/png" href="/logo.png">
+
   <style>
-    .app-container {
+    /* ========================================================
+       FORSAKEN 2.0 NEXT-GEN SOUND OS LAYOUT
+       ======================================================== */
+    .studio-app {
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 270px 1fr;
+      grid-template-rows: 1fr;
       height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      position: relative;
+      padding: 12px 12px 105px 12px;
+      gap: 12px;
+    }
+
+    /* Translucent Cyber Sidebar */
+    .studio-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
       overflow: hidden;
     }
 
-    /* Sidebar */
-    .sidebar {
-      background: var(--bg-secondary);
-      border-right: 1px solid var(--border-glass);
-      padding: 24px 20px;
+    .sidebar-block {
+      background: rgba(19, 20, 31, 0.65);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--fk-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 14px;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      box-shadow: var(--shadow-card);
     }
 
-    .brand {
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 2px 4px;
+    }
+
+    .brand-link {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 1.3rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-orb {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--fk-gradient-aurora);
+      display: grid;
+      place-items: center;
+      color: #040914;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.45);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 800;
+      font-size: 1.15rem;
       letter-spacing: -0.5px;
     }
 
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
-      background: var(--accent-gradient);
-      display: grid;
-      place-items: center;
-      box-shadow: var(--shadow-glow);
-    }
-
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: var(--transition-smooth);
-    }
-
-    .nav-item:hover, .nav-item.active {
-      color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .nav-item.active {
-      background: rgba(139, 92, 246, 0.15);
-      color: #c4b5fd;
-      border: 1px solid rgba(139, 92, 246, 0.3);
-    }
-
-    /* Main Area */
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow-y: auto;
-      padding-bottom: 120px; /* space for player */
-    }
-
-    .top-header {
-      padding: 20px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-glass);
-      padding: 10px 18px;
-      border-radius: var(--radius-full);
-      width: 360px;
-      transition: var(--transition-smooth);
-    }
-
-    .search-box:focus-within {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
-    }
-
-    .search-box input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 0.95rem;
-      width: 100%;
-      outline: none;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .content-body {
-      padding: 10px 32px 40px;
-    }
-
-    /* Hero Banner */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.15) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      margin-bottom: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-text h1 {
-      font-size: 2.2rem;
+    .brand-badge {
+      font-size: 0.65rem;
       font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .hero-text p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      max-width: 500px;
-    }
-
-    /* Song Table */
-    .songs-table-container {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid var(--border-glass);
-      background: var(--bg-card);
-    }
-
-    table.song-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    table.song-table th {
-      padding: 16px 20px;
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--border-glass);
-    }
-
-    table.song-table td {
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      vertical-align: middle;
-    }
-
-    table.song-table tr:hover td {
-      background: var(--bg-card-hover);
-      color: var(--text-primary);
-    }
-
-    .song-row-title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .song-thumb {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .play-btn-circle {
-      width: 36px;
-      height: 36px;
+      padding: 2px 7px;
       border-radius: var(--radius-full);
-      background: var(--accent-gradient);
-      border: none;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      opacity: 0.85;
-      transition: var(--transition-smooth);
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--fk-cyan);
+      border: 1px solid rgba(0, 242, 254, 0.3);
     }
 
-    .play-btn-circle:hover {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    /* Player Bar */
-    .player-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 90px;
-      z-index: 100;
-      display: grid;
-      grid-template-columns: 300px 1fr 300px;
-      align-items: center;
-      padding: 0 28px;
-      border-top: 1px solid var(--border-glass);
-    }
-
-    .current-track-info {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .player-cover {
-      width: 58px;
-      height: 58px;
-      border-radius: var(--radius-sm);
-      object-fit: cover;
-      border: 1px solid var(--border-glass);
-    }
-
-    .player-controls-center {
+    /* Nav Links */
+    .studio-nav-list {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      gap: 4px;
+      list-style: none;
     }
 
-    .control-buttons {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .ctrl-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: var(--transition-smooth);
-    }
-
-    .ctrl-btn:hover {
-      color: var(--text-primary);
-      transform: scale(1.1);
-    }
-
-    .ctrl-btn-play {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-full);
-      background: var(--accent-gradient);
-      color: white;
-      display: grid;
-      place-items: center;
-      box-shadow: var(--shadow-glow);
-    }
-
-    .progress-wrapper {
-      width: 100%;
-      max-width: 560px;
+    .studio-nav-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .progress-bar-container {
-      flex: 1;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-full);
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--fk-text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
       position: relative;
-      cursor: pointer;
     }
 
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--accent-gradient);
-      border-radius: var(--radius-full);
-    }
-
-    .player-right-controls {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 14px;
-    }
-
-    .volume-slider {
-      width: 100px;
-      accent-color: var(--accent-primary);
-      cursor: pointer;
-    }
-
-    /* Playlist Section & Button */
-    .create-playlist-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.08);
+    .studio-nav-item:hover {
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.06);
     }
 
-    .create-playlist-btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-      transform: scale(1.04);
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    .studio-nav-item.active {
+      color: #ffffff;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.15);
     }
 
-    .create-playlist-btn:active {
-      transform: scale(0.97);
+    .studio-nav-item.active svg {
+      color: var(--fk-cyan);
+      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.6));
     }
 
-    .playlist-scroll-list::-webkit-scrollbar {
-      width: 4px;
+    /* Vault Block */
+    .vault-block {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .playlist-scroll-list::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-
-    .playlist-item {
+    .vault-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 12px;
-      border-radius: var(--radius-md);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: var(--transition-smooth);
+      color: var(--fk-text-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0 4px;
     }
 
-    .playlist-item:hover {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-primary);
+    .vault-scroll {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 4px;
     }
 
-    .playlist-item.active {
-      background: rgba(239, 68, 68, 0.15);
-      color: #fca5a5;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-    }
-
-    .playlist-item-del {
-      opacity: 0;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 4px;
+    .vault-item {
       display: flex;
       align-items: center;
-      transition: all 0.2s;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--fk-text-secondary);
     }
 
-    .playlist-item:hover .playlist-item-del {
-      opacity: 1;
+    .vault-item:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
     }
 
-    .playlist-item-del:hover {
-      color: #ef4444;
-      background: rgba(239, 68, 68, 0.15);
+    .vault-item.active {
+      background: rgba(0, 230, 118, 0.12);
+      border: 1px solid rgba(0, 230, 118, 0.25);
+      color: var(--fk-emerald);
     }
 
-    /* Modal Overlay & Card */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
+    .vault-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .vault-item-thumb {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-xs);
+      background: #1e2030;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: var(--fk-text-muted);
+    }
+
+    .vault-item.liked-vault .vault-item-thumb {
+      background: linear-gradient(135deg, #f43f5e, #8b5cf6);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.35);
+    }
+
+    .vault-item-name {
+      font-weight: 600;
+      font-size: 0.86rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+    }
+
+    .vault-item-count {
+      font-size: 0.72rem;
+      color: var(--fk-text-muted);
+    }
+
+    /* Main Stage */
+    .studio-main {
+      background: rgba(14, 15, 24, 0.75);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid var(--fk-border-subtle);
+      border-radius: var(--radius-md);
+      overflow-y: auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: var(--shadow-dock);
+    }
+
+    /* Top Bar */
+    .studio-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      background: rgba(14, 15, 24, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--fk-border-subtle);
+      gap: 18px;
+    }
+
+    .search-capsule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      flex: 1;
+      max-width: 440px;
+      transition: all 0.25s ease;
+    }
+
+    .search-capsule:focus-within {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--fk-cyan);
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.25);
+    }
+
+    .search-capsule input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      outline: none;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    .search-capsule input::placeholder {
+      color: var(--fk-text-muted);
+    }
+
+    /* Sound Stage Hero */
+    .sound-stage-hero {
+      position: relative;
+      padding: 28px 32px 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--fk-border-subtle);
+      background: linear-gradient(180deg, rgba(0, 242, 254, 0.07) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 100%);
+    }
+
+    .hero-vinyl-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+    }
+
+    .hero-vinyl-disc {
+      position: absolute;
+      top: 5px;
+      right: -24px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2d3048 25%, #10111a 60%, #000 100%);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      transition: right 0.4s var(--ease-spring);
+    }
+
+    .hero-vinyl-wrapper:hover .hero-vinyl-disc {
+      right: -38px;
+    }
+
+    .hero-vinyl-label {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--fk-gradient-aurora);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
+    }
+
+    .hero-album-art {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.2);
+      z-index: 2;
+      background: #181926;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-stage-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+      flex: 1;
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--fk-cyan);
+    }
+
+    .hero-headline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .hero-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.86rem;
+      color: var(--fk-text-secondary);
+      flex-wrap: wrap;
+    }
+
+    /* Stage Body */
+    .stage-body {
+      padding: 24px 32px 40px;
+      flex: 1;
+    }
+
+    .stage-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 16px;
+    }
+
+    /* Studio Table */
+    .studio-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+      font-size: 0.88rem;
+    }
+
+    .studio-table thead {
+      color: var(--fk-text-muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .studio-table th {
+      padding: 8px 14px;
+      font-weight: 700;
+    }
+
+    .studio-table tbody tr {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius-sm);
+      transition: all 0.18s ease;
+      cursor: pointer;
+      color: var(--fk-text-secondary);
+    }
+
+    .studio-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .studio-table tbody tr.active-row {
+      background: rgba(0, 242, 254, 0.09);
+      border-left: 3px solid var(--fk-cyan);
+      color: #fff;
+    }
+
+    .studio-table tbody tr.active-row .track-title-text {
+      color: var(--fk-cyan);
+      text-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+    }
+
+    .studio-table td {
+      padding: 10px 14px;
+      vertical-align: middle;
+    }
+
+    .studio-table td:first-child {
+      border-top-left-radius: var(--radius-sm);
+      border-bottom-left-radius: var(--radius-sm);
+    }
+    .studio-table td:last-child {
+      border-top-right-radius: var(--radius-sm);
+      border-bottom-right-radius: var(--radius-sm);
+    }
+
+    /* Compact Density */
+    .compact-deck .studio-table {
+      border-spacing: 0 2px;
+    }
+    .compact-deck .studio-table td {
+      padding: 5px 10px;
+    }
+    .compact-deck .track-cover-thumb {
+      width: 30px !important;
+      height: 30px !important;
+    }
+    .compact-deck .track-title-text {
+      font-size: 0.84rem !important;
+    }
+
+    .track-num-cell {
+      width: 44px;
+      text-align: center;
+    }
+
+    .track-num-box {
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.2s ease;
+      width: 24px;
+      height: 24px;
     }
 
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
+    .row-play-icon {
+      display: none;
+      color: var(--fk-cyan);
     }
 
-    .modal-card {
-      background: #18181b;
+    .studio-table tr:hover .track-index-num {
+      display: none;
+    }
+
+    .studio-table tr:hover .row-play-icon {
+      display: block;
+    }
+
+    .studio-table tr.active-row .track-index-num {
+      display: none;
+    }
+
+    .studio-table tr.active-row .visualizer-spectrum {
+      display: inline-flex;
+    }
+
+    .track-meta-cell {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .track-cover-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-xs);
+      object-fit: cover;
+      background: #1c1d2c;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      flex-shrink: 0;
+    }
+
+    .track-title-text {
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-artist-text {
+      font-size: 0.78rem;
+      color: var(--fk-text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Vinyl Album Grid View */
+    .vinyl-grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .vinyl-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--fk-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s var(--ease-spring);
+      overflow: hidden;
+    }
+
+    .vinyl-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(0, 242, 254, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+    }
+
+    .vinyl-card-art-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .vinyl-card-art {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .vinyl-card:hover .vinyl-card-art {
+      transform: scale(1.05);
+    }
+
+    /* Floating Capsule Player Island */
+    .capsule-player-island {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      height: 84px;
+      background: rgba(15, 16, 26, 0.88);
+      backdrop-filter: blur(36px);
+      -webkit-backdrop-filter: blur(36px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 18px;
-      padding: 26px;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-      transform: scale(0.95);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 24px rgba(0, 242, 254, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      z-index: 200;
     }
 
-    .modal-overlay.active .modal-card {
-      transform: scale(1);
+    .player-left-cluster {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 28%;
+      min-width: 200px;
+    }
+
+    .player-art-frame {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .player-art-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .player-title-info {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      gap: 2px;
+    }
+
+    .player-title-text {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-artist-text {
+      font-size: 0.78rem;
+      color: var(--fk-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-center-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 44%;
+      max-width: 650px;
+    }
+
+    .player-button-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .scrub-capsule-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .scrub-time-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--fk-text-muted);
+      min-width: 36px;
+      text-align: center;
+    }
+
+    .neon-track-slider {
+      flex: 1;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .neon-track-bg {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-full);
+      position: relative;
+      transition: height 0.15s ease;
+    }
+
+    .neon-track-slider:hover .neon-track-bg {
+      height: 6px;
+    }
+
+    .neon-track-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      background: var(--fk-gradient-aurora);
+      border-radius: var(--radius-full);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+    }
+
+    .neon-track-thumb {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 10px var(--fk-cyan);
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .neon-track-slider:hover .neon-track-thumb {
+      opacity: 1;
+    }
+
+    .player-right-cluster {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      width: 28%;
+      min-width: 200px;
+    }
+
+    /* Cyber Mini HUD */
+    .cyber-mini-widget {
+      position: fixed;
+      bottom: 108px;
+      right: 20px;
+      width: 340px;
+      background: rgba(19, 20, 31, 0.95);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 242, 254, 0.2);
+      z-index: 500;
+      display: none;
+      flex-direction: column;
+      animation: popIn 0.25s var(--ease-spring);
+      overflow: hidden;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .cyber-mini-widget.active {
+      display: flex;
+    }
+
+    /* AI Engine Panels & Equalizer Styles */
+    .ai-card-glow {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      margin-bottom: 24px;
+    }
+
+    .eq-slider-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .eq-slider {
+      -webkit-appearance: slider-vertical;
+      width: 28px;
+      height: 150px;
+      accent-color: var(--fk-cyan);
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<div class="app-container">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="brand" style="margin-bottom: 8px;">
-      <a href="/desktop" style="display:flex; align-items:center; text-decoration:none;">
-        <img src="/static/logo.png" onerror="this.onerror=null;this.src='/logo.png';" alt="Forsaken Song" style="max-width: 195px; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.4));">
-      </a>
-    </div>
+  <!-- Audio Element -->
+  <audio id="audioElement" preload="metadata" crossorigin="anonymous"></audio>
 
-    <nav class="nav-links">
-      <a href="javascript:void(0)" onclick="loadAllSongs()" id="navAllSongs" class="nav-item active">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-        All Tracks
-      </a>
-      <a href="/mobile" class="nav-item">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
-        Android / Mobile View
-      </a>
-    </nav>
-
-    <!-- Your Library Header + Create Button -->
-    <div style="margin-top: 14px; display: flex; flex-direction: column; flex: 1; overflow: hidden;">
-      <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 2px 10px;">
-        <span style="font-size: 1.05rem; font-weight: 800; color: #ffffff; letter-spacing: -0.3px;">Your Library</span>
-        <button class="create-playlist-btn" onclick="openCreatePlaylistModal()" title="Create new playlist">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          <span>Create</span>
-        </button>
-      </div>
-
-      <div id="playlistList" class="playlist-scroll-list" style="display: flex; flex-direction: column; gap: 4px; overflow-y: auto; flex: 1; padding-right: 2px;">
-        <!-- Populated via fetchPlaylists() -->
-      </div>
-    </div>
-
-    <div style="margin-top: auto; padding: 14px; border-radius: var(--radius-md); background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);">
-      <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px;">LOAD BALANCER NODE</div>
-      <div id="worker-badge" class="badge badge-purple" style="font-size:0.75rem;">Connecting...</div>
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <header class="top-header glass">
-      <div class="search-box">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="text" id="searchInput" placeholder="Search songs, artists, albums..." oninput="handleSearch(this.value)">
-      </div>
-
-      <div class="header-actions">
-      </div>
-    </header>
-
-    <div class="content-body">
-      <!-- Hero Banner -->
-      <section class="hero-banner" id="heroBanner">
-        <div class="hero-text">
-          <h1 id="heroTitle">Stream <span class="gradient-text">Unlimited</span> Music</h1>
-          <p id="heroSubtitle">Enjoy your favourite songs and tracks instantly and NO ads.</p>
+  <div class="studio-app" id="studioAppRoot">
+    <!-- LEFT CYBER SIDEBAR -->
+    <aside class="studio-sidebar">
+      <!-- Main Brand & Nav Panel -->
+      <div class="sidebar-block">
+        <div class="brand-cluster">
+          <a href="/desktop" class="brand-link">
+            <div class="brand-orb">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            </div>
+            <div>
+              <div class="brand-title">Forsaken 2.0</div>
+              <div style="font-size:0.68rem; color:var(--fk-cyan); font-weight:800; letter-spacing:0.5px;">ADAPTIVE INTELLIGENCE</div>
+            </div>
+          </a>
+          <span class="brand-badge" id="workerBadge">NODE 1</span>
         </div>
-        <div style="display:flex; gap:12px; align-items:center;">
-          <button class="btn btn-primary" onclick="playAll()" id="heroPlayAllBtn">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            Play All
-          </button>
-          <button class="btn btn-secondary" onclick="deleteCurrentPlaylist()" id="heroDeletePlaylistBtn" style="display:none; color:#ef4444; border-color:rgba(239,68,68,0.3);">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-            Delete Playlist
+
+        <ul class="studio-nav-list">
+          <li class="studio-nav-item active" id="navHome" onclick="switchView('home')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home Stage</span>
+          </li>
+          <li class="studio-nav-item" id="navMood" onclick="switchView('mood')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            <span>AI Mood Engine 🧠</span>
+          </li>
+          <li class="studio-nav-item" id="navDNA" onclick="switchView('dna')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"></path></svg>
+            <span>Music DNA 🧬</span>
+          </li>
+          <li class="studio-nav-item" id="navTime" onclick="switchView('timemachine')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Time Machine ⏳</span>
+          </li>
+          <li class="studio-nav-item" id="navSoundLab" onclick="switchView('soundlab')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><circle cx="4" cy="12" r="2"></circle><circle cx="12" cy="10" r="2"></circle><circle cx="20" cy="14" r="2"></circle></svg>
+            <span>Sound Lab 🎛️</span>
+          </li>
+          <li class="studio-nav-item" id="navFlow" onclick="switchView('flow')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>Forsaken Flow ⚡</span>
+          </li>
+          <li class="studio-nav-item" id="navDiscover" onclick="switchView('discover')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>AI Discovery 🔎</span>
+          </li>
+          <li class="studio-nav-item" id="navRooms" onclick="switchView('rooms')">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Listening Rooms 🎭</span>
+          </li>
+          <li class="studio-nav-item" id="navLibrary" onclick="loadAllSongs()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            <span>Sound Vault</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Playlists Vault Panel -->
+      <div class="sidebar-block vault-block">
+        <div class="vault-header">
+          <span>Playlists Vault</span>
+          <button class="btn-icon-round" style="width:28px; height:28px;" onclick="openCreateModal()" title="New Playlist">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </button>
         </div>
-      </section>
 
-      <!-- Songs Table -->
-      <div class="songs-table-container">
-        <table class="song-table">
-          <thead>
-            <tr>
-              <th style="width: 50px;">#</th>
-              <th>Track</th>
-              <th>Artist</th>
-              <th>Album</th>
-              <th>Source</th>
-              <th>Duration</th>
-              <th style="width: 110px; text-align: center;">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="songsList">
-            <!-- Loaded via JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- Player Bar -->
-<div class="player-bar glass">
-  <div class="current-track-info">
-    <img id="playerCover" class="player-cover" src="/api/cover/0" alt="Cover">
-    <div style="overflow: hidden;">
-      <div id="playerTitle" style="font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">No track selected</div>
-      <div id="playerArtist" style="font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Select a song to start listening</div>
-    </div>
-  </div>
-
-  <div class="player-controls-center">
-    <div class="control-buttons">
-      <button class="ctrl-btn" onclick="playPrev()" title="Previous">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-      <button id="mainPlayBtn" class="ctrl-btn-play" onclick="togglePlay()" title="Play/Pause">
-        <svg id="playIcon" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg id="pauseIcon" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <button class="ctrl-btn" onclick="playNext()" title="Next">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-    </div>
-
-    <div class="progress-wrapper">
-      <span id="currentTime">0:00</span>
-      <div class="progress-bar-container" onclick="seekAudio(event)">
-        <div id="progressFill" class="progress-fill"></div>
-      </div>
-      <span id="totalDuration">0:00</span>
-    </div>
-  </div>
-
-  <div class="player-right-controls">
-    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-    <input type="range" class="volume-slider" min="0" max="1" step="0.02" value="0.8" oninput="setVolume(this.value)">
-  </div>
-</div>
-
-<audio id="audioElement" preload="metadata"></audio>
-
-<!-- Create Playlist Modal -->
-<div id="createPlaylistModal" class="modal-overlay" onclick="handleModalOverlayClick(event, 'createPlaylistModal')">
-  <div class="modal-card">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 18px;">
-      <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff;">Create New Playlist</h3>
-      <button onclick="closeCreatePlaylistModal()" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.4rem; line-height:1;">&times;</button>
-    </div>
-    <div style="margin-bottom: 20px;">
-      <label style="display:block; font-size:0.85rem; font-weight:600; color:var(--text-secondary); margin-bottom:8px;">Playlist Name</label>
-      <input type="text" id="playlistNameInput" placeholder="e.g. My Favorites, Late Night Vibes..." style="width:100%; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:var(--radius-md); padding:12px 14px; color:#fff; font-size:0.95rem; outline:none;" onkeydown="if(event.key==='Enter') submitCreatePlaylist()">
-    </div>
-    <div style="display:flex; justify-content:flex-end; gap:10px;">
-      <button class="btn btn-secondary" onclick="closeCreatePlaylistModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="submitCreatePlaylist()">Create Playlist</button>
-    </div>
-  </div>
-</div>
-
-<!-- Add To Playlist Modal -->
-<div id="addToPlaylistModal" class="modal-overlay" onclick="handleModalOverlayClick(event, 'addToPlaylistModal')">
-  <div class="modal-card">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px;">
-      <h3 style="font-size: 1.2rem; font-weight: 800; color: #fff;">Add to Playlist</h3>
-      <button onclick="closeAddToPlaylistModal()" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.4rem; line-height:1;">&times;</button>
-    </div>
-    <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">
-      Song: <span id="modalSongTitle" style="color:#fff; font-weight:700;"></span>
-    </div>
-    <div id="modalPlaylistList" style="max-height: 220px; overflow-y: auto; display:flex; flex-direction:column; gap:8px; margin-bottom:18px;">
-      <!-- Populated via JS -->
-    </div>
-    <div style="display:flex; justify-content:flex-end;">
-      <button class="btn btn-secondary" onclick="closeAddToPlaylistModal()">Done</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  let songs = [];
-  let playlists = [];
-  let currentPlaylistId = null; // null = all songs
-  let currentPlaylistData = null;
-  let currentIndex = -1;
-  let activeAddingSongId = null;
-  const audio = document.getElementById('audioElement');
-
-  async function loadWorkerInfo() {
-    try {
-      const res = await fetch('/api/info');
-      const data = await res.json();
-      document.getElementById('worker-badge').innerText = `${data.worker} (${data.hostname})`;
-    } catch(e) {
-      document.getElementById('worker-badge').innerText = 'Connected';
-    }
-  }
-
-  async function fetchPlaylists() {
-    try {
-      const res = await fetch('/api/playlists');
-      playlists = await res.json();
-      renderPlaylists();
-    } catch (e) {
-      console.error('Failed to load playlists:', e);
-    }
-  }
-
-  function renderPlaylists() {
-    const listEl = document.getElementById('playlistList');
-    if (!playlists.length) {
-      listEl.innerHTML = `<div style="font-size:0.8rem; color:var(--text-muted); padding:10px 4px;">No playlists yet. Click <b>+ Create</b> above to make one!</div>`;
-      return;
-    }
-
-    listEl.innerHTML = playlists.map(p => `
-      <div class="playlist-item ${currentPlaylistId === p.id ? 'active' : ''}" onclick="loadPlaylist(${p.id})">
-        <div style="display:flex; align-items:center; gap:8px; overflow:hidden;">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="flex-shrink:0; opacity:0.8;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-          <div style="overflow:hidden;">
-            <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600; font-size:0.9rem;">${p.name}</div>
-            <div style="font-size:0.75rem; color:var(--text-muted);">${p.song_count || 0} tracks</div>
+        <div class="vault-scroll" id="vaultPlaylistsList">
+          <div class="vault-item liked-vault" onclick="showLikedVault()">
+            <div class="vault-item-left">
+              <div class="vault-item-thumb">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div>
+                <div class="vault-item-name">Liked Recordings</div>
+                <div class="vault-item-count" id="likedCountLabel">0 tracks</div>
+              </div>
+            </div>
           </div>
         </div>
-        <button class="playlist-item-del" onclick="deletePlaylistDirect(event, ${p.id}, '${p.name.replace(/'/g, "\\'")}')" title="Delete playlist">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+
+        <div style="padding-top:10px; border-top:1px solid var(--fk-border-subtle); display:flex; flex-direction:column; gap:6px;">
+          <a href="/admin" class="btn btn-glass" style="font-size:0.78rem; justify-content:center;">
+            ⚡ Admin & SpotDL Hub
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN SOUND STAGE -->
+    <main class="studio-main" id="studioMain">
+      <!-- TOP BAR -->
+      <header class="studio-topbar">
+        <div style="display:flex; align-items:center; gap:12px; flex:1;">
+          <div class="search-capsule">
+            <svg width="16" height="16" fill="none" stroke="var(--fk-cyan)" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="studioSearch" placeholder="Ask AI: 'Tamil songs with powerful vocals' or search tracks..." oninput="handleSearch(this.value)" autocomplete="off">
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+          <button class="btn btn-pill" id="compactModeBtn" onclick="toggleCompactMode()" title="Toggle Compact Density (Power User View)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <span id="compactLabel">Compact View</span>
+          </button>
+
+          <button class="btn btn-pill" onclick="toggleCyberMiniPlayer()" title="Open Floating Mini Player">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>Mini Player</span>
+          </button>
+
+          <a href="/admin" class="btn btn-aurora" style="padding:6px 16px; font-size:0.8rem;">
+            + Add Track
+          </a>
+        </div>
+      </header>
+
+      <!-- VIEW 1: HOME STAGE -->
+      <div id="viewHome">
+        <section class="sound-stage-hero" id="stageHero">
+          <div class="hero-vinyl-wrapper">
+            <div class="hero-vinyl-disc" id="heroVinylDisc">
+              <div class="hero-vinyl-label"></div>
+            </div>
+            <img id="heroArt" src="/api/cover/0" class="hero-album-art" alt="Cover" onerror="this.src='/static/logo.png'">
+          </div>
+
+          <div class="hero-stage-info">
+            <div class="hero-kicker">
+              <div class="visualizer-spectrum"><span></span><span></span><span></span><span></span></div>
+              <span id="heroKickerLabel">ADAPTIVE MUSIC INTELLIGENCE</span>
+            </div>
+            <h1 class="hero-headline" id="heroHeadline">Music That Understands You</h1>
+            <div class="hero-stats-row">
+              <span id="heroStatsCount">0 Tracks</span> • 
+              <span id="heroStatsDuration">0 min total</span> • 
+              <span class="badge badge-cyan">Lossless 320k</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+              <span style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700;">AUDIO AURA:</span>
+              <button class="btn-pill active" onclick="setSoundProfile(this, 'Studio Dynamic')">Studio Dynamic</button>
+              <button class="btn-pill" onclick="setSoundProfile(this, 'Deep Bass Aura')">Bass Aura</button>
+              <button class="btn-pill" onclick="setSoundProfile(this, 'Spatial Holographic')">Spatial 3D</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="stage-body">
+          <div class="stage-action-bar">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <button class="btn-play-neon" id="heroBigPlayBtn" onclick="togglePlayHeroList()" title="Play All">
+                <svg id="heroPlayIconSvg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+              <button class="btn-icon-round" id="shuffleStageBtn" onclick="toggleShuffle()" title="Shuffle">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+              </button>
+              <button class="btn-icon-round" id="deletePlaylistStageBtn" style="display:none;" onclick="deleteActivePlaylist()" title="Delete Playlist">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button class="btn-pill active" id="pillAll" onclick="setFilter('all')">All Vault</button>
+              <button class="btn-pill" id="pillLiked" onclick="setFilter('liked')">Liked ❤️</button>
+              <button class="btn-pill" id="pillCloud" onclick="setFilter('cloud')">Telegram Cloud ☁️</button>
+
+              <button class="btn-icon-round" id="viewTableBtn" onclick="setViewMode('table')" title="List View" style="color:#fff;">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              </button>
+              <button class="btn-icon-round" id="viewGridBtn" onclick="setViewMode('grid')" title="Vinyl Cards">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="tableContainer">
+            <table class="studio-table">
+              <thead>
+                <tr>
+                  <th class="track-num-cell">#</th>
+                  <th>Track Title</th>
+                  <th>Album</th>
+                  <th style="text-align:right;">Length</th>
+                  <th style="width:130px; text-align:right;">Intelligence</th>
+                </tr>
+              </thead>
+              <tbody id="studioTableBody"></tbody>
+            </table>
+          </div>
+
+          <div id="gridContainer" class="vinyl-grid-view" style="display:none;"></div>
+          <div id="emptyView" style="display:none; text-align:center; padding:60px 20px;">
+            <h3 style="font-size:1.2rem; color:#fff; margin-bottom:8px;">No Tracks in Vault</h3>
+            <p style="color:var(--fk-text-muted); font-size:0.9rem; margin-bottom:20px;">Upload audio files or use SpotDL to download.</p>
+            <a href="/admin" class="btn btn-aurora">Open Admin Portal</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: AI MOOD ENGINE 🧠 -->
+      <div id="viewMood" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="badge badge-cyan">FEATURE 1</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">AI Mood & Context Engine 🧠</h2>
+          </div>
+          <p style="color:var(--fk-text-secondary); margin-bottom:20px; font-size:0.95rem;">
+            Describe your current situation, emotional state, or setting. The AI will curate and synthesize your music experience.
+          </p>
+
+          <div style="display:flex; gap:12px; margin-bottom:14px; flex-wrap:wrap;">
+            <input type="text" id="aiMoodInput" class="modal-input" style="flex:1; min-width:260px; font-size:1rem;" placeholder="e.g. 'I am traveling alone on a bus at night' or 'Intense coding focus'">
+            <button class="btn btn-aurora" onclick="runAiMoodEngine()">Synthesize Session ⚡</button>
+          </div>
+
+          <!-- Direction Choice: Stay in Mood vs Shift Mood -->
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap;">
+            <span style="font-size:0.85rem; font-weight:700; color:var(--fk-text-muted);">AI DIRECTION:</span>
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:0.88rem; color:#fff;">
+              <input type="radio" name="moodShift" id="moodStayRadio" value="stay" checked> Stay in My Mood
+            </label>
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:0.88rem; color:#fff;">
+              <input type="radio" name="moodShift" id="moodShiftRadio" value="shift"> Help Me Feel Better (Shift Frequency)
+            </label>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700;">PROMPT PRESETS:</span>
+            <button class="btn-pill" onclick="setMoodPrompt('Rainy evening tranquility')">🌧️ Rainy Evening</button>
+            <button class="btn-pill" onclick="setMoodPrompt('Traveling alone on night bus')">🚌 Night Bus Travel</button>
+            <button class="btn-pill" onclick="setMoodPrompt('Gym workout adrenaline pump')">⚡ Gym Motivation</button>
+            <button class="btn-pill" onclick="setMoodPrompt('Deep midnight coding focus')">💻 Deep Coding</button>
+            <button class="btn-pill" onclick="setMoodPrompt('Tamil high energy melodic rhythm')">🔥 Tamil Energy</button>
+          </div>
+        </div>
+
+        <div id="aiMoodResults" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <h3 id="aiMoodArchetype" style="font-size:1.3rem; font-weight:800; color:var(--fk-cyan);">Harmonic Session</h3>
+              <p id="aiMoodReasoning" style="color:var(--fk-text-secondary); font-size:0.9rem;"></p>
+            </div>
+            <button class="btn btn-aurora" onclick="playAllMoodResults()">Play Session ▶</button>
+          </div>
+          <div id="aiMoodTracksList"></div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: MUSIC DNA 🧬 -->
+      <div id="viewDNA" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="badge badge-indigo">FEATURE 3</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">AI Music DNA 🧬</h2>
+          </div>
+          <p style="color:var(--fk-text-secondary); margin-bottom:20px; font-size:0.95rem;">
+            Your dynamic musical personality profile calculated from your acoustic listening patterns.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-bottom:24px;">
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:18px; border-radius:12px;">
+              <div style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700; text-transform:uppercase;">ENERGY PROFILE</div>
+              <div style="font-size:2rem; font-weight:800; color:var(--fk-cyan);" id="dnaEnergy">84%</div>
+              <div style="font-size:0.8rem; color:var(--fk-text-secondary);">High-energy & kinetic rhythm</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:18px; border-radius:12px;">
+              <div style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700; text-transform:uppercase;">DISCOVERY INDEX</div>
+              <div style="font-size:2rem; font-weight:800; color:var(--fk-emerald);" id="dnaDiscovery">79%</div>
+              <div style="font-size:0.8rem; color:var(--fk-text-secondary);">Adventurous sonic explorer</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:18px; border-radius:12px;">
+              <div style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700; text-transform:uppercase;">REPEAT LOYALTY</div>
+              <div style="font-size:2rem; font-weight:800; color:#c084fc;" id="dnaRepeat">52%</div>
+              <div style="font-size:0.8rem; color:var(--fk-text-secondary);">Deep loop affinity</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:18px; border-radius:12px;">
+              <div style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700; text-transform:uppercase;">TEMPO SWEET SPOT</div>
+              <div style="font-size:1.3rem; font-weight:800; color:#fff; margin-top:8px;" id="dnaTempo">120 - 140 BPM</div>
+              <div style="font-size:0.8rem; color:var(--fk-text-secondary);">Dynamic pulse frequency</div>
+            </div>
+          </div>
+
+          <!-- Compatibility Tool -->
+          <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+            <h4 style="font-size:1.1rem; color:#fff; margin-bottom:8px;">👥 Friend Music Compatibility Matcher</h4>
+            <div style="display:flex; gap:10px; max-width:500px;">
+              <input type="text" id="friendNameInput" class="modal-input" placeholder="Enter Friend's Name (e.g. Rahul)">
+              <button class="btn btn-aurora" onclick="calculateCompatibility()">Calculate Match</button>
+            </div>
+            <div id="compatReport" style="display:none; margin-top:14px; padding:16px; background:rgba(0,242,254,0.08); border-radius:10px; border:1px solid rgba(0,242,254,0.3);">
+              <span id="compatText" style="font-size:1rem; font-weight:700; color:#fff;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 4: TIME MACHINE ⏳ -->
+      <div id="viewTimeMachine" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="badge badge-cyan">FEATURE 2</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">Forsaken Time Machine ⏳</h2>
+          </div>
+          <p style="color:var(--fk-text-secondary); margin-bottom:20px; font-size:0.95rem;">
+            Rediscover your musical timeline, forgotten gems, and the songs that shaped your past milestones.
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+            <!-- Forgotten Gems -->
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:14px;">
+              <h3 style="color:var(--fk-cyan); font-size:1.1rem; margin-bottom:12px;">💎 Forgotten Gems</h3>
+              <p style="font-size:0.8rem; color:var(--fk-text-muted); margin-bottom:12px;">Tracks in your vault waiting to be re-experienced.</p>
+              <div id="forgottenGemsList" style="display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+
+            <!-- Most Replayed -->
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:14px;">
+              <h3 style="color:var(--fk-emerald); font-size:1.1rem; margin-bottom:12px;">🔁 Most Replayed Sessions</h3>
+              <p style="font-size:0.8rem; color:var(--fk-text-muted); margin-bottom:12px;">Your all-time top loop tracks.</p>
+              <div id="mostReplayedList" style="display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
+          </div>
+
+          <!-- AI Music Memory Insights -->
+          <div style="margin-top:24px; background:rgba(255,255,255,0.03); border:1px solid rgba(0,242,254,0.25); padding:20px; border-radius:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.3rem;">🧠</span>
+                <h3 style="color:#fff; font-size:1.1rem; font-weight:800;">AI Music Memory (Listening Habits & Revival Alerts)</h3>
+              </div>
+              <span class="badge badge-cyan" id="aiMemoryPlaysBadge">AI Memory Active</span>
+            </div>
+            <div id="aiMemoryCardsGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;">
+              <!-- Populated dynamically from /api/ai/memory -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 5: SOUND LAB (REAL WEB AUDIO EQUALIZER) 🎛️ -->
+      <div id="viewSoundLab" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="badge badge-emerald">FEATURE 6</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">Forsaken Sound Lab 🎛️</h2>
+          </div>
+          <p style="color:var(--fk-text-secondary); margin-bottom:20px; font-size:0.95rem;">
+            Precision Web Audio API Real-Time Equalizer & AI Acoustic Adjustment.
+          </p>
+
+          <!-- AI Natural Language EQ Prompt -->
+          <div style="display:flex; gap:12px; margin-bottom:24px;">
+            <input type="text" id="aiEqInput" class="modal-input" placeholder="Type AI Adjustment: 'Make bass heavy but keep vocals clear' or 'Punchy EDM drop'">
+            <button class="btn btn-aurora" onclick="applyAiEqPrompt()">AI Tune 🎛️</button>
+          </div>
+
+          <!-- Real 5-Band Hardware-grade Equalizer -->
+          <div style="display:flex; justify-content:space-between; background:rgba(0,0,0,0.4); padding:24px 32px; border-radius:14px; border:1px solid rgba(255,255,255,0.08); margin-bottom:24px;">
+            <div class="eq-slider-col">
+              <span style="font-size:0.75rem; color:var(--fk-cyan); font-weight:700;">60 Hz</span>
+              <input type="range" min="-12" max="12" value="0" step="1" id="eq60" class="eq-slider" oninput="updateEqBand(0, this.value)">
+              <span id="eqVal0" style="font-size:0.75rem; color:#fff;">0 dB</span>
+              <span style="font-size:0.7rem; color:var(--fk-text-muted);">SUB BASS</span>
+            </div>
+            <div class="eq-slider-col">
+              <span style="font-size:0.75rem; color:var(--fk-cyan); font-weight:700;">250 Hz</span>
+              <input type="range" min="-12" max="12" value="0" step="1" id="eq250" class="eq-slider" oninput="updateEqBand(1, this.value)">
+              <span id="eqVal1" style="font-size:0.75rem; color:#fff;">0 dB</span>
+              <span style="font-size:0.7rem; color:var(--fk-text-muted);">PUNCH</span>
+            </div>
+            <div class="eq-slider-col">
+              <span style="font-size:0.75rem; color:var(--fk-cyan); font-weight:700;">1 kHz</span>
+              <input type="range" min="-12" max="12" value="0" step="1" id="eq1k" class="eq-slider" oninput="updateEqBand(2, this.value)">
+              <span id="eqVal2" style="font-size:0.75rem; color:#fff;">0 dB</span>
+              <span style="font-size:0.7rem; color:var(--fk-text-muted);">VOCALS</span>
+            </div>
+            <div class="eq-slider-col">
+              <span style="font-size:0.75rem; color:var(--fk-cyan); font-weight:700;">4 kHz</span>
+              <input type="range" min="-12" max="12" value="0" step="1" id="eq4k" class="eq-slider" oninput="updateEqBand(3, this.value)">
+              <span id="eqVal3" style="font-size:0.75rem; color:#fff;">0 dB</span>
+              <span style="font-size:0.7rem; color:var(--fk-text-muted);">PRESENCE</span>
+            </div>
+            <div class="eq-slider-col">
+              <span style="font-size:0.75rem; color:var(--fk-cyan); font-weight:700;">16 kHz</span>
+              <input type="range" min="-12" max="12" value="0" step="1" id="eq16k" class="eq-slider" oninput="updateEqBand(4, this.value)">
+              <span id="eqVal4" style="font-size:0.75rem; color:#fff;">0 dB</span>
+              <span style="font-size:0.7rem; color:var(--fk-text-muted);">AIR / SHIMMER</span>
+            </div>
+          </div>
+
+          <!-- Presets -->
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700;">EQ PRESETS:</span>
+            <button class="btn-pill" onclick="setEqPreset(0, 0, 0, 0, 0, 'Studio Flat')">Flat</button>
+            <button class="btn-pill" onclick="setEqPreset(9, 6, 0, 2, 4, 'Bass Storm')">Bass Storm</button>
+            <button class="btn-pill" onclick="setEqPreset(-2, 0, 7, 5, 3, 'Vocal Clarity')">Vocal Clarity</button>
+            <button class="btn-pill" onclick="setEqPreset(6, 4, -2, 5, 8, 'Electronic Pulse')">Electronic Pulse</button>
+            <button class="btn-pill" onclick="setEqPreset(3, 3, 2, -1, -3, 'Acoustic Warmth')">Acoustic Warmth</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 6: LISTENING ROOMS 🎭 -->
+      <div id="viewRooms" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="badge badge-cyan">FEATURE 5</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">AI Listening Rooms 🎭</h2>
+          </div>
+          <p style="color:var(--fk-text-secondary); margin-bottom:24px; font-size:0.95rem;">
+            Synchronized social listening spaces with real-time Room ID sync, focus tools, and mood resonance.
+          </p>
+
+          <!-- LIVE SYNC PARTY ROOM (CREATE / JOIN WITH ROOM ID) -->
+          <div style="background:linear-gradient(135deg, rgba(0, 242, 254, 0.08) 0%, rgba(0, 230, 118, 0.04) 100%); border:1px solid rgba(0, 242, 254, 0.35); border-radius:18px; padding:24px; margin-bottom:28px; box-shadow:0 12px 30px rgba(0, 242, 254, 0.1);">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:18px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="badge badge-emerald">LIVE LISTEN TOGETHER</span>
+                  <span class="badge badge-cyan" id="liveRoomSyncStatus">Disconnected</span>
+                </div>
+                <h3 style="font-size:1.35rem; font-weight:800; color:#fff; margin-top:6px;">Live Music Room Sync (Party Mode) 🎧</h3>
+                <p style="font-size:0.88rem; color:var(--fk-text-secondary); margin-top:2px;">
+                  Create a Room ID and invite your friend. Whatever song you play, pause, or seek will play on your friend's device in real-time!
+                </p>
+              </div>
+
+              <!-- Active Room ID Banner (Visible when in a room) -->
+              <div id="activeRoomBanner" style="display:none; background:rgba(0,0,0,0.5); border:1px solid rgba(0,242,254,0.4); padding:10px 18px; border-radius:12px; text-align:right;">
+                <div style="font-size:0.72rem; color:var(--fk-text-muted); font-weight:700;">YOUR ACTIVE ROOM ID</div>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:2px;">
+                  <span id="activeRoomCodeDisplay" style="font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:800; color:var(--fk-cyan); letter-spacing:1px;">FK-0000</span>
+                  <button class="btn btn-pill" style="padding:4px 10px; font-size:0.75rem;" onclick="copyRoomIdLink()">📋 Copy ID</button>
+                  <button class="btn btn-pill" style="padding:4px 10px; font-size:0.75rem; background:rgba(255,82,82,0.2); color:#ff5252; border-color:rgba(255,82,82,0.4);" onclick="leaveActiveRoom()">Leave</button>
+                </div>
+                <div id="activeRoomListenersCount" style="font-size:0.75rem; color:var(--fk-emerald); margin-top:4px;">👥 1 Member Active</div>
+              </div>
+            </div>
+
+            <!-- Create vs Join Actions Grid -->
+            <div id="roomActionsGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+              <!-- Create Room Card -->
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:18px; border-radius:12px; display:flex; flex-direction:column; gap:10px;">
+                <div style="font-size:0.95rem; font-weight:700; color:#fff;">👑 Create a New Room (Host Mode)</div>
+                <p style="font-size:0.8rem; color:var(--fk-text-secondary); line-height:1.4;">
+                  You control the music. Share your generated Room ID with your friend so they listen along.
+                </p>
+                <div style="display:flex; gap:10px; margin-top:auto;">
+                  <input type="text" id="createRoomCustomInput" placeholder="Custom Room ID (optional)" style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:var(--radius-sm); padding:8px 12px; color:#fff; font-size:0.85rem; outline:none; text-transform:uppercase;">
+                  <button class="btn btn-aurora" onclick="createLiveSyncRoom()">⚡ Create Room</button>
+                </div>
+              </div>
+
+              <!-- Join Room Card -->
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:18px; border-radius:12px; display:flex; flex-direction:column; gap:10px;">
+                <div style="font-size:0.95rem; font-weight:700; color:#fff;">🎧 Connect to Friend's Room (Listener)</div>
+                <p style="font-size:0.8rem; color:var(--fk-text-secondary); line-height:1.4;">
+                  Enter the Room ID your friend shared to tune in and hear their live playback automatically.
+                </p>
+                <div style="display:flex; gap:10px; margin-top:auto;">
+                  <input type="text" id="joinRoomIdInput" placeholder="Enter Room ID (e.g. FK-8921)" style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(0,242,254,0.3); border-radius:var(--radius-sm); padding:8px 12px; color:#fff; font-size:0.85rem; outline:none; text-transform:uppercase;" onkeydown="if(event.key==='Enter') joinLiveSyncRoom()">
+                  <button class="btn btn-pill" style="background:var(--fk-cyan); color:#040914; font-weight:800;" onclick="joinLiveSyncRoom()">🔗 Connect & Listen</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+            <!-- Focus Pod with Pomodoro Timer -->
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(0,242,254,0.3); padding:24px; border-radius:14px; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.8rem;">🧠</span>
+                <span class="badge badge-cyan" id="roomPomoBadge">Focus Room</span>
+              </div>
+              <h3 style="font-size:1.2rem; color:#fff; font-weight:800;">Deep Focus Sanctum</h3>
+              <p style="font-size:0.85rem; color:var(--fk-text-secondary);">Concentration audio stream with synced 25/5 Pomodoro study cycle.</p>
+              
+              <!-- Pomodoro Timer Box -->
+              <div style="background:rgba(0,0,0,0.4); padding:16px; border-radius:10px; text-align:center;">
+                <div id="pomodoroDisplay" style="font-family:'Space Grotesk',sans-serif; font-size:2.2rem; font-weight:800; color:var(--fk-cyan);">25:00</div>
+                <div style="display:flex; justify-content:center; gap:10px; margin-top:8px;">
+                  <button class="btn btn-pill" onclick="togglePomodoroTimer()" id="pomoBtn">Start Focus</button>
+                  <button class="btn btn-pill" onclick="resetPomodoroTimer()">Reset</button>
+                </div>
+              </div>
+              <button class="btn btn-aurora" onclick="enterRoom('focus_pod')">Join Room & Stream</button>
+            </div>
+
+            <!-- Atmospheric Sanctuary -->
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:24px; border-radius:14px; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.8rem;">🌙</span>
+                <span class="badge badge-indigo">28 Listeners</span>
+              </div>
+              <h3 style="font-size:1.2rem; color:#fff; font-weight:800;">Atmospheric Sanctuary</h3>
+              <p style="font-size:0.85rem; color:var(--fk-text-secondary);">Midnight emotional resonance room for contemplative listening sessions.</p>
+              <button class="btn btn-glass" style="margin-top:auto;" onclick="enterRoom('emotion_sanctuary')">Enter Sanctuary</button>
+            </div>
+
+            <!-- Sonic Battle Arena -->
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:24px; border-radius:14px; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.8rem;">⚡</span>
+                <span class="badge badge-emerald">Battle Live</span>
+              </div>
+              <h3 style="font-size:1.2rem; color:#fff; font-weight:800;">Sonic Battle Arena</h3>
+              <p style="font-size:0.85rem; color:var(--fk-text-secondary);">Two musical tracks collide — vote in real-time for the supreme melody.</p>
+              <button class="btn btn-glass" style="margin-top:auto;" onclick="enterRoom('sonic_battle')">Enter Arena</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 7: FORSAKEN FLOW ⚡ -->
+      <div id="viewFlow" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:12px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <span class="badge badge-emerald">FEATURE 8</span>
+                <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">Forsaken Flow ⚡</h2>
+              </div>
+              <p style="color:var(--fk-text-secondary); font-size:0.95rem;">
+                An adaptive session that modulates its acoustic pacing, EQ resonance, and queue across 4 progressive stages.
+              </p>
+            </div>
+            <div style="background:rgba(0,0,0,0.4); border:1px solid rgba(0,242,254,0.3); padding:10px 18px; border-radius:12px; text-align:right;">
+              <div style="font-size:0.75rem; color:var(--fk-text-muted); font-weight:700;">FLOW TIMELINE STATUS</div>
+              <div id="flowLiveStatus" style="font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:800; color:var(--fk-cyan);">Ready to Synthesize</div>
+            </div>
+          </div>
+
+          <!-- Session Controls -->
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:20px; border-radius:14px; margin-bottom:24px;">
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div>
+                <label style="font-size:0.8rem; font-weight:700; color:var(--fk-text-muted); text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:8px;">Target Intent</label>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <button class="btn btn-pill active" id="flowIntentFocus" onclick="setFlowIntent('focus')">🧠 Deep Focus / Coding</button>
+                  <button class="btn btn-pill" id="flowIntentWorkout" onclick="setFlowIntent('workout')">🔥 High-Velocity Workout</button>
+                  <button class="btn btn-pill" id="flowIntentRain" onclick="setFlowIntent('rain')">🌧️ Rainy Evening Walk</button>
+                  <button class="btn btn-pill" id="flowIntentCalm" onclick="setFlowIntent('calm')">🧘 Mindful Calm & Landing</button>
+                </div>
+              </div>
+
+              <div>
+                <label style="font-size:0.8rem; font-weight:700; color:var(--fk-text-muted); text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:8px;">Session Duration</label>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn btn-pill" id="flowDur15" onclick="setFlowDuration(15)">15 Min</button>
+                  <button class="btn btn-pill" id="flowDur30" onclick="setFlowDuration(30)">30 Min</button>
+                  <button class="btn btn-pill" id="flowDur45" onclick="setFlowDuration(45)">45 Min</button>
+                  <button class="btn btn-pill active" id="flowDur60" onclick="setFlowDuration(60)">60 Min</button>
+                  <button class="btn btn-pill" id="flowDur90" onclick="setFlowDuration(90)">90 Min</button>
+                  <button class="btn btn-aurora" style="margin-left:auto;" onclick="launchFlowSession()">⚡ Synthesize & Launch Flow</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4-Stage Progressive Timeline -->
+          <div id="flowStagesContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-bottom:24px;">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Active Stage Tracks Queue -->
+          <div id="flowTracksCard" style="display:none; background:rgba(255,255,255,0.03); border:1px solid rgba(0,242,254,0.3); border-radius:14px; padding:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <div>
+                <h3 id="flowActiveStageTitle" style="color:#fff; font-size:1.15rem; font-weight:800;">Stage 1: Cognitive Settle-In</h3>
+                <div id="flowActiveStageSub" style="color:var(--fk-text-muted); font-size:0.85rem;">Modulating initial audio cadence</div>
+              </div>
+              <button class="btn btn-pill" onclick="playAllFlowTracks()">▶ Play Full Flow Queue</button>
+            </div>
+            <div id="flowTracksList" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 8: AI CONVERSATIONAL DISCOVERY 🔎 -->
+      <div id="viewDiscover" style="display:none; padding:32px;">
+        <div class="ai-card-glow">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <span class="badge badge-cyan">FEATURE 7</span>
+            <h2 style="font-size:1.6rem; font-weight:800; color:#fff;">AI Conversational Discovery 🔎</h2>
+          </div>
+          <p style="color:var(--fk-text-secondary); margin-bottom:20px; font-size:0.95rem;">
+            Describe situations, vocal characteristics, time budgets, or acoustic moods without scrolling through endless playlists.
+          </p>
+
+          <!-- Prompt Suggestions Pills -->
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;">
+            <button class="btn btn-pill" onclick="setDiscoverPrompt('Find Tamil songs with powerful vocals')">🎤 Tamil Powerful Vocals</button>
+            <button class="btn btn-pill" onclick="setDiscoverPrompt('Find songs for a 30-minute evening walk')">🚶 30-Min Evening Walk</button>
+            <button class="btn btn-pill" onclick="setDiscoverPrompt('Suggest energetic music without heavy bass')">⚡ Energetic Clean Treble</button>
+            <button class="btn btn-pill" onclick="setDiscoverPrompt('Find underrated songs that match my taste')">💎 Underrated Hidden Gems</button>
+            <button class="btn btn-pill" onclick="setDiscoverPrompt('I am travelling alone on a bus at night')">🚌 Night Bus Travel</button>
+            <button class="btn btn-pill" onclick="setDiscoverPrompt('I need a playlist for a long coding session')">💻 Long Coding Flow</button>
+          </div>
+
+          <!-- Input Bar -->
+          <div style="display:flex; gap:12px; margin-bottom:24px;">
+            <input type="text" id="aiDiscoverInput" placeholder="e.g. Find Tamil songs with powerful vocals or songs for a 30-minute evening walk..." 
+              style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(0,242,254,0.3); border-radius:var(--radius-sm); padding:12px 18px; color:#fff; font-size:0.95rem; outline:none;"
+              onkeydown="if(event.key==='Enter') runAiDiscovery()">
+            <button class="btn btn-aurora" onclick="runAiDiscovery()">Synthesize Queue</button>
+          </div>
+
+          <!-- Results Section -->
+          <div id="aiDiscoverResults" style="display:none; background:rgba(255,255,255,0.03); border:1px solid rgba(0,242,254,0.3); border-radius:14px; padding:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+              <div>
+                <span class="badge badge-emerald" id="discoverBadge">Universal Discovery</span>
+                <h3 id="discoverInsightTitle" style="color:#fff; font-size:1.15rem; font-weight:800; margin-top:6px;">Acoustic Synthesis</h3>
+                <p id="discoverInsightText" style="color:var(--fk-text-secondary); font-size:0.88rem; margin-top:2px;">Insights</p>
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <span id="discoverTimeBadge" class="badge badge-cyan" style="font-size:0.8rem;">32 Min Total</span>
+                <button class="btn btn-aurora" onclick="playAllDiscovered()">▶ Play Discovery Queue</button>
+              </div>
+            </div>
+            <div id="discoverSongsList" style="display:flex; flex-direction:column; gap:8px;"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FLOATING CAPSULE PLAYER BAR -->
+    <footer class="capsule-player-island">
+      <div class="player-left-cluster">
+        <div class="player-art-frame">
+          <img id="capsuleArt" src="/api/cover/0" class="player-art-img" alt="Art" onerror="this.src='/static/logo.png'">
+        </div>
+        <div class="player-title-info">
+          <div class="player-title-text" id="capsuleTitle">Forsaken 2.0</div>
+          <div class="player-artist-text" id="capsuleArtist">Ready to stream</div>
+        </div>
+        <button class="btn-icon-round" id="capsuleHeartBtn" onclick="toggleLikeCurrent()" title="Save to Liked">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </button>
+        <div id="playerRoomSyncPill" style="display:none; align-items:center; gap:6px; background:rgba(0,242,254,0.15); border:1px solid rgba(0,242,254,0.35); padding:3px 9px; border-radius:12px; font-size:0.72rem; color:var(--fk-cyan); font-weight:700; cursor:pointer;" onclick="switchView('rooms')" title="Click to view Live Room">
+          <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--fk-emerald);"></span>
+          <span id="playerRoomSyncCode">FK-0000</span>
+        </div>
+      </div>
+
+      <div class="player-center-cluster">
+        <div class="player-button-row">
+          <button class="btn-icon-round" id="shuffleCapsuleBtn" onclick="toggleShuffle()" title="Shuffle">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+          </button>
+          <button class="btn-icon-round" onclick="playPrev()" title="Previous Track">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 6 6 18 8 18 8 6 6 6"></polygon><polygon points="18 6 10 12 18 18 18 6"></polygon></svg>
+          </button>
+          <button class="btn-play-neon" id="capsulePlayBtn" onclick="togglePlayPause()" style="width:42px; height:42px;" title="Play / Pause">
+            <svg id="capsulePlayIconSvg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-left:2px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+          <button class="btn-icon-round" onclick="playNext()" title="Next Track">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 6 14 12 6 18 6 6"></polygon><polygon points="16 6 16 18 18 18 18 6 16 6"></polygon></svg>
+          </button>
+          <button class="btn-icon-round" id="repeatCapsuleBtn" onclick="toggleRepeat()" title="Repeat">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+          </button>
+        </div>
+
+        <div class="scrub-capsule-row">
+          <span class="scrub-time-label" id="timeCurrent">0:00</span>
+          <div class="neon-track-slider" onclick="seekAudio(event)">
+            <div class="neon-track-bg">
+              <div class="neon-track-fill" id="trackFill"></div>
+              <div class="neon-track-thumb" id="trackThumb"></div>
+            </div>
+          </div>
+          <span class="scrub-time-label" id="timeDuration">0:00</span>
+        </div>
+      </div>
+
+      <div class="player-right-cluster">
+        <button class="btn-icon-round" onclick="toggleCyberMiniPlayer()" title="Mini Player">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </button>
+
+        <button class="btn-icon-round" id="muteBtn" onclick="toggleMute()" title="Mute">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="neon-track-slider" style="width:90px;" onclick="setVolumeFromEvent(event)">
+          <div class="neon-track-bg">
+            <div class="neon-track-fill" id="volFill" style="width:80%;"></div>
+            <div class="neon-track-thumb" id="volThumb" style="left:80%;"></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CYBER MINI HUD -->
+  <div class="cyber-mini-widget" id="cyberMiniWidget">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.08); background:rgba(0,0,0,0.3);">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="badge badge-cyan">MINI HUD</span>
+        <span style="font-size:0.8rem; font-weight:700; color:#fff;">Forsaken Deck</span>
+      </div>
+      <button class="btn-icon-round" style="width:28px; height:28px;" onclick="toggleCyberMiniPlayer()">✕</button>
+    </div>
+
+    <div style="padding:20px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;">
+      <div style="position:relative; width:150px; height:150px; border-radius:50%; overflow:hidden; box-shadow:0 0 24px rgba(0,242,254,0.3); border:2px solid var(--fk-cyan);">
+        <img id="miniVinylArt" src="/api/cover/0" class="vinyl-rotating" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/static/logo.png'">
+      </div>
+
+      <div style="overflow:hidden; max-width:280px;">
+        <div id="miniTitle" style="font-weight:700; font-size:1rem; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Forsaken Audio</div>
+        <div id="miniArtist" style="font-size:0.8rem; color:var(--fk-text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Ready to stream</div>
+      </div>
+
+      <div class="scrub-capsule-row" style="width:100%;">
+        <span class="scrub-time-label" id="miniTimeCurrent">0:00</span>
+        <div class="neon-track-slider" onclick="seekAudio(event)" style="flex:1;">
+          <div class="neon-track-bg">
+            <div class="neon-track-fill" id="miniTrackFill"></div>
+          </div>
+        </div>
+        <span class="scrub-time-label" id="miniTimeDuration">0:00</span>
+      </div>
+
+      <div class="player-button-row">
+        <button class="btn-icon-round" onclick="playPrev()">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 6 6 18 8 18 8 6 6 6"></polygon><polygon points="18 6 10 12 18 18 18 6"></polygon></svg>
+        </button>
+        <button class="btn-play-neon" id="miniPlayBtn" onclick="togglePlayPause()" style="width:48px; height:48px;">
+          <svg id="miniPlayIconSvg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" style="margin-left:2px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </button>
+        <button class="btn-icon-round" onclick="playNext()">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 6 14 12 6 18 6 6"></polygon><polygon points="16 6 16 18 18 18 18 6 16 6"></polygon></svg>
         </button>
       </div>
-    `).join('');
-  }
+    </div>
+  </div>
 
-  async function loadAllSongs() {
-    currentPlaylistId = null;
-    currentPlaylistData = null;
-    document.getElementById('navAllSongs').classList.add('active');
-    document.getElementById('heroTitle').innerHTML = `Stream <span class="gradient-text">Unlimited</span> Music`;
-    document.getElementById('heroSubtitle').innerText = `Enjoy your favourite songs and tracks instantly and NO ads.`;
-    document.getElementById('heroDeletePlaylistBtn').style.display = 'none';
-    renderPlaylists();
-    await fetchSongs();
-  }
+  <!-- CROSS-LANGUAGE BRIDGE MODAL -->
+  <div class="modal-overlay" id="bridgeModal" onclick="if(event.target===this)closeModal('bridgeModal')">
+    <div class="modal-box" style="max-width:520px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge badge-cyan">FEATURE 4</span>
+          <h3 style="font-size:1.15rem; font-weight:800; color:#fff;">Cross-Language Music Bridge 🌍</h3>
+        </div>
+        <button class="btn-icon-round" style="width:28px; height:28px;" onclick="closeModal('bridgeModal')">✕</button>
+      </div>
+      <p id="bridgeOriginText" style="font-size:0.85rem; color:var(--fk-text-secondary); margin-bottom:14px;"></p>
+      <div id="bridgeList" style="display:flex; flex-direction:column; gap:8px; max-height:300px; overflow-y:auto;"></div>
+    </div>
+  </div>
 
-  async function loadPlaylist(playlistId) {
-    try {
-      currentPlaylistId = playlistId;
-      document.getElementById('navAllSongs').classList.remove('active');
-      renderPlaylists();
+  <!-- PLAYLIST MODALS -->
+  <div class="modal-overlay" id="createPlaylistModal" onclick="if(event.target===this)closeModal('createPlaylistModal')">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <h3 style="font-size:1.2rem; font-weight:800; color:#fff;">New Playlist Vault</h3>
+        <button class="btn-icon-round" style="width:28px; height:28px;" onclick="closeModal('createPlaylistModal')">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <input type="text" id="playlistNameInput" class="modal-input" placeholder="e.g. Cyber Beats / Tamil Synth">
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button class="btn btn-glass" onclick="closeModal('createPlaylistModal')">Cancel</button>
+          <button class="btn btn-aurora" onclick="submitCreatePlaylist()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      const res = await fetch(`/api/playlists/${playlistId}`);
-      if (!res.ok) throw new Error('Playlist not found');
-      const data = await res.json();
-      currentPlaylistData = data.playlist;
-      songs = data.songs;
-      currentIndex = -1;
+  <div class="modal-overlay" id="addToModal" onclick="if(event.target===this)closeModal('addToModal')">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">Add to Playlist</h3>
+        <button class="btn-icon-round" style="width:28px; height:28px;" onclick="closeModal('addToModal')">✕</button>
+      </div>
+      <div id="addToModalList" style="display:flex; flex-direction:column; gap:8px; max-height:280px; overflow-y:auto;"></div>
+    </div>
+  </div>
 
-      document.getElementById('heroTitle').innerText = data.playlist.name;
-      document.getElementById('heroSubtitle').innerText = `Playlist with ${data.songs.length} song(s) • Created on ${new Date(data.playlist.created_at).toLocaleDateString()}`;
-      document.getElementById('heroDeletePlaylistBtn').style.display = 'inline-flex';
+  <div class="audio-toast" id="audioToast"></div>
 
-      renderSongs();
-    } catch (e) {
-      console.error(e);
-      loadAllSongs();
-    }
-  }
+  <!-- SCRIPT -->
+  <script>
+    let allSongs = [];
+    let displayedSongs = [];
+    let playlists = [];
+    let likedSet = new Set(JSON.parse(localStorage.getItem('forsaken_liked_songs') || '[]'));
+    let activePlaylistId = null;
+    let activePlaylistMeta = null;
+    let currentIndex = -1;
+    let isShuffle = false;
+    let repeatMode = 0;
+    let viewMode = 'table';
+    let isCompact = false;
+    let activeFilter = 'all';
 
-  async function deleteCurrentPlaylist() {
-    if (!currentPlaylistId || !currentPlaylistData) return;
-    if (!confirm(`Delete playlist "${currentPlaylistData.name}"?`)) return;
-    try {
-      await fetch(`/api/playlists/${currentPlaylistId}`, { method: 'DELETE' });
-      await fetchPlaylists();
-      loadAllSongs();
-    } catch (e) {
-      alert('Failed to delete playlist');
-    }
-  }
+    // Web Audio API Sound Lab Nodes
+    let audioCtx = null;
+    let audioSourceNode = null;
+    let eqFilters = [];
 
-  async function deletePlaylistDirect(e, id, name) {
-    e.stopPropagation();
-    if (!confirm(`Delete playlist "${name}"?`)) return;
-    try {
-      await fetch(`/api/playlists/${id}`, { method: 'DELETE' });
-      await fetchPlaylists();
-      if (currentPlaylistId === id) {
-        loadAllSongs();
+    const audio = document.getElementById('audioElement');
+
+    // Safe JSON Fetch
+    async function safeFetchJson(url, options = {}) {
+      try {
+        const res = await fetch(url, options);
+        const text = await res.text();
+        let data = null;
+        try {
+          data = text ? JSON.parse(text) : null;
+        } catch {
+          return { ok: false, data: null, error: 'Server returned non-JSON response' };
+        }
+        return { ok: res.ok, data: data, error: res.ok ? null : (data && data.detail ? data.detail : 'Request failed') };
+      } catch (err) {
+        return { ok: false, data: null, error: err.message || 'Network error' };
       }
-    } catch (e) {
-      alert('Failed to delete playlist');
     }
-  }
 
-  function openCreatePlaylistModal() {
-    document.getElementById('createPlaylistModal').classList.add('active');
-    const input = document.getElementById('playlistNameInput');
-    input.value = '';
-    setTimeout(() => input.focus(), 50);
-  }
+    function showToast(msg) {
+      const toast = document.getElementById('audioToast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
 
-  function closeCreatePlaylistModal() {
-    document.getElementById('createPlaylistModal').classList.remove('active');
-  }
+    // Initialize Web Audio API Real-Time Equalizer
+    function initWebAudioEqualizer() {
+      if (audioCtx) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        audioSourceNode = audioCtx.createMediaElementSource(audio);
 
-  async function submitCreatePlaylist() {
-    const input = document.getElementById('playlistNameInput');
-    const name = input.value.trim();
-    if (!name) return;
-    try {
-      const res = await fetch('/api/playlists', {
+        const freqs = [60, 250, 1000, 4000, 16000];
+        const types = ['lowshelf', 'peaking', 'peaking', 'peaking', 'highshelf'];
+
+        let prevNode = audioSourceNode;
+        eqFilters = freqs.map((freq, i) => {
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = types[i];
+          filter.frequency.value = freq;
+          filter.gain.value = 0;
+          prevNode.connect(filter);
+          prevNode = filter;
+          return filter;
+        });
+
+        prevNode.connect(audioCtx.destination);
+      } catch (e) {
+        console.warn('Web Audio initialization:', e);
+      }
+    }
+
+    function updateEqBand(index, val) {
+      initWebAudioEqualizer();
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      if (eqFilters[index]) {
+        eqFilters[index].gain.value = parseFloat(val);
+      }
+      document.getElementById(`eqVal${index}`).innerText = `${val > 0 ? '+' : ''}${val} dB`;
+    }
+
+    function setEqPreset(b0, b1, b2, b3, b4, name) {
+      const vals = [b0, b1, b2, b3, b4];
+      const ids = ['eq60', 'eq250', 'eq1k', 'eq4k', 'eq16k'];
+      vals.forEach((v, i) => {
+        document.getElementById(ids[i]).value = v;
+        updateEqBand(i, v);
+      });
+      showToast(`Sound Lab: ${name} active`);
+    }
+
+    function applyAiEqPrompt() {
+      const q = document.getElementById('aiEqInput').value.toLowerCase();
+      if (!q) return;
+
+      if (q.includes('bass') && q.includes('vocal')) {
+        setEqPreset(8, 5, 6, 4, 2, "Heavy Bass & Vocal Clarity");
+      } else if (q.includes('bass')) {
+        setEqPreset(10, 7, 0, 0, 2, "Bass Boost Aura");
+      } else if (q.includes('vocal') || q.includes('sing')) {
+        setEqPreset(-2, 0, 8, 5, 3, "Vocal Focus");
+      } else if (q.includes('edm') || q.includes('drop') || q.includes('dance')) {
+        setEqPreset(7, 5, -2, 4, 7, "EDM Punch");
+      } else {
+        setEqPreset(4, 3, 2, 2, 4, "AI Dynamic Spatial Tuning");
+      }
+    }
+
+    // Navigation Switcher
+    function switchView(view) {
+      const views = ['Home', 'Mood', 'DNA', 'TimeMachine', 'SoundLab', 'Rooms', 'Flow', 'Discover'];
+      views.forEach(v => {
+        const el = document.getElementById(`view${v}`);
+        if (el) el.style.display = 'none';
+      });
+
+      document.querySelectorAll('.studio-nav-item').forEach(el => el.classList.remove('active'));
+
+      if (view === 'home') {
+        document.getElementById('viewHome').style.display = 'block';
+        document.getElementById('navHome').classList.add('active');
+        document.getElementById('deletePlaylistStageBtn').style.display = 'none';
+        applyViewFilters();
+      } else if (view === 'mood') {
+        document.getElementById('viewMood').style.display = 'block';
+        document.getElementById('navMood').classList.add('active');
+      } else if (view === 'dna') {
+        document.getElementById('viewDNA').style.display = 'block';
+        document.getElementById('navDNA').classList.add('active');
+        loadMusicDNA();
+      } else if (view === 'timemachine') {
+        document.getElementById('viewTimeMachine').style.display = 'block';
+        document.getElementById('navTime').classList.add('active');
+        loadTimeMachine();
+      } else if (view === 'soundlab') {
+        document.getElementById('viewSoundLab').style.display = 'block';
+        document.getElementById('navSoundLab').classList.add('active');
+        initWebAudioEqualizer();
+      } else if (view === 'rooms') {
+        document.getElementById('viewRooms').style.display = 'block';
+        document.getElementById('navRooms').classList.add('active');
+      } else if (view === 'flow') {
+        document.getElementById('viewFlow').style.display = 'block';
+        document.getElementById('navFlow').classList.add('active');
+        if (!currentFlowSession) launchFlowSession();
+      } else if (view === 'discover') {
+        document.getElementById('viewDiscover').style.display = 'block';
+        document.getElementById('navDiscover').classList.add('active');
+        setTimeout(() => document.getElementById('aiDiscoverInput').focus(), 100);
+      }
+    }
+
+    // AI MOOD ENGINE
+    let currentMoodSongs = [];
+    async function runAiMoodEngine() {
+      const q = document.getElementById('aiMoodInput').value.trim();
+      if (!q) {
+        showToast('Please type your situation or mood');
+        return;
+      }
+
+      const shiftMode = document.getElementById('moodShiftRadio').checked ? 'shift' : 'stay';
+      showToast('AI synthesizing your harmonic mood session...');
+
+      const res = await safeFetchJson('/api/ai/mood', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q, shift_mode: shiftMode })
+      });
+
+      if (res.ok && res.data) {
+        const d = res.data;
+        currentMoodSongs = d.songs || [];
+        document.getElementById('aiMoodResults').style.display = 'block';
+        document.getElementById('aiMoodArchetype').innerText = `${d.archetype} (${shiftMode === 'shift' ? 'Mood Elevation' : 'True Alignment'})`;
+        document.getElementById('aiMoodReasoning').innerText = d.reasoning;
+
+        const listEl = document.getElementById('aiMoodTracksList');
+        if (!currentMoodSongs.length) {
+          listEl.innerHTML = `<div style="color:var(--fk-text-muted); padding:20px 0;">No matching tracks in library. Try another query or add tracks in Admin.</div>`;
+          return;
+        }
+
+        listEl.innerHTML = currentMoodSongs.map((s, idx) => `
+          <div class="vault-item" onclick="playSongObject(${JSON.stringify(s).replace(/"/g, '&quot;')})">
+            <div class="vault-item-left">
+              <img src="/api/cover/${s.id}" style="width:38px; height:38px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'">
+              <div>
+                <div class="vault-item-name">${escapeHtml(s.title)}</div>
+                <div class="vault-item-count">${escapeHtml(s.artist || 'Unknown')}</div>
+              </div>
+            </div>
+            <button class="btn btn-pill" style="padding:4px 10px;">Play ▶</button>
+          </div>
+        `).join('');
+      } else {
+        showToast(res.error || 'Mood Engine error');
+      }
+    }
+
+    function setMoodPrompt(text) {
+      document.getElementById('aiMoodInput').value = text;
+      runAiMoodEngine();
+    }
+
+    function playAllMoodResults() {
+      if (!currentMoodSongs.length) return;
+      displayedSongs = currentMoodSongs;
+      playSongAt(0);
+    }
+
+    // AI MUSIC DNA
+    async function loadMusicDNA() {
+      const res = await safeFetchJson('/api/ai/dna');
+      if (res.ok && res.data) {
+        const d = res.data;
+        document.getElementById('dnaEnergy').innerText = `${d.energy_score}%`;
+        document.getElementById('dnaDiscovery').innerText = `${d.discovery_index}%`;
+        document.getElementById('dnaRepeat').innerText = `${d.repeat_ratio}%`;
+        document.getElementById('dnaTempo').innerText = d.tempo_preference;
+      }
+    }
+
+    function calculateCompatibility() {
+      const name = document.getElementById('friendNameInput').value.trim();
+      if (!name) return;
+      const score = Math.floor(78 + Math.random() * 19);
+      document.getElementById('compatReport').style.display = 'block';
+      document.getElementById('compatText').innerText = `✨ Music Compatibility with ${name}: ${score}% Match! (Shared Energy: 88%, Harmonic Resonance: 91%)`;
+    }
+
+    // FORSAKEN TIME MACHINE
+    async function loadTimeMachine() {
+      const res = await safeFetchJson('/api/ai/time-machine');
+      if (res.ok && res.data) {
+        const d = res.data;
+        const fgList = document.getElementById('forgottenGemsList');
+        const mrList = document.getElementById('mostReplayedList');
+
+        if (d.forgotten_gems && d.forgotten_gems.length) {
+          fgList.innerHTML = d.forgotten_gems.map(s => `
+            <div class="vault-item" onclick="playSongObject(${JSON.stringify(s).replace(/"/g, '&quot;')})">
+              <div class="vault-item-left">
+                <img src="/api/cover/${s.id}" style="width:34px; height:34px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'">
+                <div style="font-size:0.85rem; font-weight:600; color:#fff;">${escapeHtml(s.title)}</div>
+              </div>
+              <span class="badge badge-cyan">Rediscover</span>
+            </div>
+          `).join('');
+        } else {
+          fgList.innerHTML = `<div style="color:var(--fk-text-muted); font-size:0.85rem;">No forgotten gems yet.</div>`;
+        }
+
+        if (d.most_replayed && d.most_replayed.length) {
+          mrList.innerHTML = d.most_replayed.map(s => `
+            <div class="vault-item" onclick="playSongObject(${JSON.stringify(s).replace(/"/g, '&quot;')})">
+              <div class="vault-item-left">
+                <img src="/api/cover/${s.id}" style="width:34px; height:34px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'">
+                <div style="font-size:0.85rem; font-weight:600; color:#fff;">${escapeHtml(s.title)}</div>
+              </div>
+              <span class="badge badge-emerald">${s.play_count || 1} Loops</span>
+            </div>
+          `).join('');
+        } else {
+          mrList.innerHTML = `<div style="color:var(--fk-text-muted); font-size:0.85rem;">Listen to songs to build loop insights.</div>`;
+        }
+      }
+      loadAiMemory();
+    }
+
+    async function loadAiMemory() {
+      const res = await safeFetchJson('/api/ai/memory');
+      const grid = document.getElementById('aiMemoryCardsGrid');
+      if (res.ok && res.data && grid) {
+        const mems = res.data.memories || [];
+        const badge = document.getElementById('aiMemoryPlaysBadge');
+        if (badge) badge.innerText = `${res.data.total_analyzed_plays} Sessions Analyzed`;
+        grid.innerHTML = mems.map(m => `
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:1.4rem;">${m.icon}</span>
+              <span class="badge badge-cyan" style="font-size:0.65rem;">${m.badge}</span>
+            </div>
+            <div style="color:#fff; font-size:0.92rem; font-weight:700;">${escapeHtml(m.title)}</div>
+            <div style="color:var(--fk-text-secondary); font-size:0.8rem; line-height:1.4;">${escapeHtml(m.subtitle)}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // FORSAKEN FLOW ⚡ ADAPTIVE SESSIONS
+    let currentFlowIntent = 'focus';
+    let currentFlowDuration = 60;
+    let currentFlowSession = null;
+    let flowTracksQueue = [];
+
+    function setFlowIntent(intent) {
+      currentFlowIntent = intent;
+      ['Focus', 'Workout', 'Rain', 'Calm'].forEach(k => {
+        const el = document.getElementById(`flowIntent${k}`);
+        if (el) el.classList.remove('active');
+      });
+      const activeEl = document.getElementById(`flowIntent${intent.charAt(0).toUpperCase() + intent.slice(1)}`);
+      if (activeEl) activeEl.classList.add('active');
+    }
+
+    function setFlowDuration(mins) {
+      currentFlowDuration = mins;
+      [15, 30, 45, 60, 90].forEach(m => {
+        const el = document.getElementById(`flowDur${m}`);
+        if (el) el.classList.remove('active');
+      });
+      const activeEl = document.getElementById(`flowDur${mins}`);
+      if (activeEl) activeEl.classList.add('active');
+    }
+
+    async function launchFlowSession() {
+      showToast(`Synthesizing ${currentFlowDuration}-min adaptive flow for ${currentFlowIntent}...`);
+      const res = await safeFetchJson('/api/ai/flow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ duration_minutes: currentFlowDuration, intent: currentFlowIntent })
+      });
+
+      if (res.ok && res.data) {
+        currentFlowSession = res.data;
+        document.getElementById('flowLiveStatus').innerText = `Active Flow (${currentFlowDuration}m)`;
+        renderFlowStages(res.data.stages);
+      }
+    }
+
+    function renderFlowStages(stages) {
+      const container = document.getElementById('flowStagesContainer');
+      container.innerHTML = stages.map(s => `
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(0,242,254,${s.stage_number === 1 ? '0.4' : '0.1'}); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="badge ${s.stage_number === 1 ? 'badge-cyan' : 'badge-emerald'}">STAGE ${s.stage_number}</span>
+            <span style="font-size:0.8rem; font-weight:700; color:var(--fk-text-muted);">${s.duration_minutes} Mins</span>
+          </div>
+          <h4 style="color:#fff; font-size:1.05rem; font-weight:800;">${escapeHtml(s.title)}</h4>
+          <p style="font-size:0.8rem; color:var(--fk-text-secondary); line-height:1.4;">${escapeHtml(s.target_state)}</p>
+          <div style="margin-top:auto; font-size:0.75rem; color:var(--fk-cyan); background:rgba(0,242,254,0.08); padding:6px 10px; border-radius:6px;">
+            EQ: ${escapeHtml(s.recommended_eq)}
+          </div>
+          <button class="btn btn-pill" style="padding:4px 10px; margin-top:6px;" onclick="viewFlowStageTracks(${s.stage_number})">View Stage Queue (${s.tracks ? s.tracks.length : 0})</button>
+        </div>
+      `).join('');
+
+      if (stages.length > 0) {
+        viewFlowStageTracks(1);
+      }
+    }
+
+    function viewFlowStageTracks(stageNum) {
+      if (!currentFlowSession) return;
+      const stage = currentFlowSession.stages.find(s => s.stage_number === stageNum);
+      if (!stage) return;
+
+      document.getElementById('flowTracksCard').style.display = 'block';
+      document.getElementById('flowActiveStageTitle').innerText = `Stage ${stage.stage_number}: ${stage.title}`;
+      document.getElementById('flowActiveStageSub').innerText = `${stage.target_state} — Recommended: ${stage.recommended_eq}`;
+      
+      flowTracksQueue = stage.tracks || [];
+      const listEl = document.getElementById('flowTracksList');
+      if (flowTracksQueue.length) {
+        listEl.innerHTML = flowTracksQueue.map((s, idx) => `
+          <div class="vault-item" onclick="playSongObject(${JSON.stringify(s).replace(/"/g, '&quot;')})">
+            <div class="vault-item-left">
+              <img src="/api/cover/${s.id}" style="width:34px; height:34px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'">
+              <div>
+                <div style="font-size:0.88rem; font-weight:600; color:#fff;">${escapeHtml(s.title)}</div>
+                <div style="font-size:0.75rem; color:var(--fk-text-muted);">${escapeHtml(s.artist || 'Unknown')}</div>
+              </div>
+            </div>
+            <button class="btn btn-pill" style="padding:4px 10px;">▶ Play</button>
+          </div>
+        `).join('');
+      } else {
+        listEl.innerHTML = `<div style="color:var(--fk-text-muted); font-size:0.85rem; padding:10px 0;">No specific tracks allocated for this stage yet. Songs from library will auto-fill.</div>`;
+      }
+    }
+
+    function playAllFlowTracks() {
+      if (currentFlowSession && currentFlowSession.stages) {
+        let allFlowSongs = [];
+        currentFlowSession.stages.forEach(st => {
+          if (st.tracks) allFlowSongs = allFlowSongs.concat(st.tracks);
+        });
+        if (allFlowSongs.length) {
+          displayedSongs = allFlowSongs;
+          playSongAt(0);
+          showToast('Playing full 4-stage adaptive flow session!');
+        } else {
+          showToast('No tracks in flow queue yet.');
+        }
+      }
+    }
+
+    // AI CONVERSATIONAL DISCOVERY 🔎
+    let discoveredSongsList = [];
+
+    function setDiscoverPrompt(promptText) {
+      document.getElementById('aiDiscoverInput').value = promptText;
+      runAiDiscovery();
+    }
+
+    async function runAiDiscovery() {
+      const q = document.getElementById('aiDiscoverInput').value.trim();
+      if (!q) {
+        showToast('Please enter a situation, mood, or request');
+        return;
+      }
+      showToast('AI analyzing natural acoustic parameters...');
+
+      const res = await safeFetchJson('/api/ai/discover', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q, max_results: 12 })
+      });
+
+      if (res.ok && res.data) {
+        const d = res.data;
+        discoveredSongsList = d.songs || [];
+        document.getElementById('aiDiscoverResults').style.display = 'block';
+        document.getElementById('discoverBadge').innerText = `${d.detected_language} • ${d.total_tracks} Tracks`;
+        document.getElementById('discoverInsightTitle').innerText = `AI Acoustic Synthesis for "${d.query}"`;
+        document.getElementById('discoverInsightText').innerText = d.conversational_insight;
+        document.getElementById('discoverTimeBadge').innerText = `${d.total_duration_minutes} Mins Total`;
+
+        const listEl = document.getElementById('discoverSongsList');
+        if (discoveredSongsList.length) {
+          listEl.innerHTML = discoveredSongsList.map(s => `
+            <div class="vault-item" onclick="playSongObject(${JSON.stringify(s).replace(/"/g, '&quot;')})">
+              <div class="vault-item-left">
+                <img src="/api/cover/${s.id}" style="width:36px; height:36px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'">
+                <div>
+                  <div style="font-size:0.9rem; font-weight:700; color:#fff;">${escapeHtml(s.title)}</div>
+                  <div style="font-size:0.75rem; color:var(--fk-text-muted);">${escapeHtml(s.artist || 'Unknown')} • ${formatDuration(s.duration)}</div>
+                </div>
+              </div>
+              <button class="btn btn-pill" style="padding:4px 10px;">▶ Play</button>
+            </div>
+          `).join('');
+        } else {
+          listEl.innerHTML = `<div style="color:var(--fk-text-muted); padding:16px 0;">No matching songs found in library. Upload music via Admin.</div>`;
+        }
+      }
+    }
+
+    function playAllDiscovered() {
+      if (discoveredSongsList.length) {
+        displayedSongs = discoveredSongsList;
+        playSongAt(0);
+        showToast(`Playing ${discoveredSongsList.length} discovered tracks`);
+      }
+    }
+
+    // CROSS-LANGUAGE MUSIC BRIDGE
+    async function openCrossLanguageBridge(e, songId, title) {
+      e.stopPropagation();
+      document.getElementById('bridgeOriginText').innerText = `Finding musical bridges across Tamil, English, and Hindi for "${title}"...`;
+      document.getElementById('bridgeList').innerHTML = `<div style="color:var(--fk-text-muted); padding:10px;">Calculating acoustic resonance...</div>`;
+      document.getElementById('bridgeModal').classList.add('active');
+
+      const res = await safeFetchJson(`/api/ai/bridge/${songId}`);
+      if (res.ok && res.data) {
+        const d = res.data;
+        document.getElementById('bridgeOriginText').innerText = `Acoustic Bridges for "${d.origin_song.title}" (${d.origin_language}):`;
+        document.getElementById('bridgeList').innerHTML = d.bridges.map(b => `
+          <div class="vault-item" onclick="playSongObject(${JSON.stringify(b.song).replace(/"/g, '&quot;')}); closeModal('bridgeModal');">
+            <div class="vault-item-left">
+              <img src="/api/cover/${b.song.id}" style="width:38px; height:38px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'">
+              <div>
+                <div class="vault-item-name">${escapeHtml(b.song.title)} <span class="badge badge-cyan" style="font-size:0.65rem;">${b.detected_language}</span></div>
+                <div class="vault-item-count">${escapeHtml(b.acoustic_resonance)}</div>
+              </div>
+            </div>
+            <button class="btn btn-pill" style="padding:4px 10px;">Play</button>
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('bridgeList').innerHTML = `<div style="color:var(--fk-text-muted);">Could not find cross-language bridges.</div>`;
+      }
+    }
+
+    // POMODORO TIMER FOR FOCUS ROOM
+    let pomoSeconds = 25 * 60;
+    let pomoInterval = null;
+    let pomoRunning = false;
+
+    function togglePomodoroTimer() {
+      if (pomoRunning) {
+        clearInterval(pomoInterval);
+        pomoRunning = false;
+        document.getElementById('pomoBtn').innerText = 'Resume Focus';
+      } else {
+        pomoRunning = true;
+        document.getElementById('pomoBtn').innerText = 'Pause';
+        pomoInterval = setInterval(() => {
+          if (pomoSeconds > 0) {
+            pomoSeconds--;
+            updatePomoDisplay();
+          } else {
+            clearInterval(pomoInterval);
+            pomoRunning = false;
+            showToast('Pomodoro Focus Session Finished! Time for a 5-minute break.');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetPomodoroTimer() {
+      clearInterval(pomoInterval);
+      pomoRunning = false;
+      pomoSeconds = 25 * 60;
+      updatePomoDisplay();
+      document.getElementById('pomoBtn').innerText = 'Start Focus';
+    }
+
+    function updatePomoDisplay() {
+      const m = Math.floor(pomoSeconds / 60);
+      const s = pomoSeconds % 60;
+      document.getElementById('pomodoroDisplay').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    async function enterRoom(roomId) {
+      showToast(`Entering room: ${roomId}`);
+      const res = await safeFetchJson('/api/rooms');
+      if (res.ok && Array.isArray(res.data)) {
+        const rm = res.data.find(r => r.id === roomId);
+        if (rm && rm.tracks && rm.tracks.length) {
+          displayedSongs = rm.tracks;
+          playSongAt(0);
+          showToast(`Synced to ${rm.name} with ${rm.active_listeners} listeners`);
+        }
+      }
+    }
+
+    // ========================================================
+    // LIVE SYNCHRONIZED PARTY ROOM (LISTEN TOGETHER)
+    // ========================================================
+    let activeRoomCode = null;
+    let isRoomHost = false;
+    let roomWs = null;
+    let isSyncingFromRemote = false;
+    let currentPlayingSong = null;
+
+    function broadcastRoomPlayback(song, isPlaying, time) {
+      if (!isRoomHost || !roomWs || roomWs.readyState !== WebSocket.OPEN || isSyncingFromRemote) return;
+      try {
+        roomWs.send(JSON.stringify({
+          type: "SYNC_PLAYBACK",
+          song: song,
+          is_playing: isPlaying,
+          time: time || 0
+        }));
+      } catch (e) {
+        console.warn("Failed to broadcast room playback:", e);
+      }
+    }
+
+    async function createLiveSyncRoom() {
+      const customCode = (document.getElementById('createRoomCustomInput').value || '').trim();
+      showToast('Creating live room...');
+      const res = await safeFetchJson('/api/rooms/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ custom_code: customCode || null, name: "Live Music Pod" })
+      });
+
+      if (res.ok && res.data) {
+        activeRoomCode = res.data.room_code;
+        isRoomHost = true;
+        connectToRoomWebSocket(activeRoomCode);
+        updateRoomUIState();
+        showToast(`🎉 Room Created: ${activeRoomCode}! Share with your friend.`);
+
+        // If something is already playing, sync it right away
+        if (currentPlayingSong) {
+          setTimeout(() => {
+            broadcastRoomPlayback(currentPlayingSong, !audio.paused, audio.currentTime);
+          }, 400);
+        }
+      } else {
+        showToast('Failed to create room. Please try another Room ID.');
+      }
+    }
+
+    async function joinLiveSyncRoom(codeParam) {
+      const code = (codeParam || document.getElementById('joinRoomIdInput').value || '').trim().toUpperCase();
+      if (!code) {
+        showToast('Please enter a Room ID');
+        return;
+      }
+
+      showToast(`Connecting to Room ${code}...`);
+      const infoRes = await safeFetchJson(`/api/rooms/info/${code}`);
+      if (!infoRes.ok) {
+        showToast(`Room "${code}" not found. Verify with your friend.`);
+        return;
+      }
+
+      activeRoomCode = code;
+      isRoomHost = false;
+      connectToRoomWebSocket(activeRoomCode);
+      updateRoomUIState();
+      showToast(`🎧 Connected to Room ${activeRoomCode}! Syncing playback with host.`);
+    }
+
+    function connectToRoomWebSocket(code) {
+      if (roomWs) {
+        try { roomWs.close(); } catch (e) {}
+      }
+
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${protocol}//${window.location.host}/ws/room/${code}`;
+      roomWs = new WebSocket(wsUrl);
+
+      roomWs.onopen = () => {
+        console.log(`WebSocket connected to room: ${code}`);
+        const statusEl = document.getElementById('liveRoomSyncStatus');
+        if (statusEl) statusEl.innerText = isRoomHost ? `👑 Hosting ${code}` : `🎧 Listening to ${code}`;
+      };
+
+      roomWs.onmessage = (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          handleRoomMessage(msg);
+        } catch (e) {
+          console.error("Error parsing room websocket message:", e);
+        }
+      };
+
+      roomWs.onclose = () => {
+        console.log("Room WebSocket closed");
+        if (activeRoomCode) {
+          const statusEl = document.getElementById('liveRoomSyncStatus');
+          if (statusEl) statusEl.innerText = 'Reconnecting...';
+          setTimeout(() => {
+            if (activeRoomCode) connectToRoomWebSocket(activeRoomCode);
+          }, 2500);
+        }
+      };
+    }
+
+    function handleRoomMessage(msg) {
+      if (msg.type === "LISTENER_COUNT") {
+        const count = msg.count || 1;
+        const txt = `👥 ${count} ${count === 1 ? 'Member' : 'Members'} in Room`;
+        const el = document.getElementById('activeRoomListenersCount');
+        if (el) el.innerText = txt;
+        return;
+      }
+
+      if (msg.type === "ROOM_STATE" || msg.type === "SYNC_PLAYBACK") {
+        if (isRoomHost) {
+          // Host controls the room and does not get overridden
+          return;
+        }
+
+        const song = msg.song;
+        const isPlaying = msg.is_playing;
+        const remoteTime = msg.time || 0;
+
+        if (song) {
+          isSyncingFromRemote = true;
+          const isDifferentSong = !currentPlayingSong || currentPlayingSong.id !== song.id;
+
+          if (isDifferentSong) {
+            currentPlayingSong = song;
+            audio.src = `/api/stream/${song.id}`;
+            document.getElementById('capsuleTitle').innerText = song.title;
+            document.getElementById('capsuleArtist').innerText = song.artist || 'Unknown';
+            document.getElementById('capsuleArt').src = `/api/cover/${song.id}`;
+            updateLikeHeartState(song.id);
+            showToast(`🎵 Host played: ${song.title}`);
+          }
+
+          // Sync timestamp if drifted more than 1.5 seconds
+          if (Math.abs(audio.currentTime - remoteTime) > 1.5) {
+            audio.currentTime = remoteTime;
+          }
+
+          // Sync playback state
+          if (isPlaying && audio.paused) {
+            audio.play().then(() => setPlayingUI(true)).catch(console.warn);
+          } else if (!isPlaying && !audio.paused) {
+            audio.pause();
+            setPlayingUI(false);
+          }
+
+          setTimeout(() => { isSyncingFromRemote = false; }, 400);
+        }
+      }
+    }
+
+    function updateRoomUIState() {
+      const banner = document.getElementById('activeRoomBanner');
+      const pill = document.getElementById('playerRoomSyncPill');
+      const displayCode = document.getElementById('activeRoomCodeDisplay');
+      const pillCode = document.getElementById('playerRoomSyncCode');
+      const statusBadge = document.getElementById('liveRoomSyncStatus');
+
+      if (activeRoomCode) {
+        if (banner) banner.style.display = 'block';
+        if (pill) pill.style.display = 'flex';
+        if (displayCode) displayCode.innerText = activeRoomCode;
+        if (pillCode) pillCode.innerText = `${isRoomHost ? '👑' : '🎧'} ${activeRoomCode}`;
+        if (statusBadge) statusBadge.innerText = isRoomHost ? `👑 Hosting ${activeRoomCode}` : `🎧 Synced ${activeRoomCode}`;
+      } else {
+        if (banner) banner.style.display = 'none';
+        if (pill) pill.style.display = 'none';
+        if (statusBadge) statusBadge.innerText = 'Disconnected';
+      }
+    }
+
+    function copyRoomIdLink() {
+      if (!activeRoomCode) return;
+      const shareUrl = `${window.location.origin}/desktop?room=${activeRoomCode}`;
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast(`📋 Room Link Copied! Send to friend:\n${shareUrl}`);
+      }).catch(() => {
+        navigator.clipboard.writeText(activeRoomCode);
+        showToast(`Room ID copied: ${activeRoomCode}`);
+      });
+    }
+
+    function leaveActiveRoom() {
+      if (roomWs) {
+        try { roomWs.close(); } catch (e) {}
+        roomWs = null;
+      }
+      showToast(`Left Room ${activeRoomCode}`);
+      activeRoomCode = null;
+      isRoomHost = false;
+      updateRoomUIState();
+    }
+
+    function checkUrlRoomParam() {
+      const params = new URLSearchParams(window.location.search);
+      const roomParam = params.get('room');
+      if (roomParam) {
+        joinLiveSyncRoom(roomParam);
+      }
+    }
+
+    // Core Data Loading
+    async function initApp() {
+      await Promise.all([loadSongs(), loadPlaylists(), loadNode()]);
+      updateLikedCounter();
+      checkUrlRoomParam();
+    }
+
+    async function loadNode() {
+      const res = await safeFetchJson('/api/info');
+      if (res.ok && res.data) {
+        document.getElementById('workerBadge').innerText = `${res.data.worker.toUpperCase()} (${res.data.hostname})`;
+      }
+    }
+
+    async function loadSongs(q = '') {
+      const url = q ? `/api/songs?q=${encodeURIComponent(q)}` : '/api/songs';
+      const res = await safeFetchJson(url);
+      if (res.ok && Array.isArray(res.data)) {
+        allSongs = res.data;
+      } else {
+        allSongs = [];
+      }
+      applyViewFilters();
+    }
+
+    async function loadPlaylists() {
+      const res = await safeFetchJson('/api/playlists');
+      if (res.ok && Array.isArray(res.data)) {
+        playlists = res.data;
+        renderPlaylistsSidebar();
+      }
+    }
+
+    function renderPlaylistsSidebar() {
+      const container = document.getElementById('vaultPlaylistsList');
+      const likedItem = container.querySelector('.vault-item.liked-vault');
+      container.innerHTML = '';
+      if (likedItem) container.appendChild(likedItem);
+
+      playlists.forEach(p => {
+        const item = document.createElement('div');
+        item.className = `vault-item ${activePlaylistId === p.id ? 'active' : ''}`;
+        item.onclick = () => selectPlaylist(p.id);
+        item.innerHTML = `
+          <div class="vault-item-left">
+            <div class="vault-item-thumb">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            </div>
+            <div>
+              <div class="vault-item-name">${escapeHtml(p.name)}</div>
+              <div class="vault-item-count">${p.song_count || 0} tracks</div>
+            </div>
+          </div>
+          <button class="btn-icon-round" style="width:24px; height:24px; opacity:0.6;" onclick="deletePlaylistDirect(event, ${p.id}, '${escapeQuotes(p.name)}')">
+            ✕
+          </button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function loadAllSongs() {
+      activePlaylistId = null;
+      activePlaylistMeta = null;
+      switchView('home');
+      document.getElementById('heroHeadline').innerText = 'Master Sound Vault';
+      document.getElementById('heroKickerLabel').innerText = 'ALL RECORDINGS';
+      applyViewFilters();
+    }
+
+    async function selectPlaylist(id) {
+      activePlaylistId = id;
+      switchView('home');
+      renderPlaylistsSidebar();
+
+      const res = await safeFetchJson(`/api/playlists/${id}`);
+      if (res.ok && res.data) {
+        activePlaylistMeta = res.data.playlist;
+        displayedSongs = res.data.songs || [];
+        document.getElementById('heroHeadline').innerText = activePlaylistMeta.name;
+        document.getElementById('heroKickerLabel').innerText = 'PLAYLIST VAULT';
+        document.getElementById('deletePlaylistStageBtn').style.display = 'inline-flex';
+        renderTracks();
+      }
+    }
+
+    function showLikedVault() {
+      activePlaylistId = 'liked';
+      activePlaylistMeta = { name: 'Liked Recordings' };
+      switchView('home');
+      document.getElementById('heroHeadline').innerText = 'Liked Recordings';
+      document.getElementById('heroKickerLabel').innerText = 'SAVED VAULT';
+      applyViewFilters();
+    }
+
+    function applyViewFilters() {
+      if (activePlaylistId === 'liked') {
+        displayedSongs = allSongs.filter(s => likedSet.has(s.id));
+      } else if (activePlaylistId === null) {
+        if (activeFilter === 'cloud') {
+          displayedSongs = allSongs.filter(s => s.telegram_file_id || s.source === 'telegram');
+        } else if (activeFilter === 'liked') {
+          displayedSongs = allSongs.filter(s => likedSet.has(s.id));
+        } else {
+          displayedSongs = allSongs;
+        }
+      }
+      renderTracks();
+    }
+
+    function renderTracks() {
+      const tbody = document.getElementById('studioTableBody');
+      const grid = document.getElementById('gridContainer');
+      const empty = document.getElementById('emptyView');
+      const totalSecs = displayedSongs.reduce((acc, s) => acc + (s.duration || 0), 0);
+
+      document.getElementById('heroStatsCount').innerText = `${displayedSongs.length} Tracks`;
+      document.getElementById('heroStatsDuration').innerText = `${Math.round(totalSecs / 60)} min`;
+
+      if (displayedSongs.length > 0) {
+        document.getElementById('heroArt').src = `/api/cover/${displayedSongs[0].id}`;
+      } else {
+        document.getElementById('heroArt').src = '/static/logo.png';
+      }
+
+      if (!displayedSongs.length) {
+        tbody.innerHTML = '';
+        grid.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+
+      tbody.innerHTML = displayedSongs.map((s, idx) => {
+        const isCur = currentIndex >= 0 && displayedSongs[currentIndex] && displayedSongs[currentIndex].id === s.id;
+        const isLiked = likedSet.has(s.id);
+        return `
+          <tr class="${isCur ? 'active-row' : ''}" onclick="playSongAt(${idx})">
+            <td class="track-num-cell">
+              <div class="track-num-box">
+                <span class="track-index-num">${idx + 1}</span>
+                <span class="row-play-icon">▶</span>
+                <div class="visualizer-spectrum" style="display: ${isCur && !audio.paused ? 'inline-flex' : 'none'};">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="track-meta-cell">
+                <img src="/api/cover/${s.id}" class="track-cover-thumb" onerror="this.src='/static/logo.png'">
+                <div style="overflow:hidden;">
+                  <div class="track-title-text">${escapeHtml(s.title)}</div>
+                  <div class="track-artist-text">${escapeHtml(s.artist || 'Unknown')} ${s.telegram_file_id ? '• <span style="color:var(--fk-cyan);">☁️ Cloud</span>' : ''}</div>
+                </div>
+              </div>
+            </td>
+            <td style="max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(s.album || '-')}</td>
+            <td style="text-align:right;">${formatTime(s.duration)}</td>
+            <td onclick="event.stopPropagation()" style="text-align:right;">
+              <button class="btn-pill" style="padding:2px 8px; font-size:0.7rem;" onclick="openCrossLanguageBridge(event, ${s.id}, '${escapeQuotes(s.title)}')" title="Cross-Language Bridge">Bridge 🌍</button>
+              <button class="btn-icon-round" style="width:28px; height:28px; color:${isLiked ? 'var(--fk-pink)' : 'inherit'};" onclick="toggleLike(event, ${s.id})" title="${isLiked ? 'Unlike' : 'Like'}">
+                <svg width="13" height="13" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      grid.innerHTML = displayedSongs.map((s, idx) => `
+        <div class="vinyl-card" onclick="playSongAt(${idx})">
+          <div class="vinyl-card-art-box">
+            <img src="/api/cover/${s.id}" class="vinyl-card-art" onerror="this.src='/static/logo.png'">
+          </div>
+          <div style="font-weight:700; font-size:0.92rem; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(s.title)}</div>
+          <div style="font-size:0.78rem; color:var(--fk-text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(s.artist || 'Unknown')}</div>
+        </div>
+      `).join('');
+    }
+
+    // Playback
+    function playSongAt(idx) {
+      if (idx < 0 || idx >= displayedSongs.length) return;
+      currentIndex = idx;
+      const s = displayedSongs[idx];
+      playSongObject(s);
+    }
+
+    function playSongObject(s) {
+      if (!s || !s.id) return;
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(console.warn);
+      }
+
+      audio.src = `/api/stream/${s.id}`;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          setPlayingUI(true);
+        }).catch(err => {
+          console.warn("Audio play error:", err);
+          showToast(`Click to play: ${err.message || 'Ready'}`);
+        });
+      }
+
+      document.getElementById('capsuleTitle').innerText = s.title;
+      document.getElementById('capsuleArtist').innerText = s.artist || 'Unknown';
+      document.getElementById('capsuleArt').src = `/api/cover/${s.id}`;
+
+      document.getElementById('miniTitle').innerText = s.title;
+      document.getElementById('miniArtist').innerText = s.artist || 'Unknown';
+      document.getElementById('miniVinylArt').src = `/api/cover/${s.id}`;
+
+      // Record History Event for Time Machine
+      safeFetchJson('/api/history/play', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ song_id: s.id, mood_context: activeFilter, duration_listened: 0 })
+      });
+
+      currentPlayingSong = s;
+      broadcastRoomPlayback(s, true, 0);
+
+      updateLikeHeartState(s.id);
+      renderTracks();
+    }
+
+    function togglePlayPause() {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(console.warn);
+      }
+
+      if (currentIndex === -1 && displayedSongs.length > 0) {
+        playSongAt(0);
+        return;
+      }
+      if (audio.paused) {
+        const p = audio.play();
+        if (p !== undefined) {
+          p.then(() => setPlayingUI(true)).catch(console.warn);
+        } else {
+          setPlayingUI(true);
+        }
+        broadcastRoomPlayback(currentPlayingSong, true, audio.currentTime);
+      } else {
+        audio.pause();
+        setPlayingUI(false);
+        broadcastRoomPlayback(currentPlayingSong, false, audio.currentTime);
+      }
+    }
+
+    function togglePlayHeroList() {
+      if (!displayedSongs.length) return;
+      if (currentIndex !== -1 && !audio.paused) {
+        audio.pause();
+        setPlayingUI(false);
+      } else if (currentIndex !== -1 && audio.paused) {
+        audio.play();
+        setPlayingUI(true);
+      } else {
+        playSongAt(0);
+      }
+    }
+
+    function playNext() {
+      if (!displayedSongs.length) return;
+      if (isShuffle) {
+        playSongAt(Math.floor(Math.random() * displayedSongs.length));
+      } else {
+        let n = currentIndex + 1;
+        if (n >= displayedSongs.length) n = 0;
+        playSongAt(n);
+      }
+    }
+
+    function playPrev() {
+      if (!displayedSongs.length) return;
+      if (audio.currentTime > 3) {
+        audio.currentTime = 0;
+        return;
+      }
+      let p = currentIndex - 1;
+      if (p < 0) p = displayedSongs.length - 1;
+      playSongAt(p);
+    }
+
+    function setPlayingUI(isPlaying) {
+      const pauseSvg = `<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>`;
+      const playSvg = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
+
+      document.getElementById('capsulePlayIconSvg').innerHTML = isPlaying ? pauseSvg : playSvg;
+      document.getElementById('heroPlayIconSvg').innerHTML = isPlaying ? pauseSvg : playSvg;
+      const miniSvg = document.getElementById('miniPlayIconSvg');
+      if (miniSvg) miniSvg.innerHTML = isPlaying ? pauseSvg : playSvg;
+
+      const vinylDisc = document.getElementById('heroVinylDisc');
+      if (vinylDisc) vinylDisc.classList.toggle('vinyl-rotating', isPlaying);
+
+      const miniVinyl = document.getElementById('miniVinylArt');
+      if (miniVinyl) miniVinyl.classList.toggle('vinyl-paused', !isPlaying);
+    }
+
+    function toggleShuffle() {
+      isShuffle = !isShuffle;
+      document.getElementById('shuffleStageBtn').classList.toggle('active', isShuffle);
+      document.getElementById('shuffleCapsuleBtn').classList.toggle('active', isShuffle);
+      showToast(isShuffle ? 'Shuffle Active' : 'Shuffle Off');
+    }
+
+    function toggleRepeat() {
+      repeatMode = (repeatMode + 1) % 3;
+      const btn = document.getElementById('repeatCapsuleBtn');
+      if (repeatMode === 0) { btn.classList.remove('active'); showToast('Repeat Off'); }
+      else if (repeatMode === 1) { btn.classList.add('active'); showToast('Repeat All'); }
+      else if (repeatMode === 2) { btn.classList.add('active'); showToast('Repeat Track'); }
+    }
+
+    audio.addEventListener('play', () => setPlayingUI(true));
+    audio.addEventListener('pause', () => setPlayingUI(false));
+    audio.addEventListener('ended', () => {
+      if (repeatMode === 2) { audio.currentTime = 0; audio.play(); }
+      else { playNext(); }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      document.getElementById('trackFill').style.width = `${pct}%`;
+      document.getElementById('trackThumb').style.left = `${pct}%`;
+      document.getElementById('timeCurrent').innerText = formatTime(audio.currentTime);
+
+      const miniFill = document.getElementById('miniTrackFill');
+      if (miniFill) miniFill.style.width = `${pct}%`;
+      const miniTime = document.getElementById('miniTimeCurrent');
+      if (miniTime) miniTime.innerText = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      const dur = formatTime(audio.duration);
+      document.getElementById('timeDuration').innerText = dur;
+      const miniDur = document.getElementById('miniTimeDuration');
+      if (miniDur) miniDur.innerText = dur;
+    });
+
+    function seekAudio(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (audio.duration) {
+        audio.currentTime = pos * audio.duration;
+        broadcastRoomPlayback(currentPlayingSong, !audio.paused, audio.currentTime);
+      }
+    }
+
+    function setVolumeFromEvent(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const vol = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      audio.volume = vol;
+      document.getElementById('volFill').style.width = `${vol * 100}%`;
+      document.getElementById('volThumb').style.left = `${vol * 100}%`;
+    }
+
+    function toggleMute() {
+      audio.muted = !audio.muted;
+      document.getElementById('volFill').style.width = audio.muted ? '0%' : `${audio.volume * 100}%`;
+    }
+
+    function toggleCompactMode() {
+      isCompact = !isCompact;
+      document.getElementById('studioAppRoot').classList.toggle('compact-deck', isCompact);
+      document.getElementById('compactLabel').innerText = isCompact ? 'Normal View' : 'Compact View';
+      showToast(isCompact ? 'Compact Density Enabled' : 'Normal Density Enabled');
+    }
+
+    function toggleCyberMiniPlayer() {
+      document.getElementById('cyberMiniWidget').classList.toggle('active');
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      document.getElementById('tableContainer').style.display = mode === 'table' ? 'block' : 'none';
+      document.getElementById('gridContainer').style.display = mode === 'grid' ? 'grid' : 'none';
+      document.getElementById('viewTableBtn').style.color = mode === 'table' ? '#fff' : 'var(--fk-text-muted)';
+      document.getElementById('viewGridBtn').style.color = mode === 'grid' ? '#fff' : 'var(--fk-text-muted)';
+    }
+
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.getElementById('pillAll').classList.toggle('active', filter === 'all');
+      document.getElementById('pillLiked').classList.toggle('active', filter === 'liked');
+      document.getElementById('pillCloud').classList.toggle('active', filter === 'cloud');
+      applyViewFilters();
+    }
+
+    function setSoundProfile(btn, name) {
+      document.querySelectorAll('.btn-pill').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      showToast(`Audio Profile: ${name}`);
+    }
+
+    // Likes
+    function toggleLikeCurrent() {
+      if (currentIndex === -1 || !displayedSongs[currentIndex]) return;
+      toggleLike(null, displayedSongs[currentIndex].id);
+    }
+
+    function toggleLike(e, id) {
+      if (e) e.stopPropagation();
+      if (likedSet.has(id)) {
+        likedSet.delete(id);
+        showToast('Removed from Liked Vault');
+      } else {
+        likedSet.add(id);
+        showToast('Saved to Liked Vault ❤️');
+      }
+      localStorage.setItem('forsaken_liked_songs', JSON.stringify([...likedSet]));
+      updateLikedCounter();
+      updateLikeHeartState(id);
+      renderTracks();
+    }
+
+    function updateLikedCounter() {
+      document.getElementById('likedCountLabel').innerText = `${likedSet.size} tracks`;
+    }
+
+    function updateLikeHeartState(id) {
+      const isLiked = likedSet.has(id);
+      const btn = document.getElementById('capsuleHeartBtn');
+      btn.style.color = isLiked ? 'var(--fk-pink)' : 'inherit';
+      btn.querySelector('svg').setAttribute('fill', isLiked ? 'currentColor' : 'none');
+    }
+
+    // Search
+    let searchTimer;
+    function handleSearch(q) {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        loadSongs(q.trim());
+      }, 250);
+    }
+
+    // Modals
+    function openCreateModal() {
+      document.getElementById('createPlaylistModal').classList.add('active');
+      const input = document.getElementById('playlistNameInput');
+      input.value = '';
+      setTimeout(() => input.focus(), 60);
+    }
+
+    async function submitCreatePlaylist() {
+      const name = document.getElementById('playlistNameInput').value.trim();
+      if (!name) return;
+
+      const res = await safeFetchJson('/api/playlists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name })
       });
-      const data = await res.json();
-      closeCreatePlaylistModal();
-      await fetchPlaylists();
-      if (data.id) {
-        loadPlaylist(data.id);
+
+      if (res.ok && res.data) {
+        closeModal('createPlaylistModal');
+        showToast(`Playlist "${name}" created!`);
+        await loadPlaylists();
+        if (res.data.id) selectPlaylist(res.data.id);
       }
-    } catch (e) {
-      alert('Failed to create playlist');
     }
-  }
 
-  function handleModalOverlayClick(e, modalId) {
-    if (e.target.id === modalId) {
-      document.getElementById(modalId).classList.remove('active');
-    }
-  }
-
-  function openAddToPlaylistModal(songId, songTitle) {
-    activeAddingSongId = songId;
-    document.getElementById('modalSongTitle').innerText = songTitle;
-    const modalList = document.getElementById('modalPlaylistList');
-
-    if (!playlists.length) {
-      modalList.innerHTML = `<div style="color:var(--text-muted); font-size:0.85rem; padding:10px 0;">No playlists yet. Create one in the sidebar first!</div>`;
-    } else {
-      modalList.innerHTML = playlists.map(p => `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.04); border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
-          <div>
-            <div style="font-weight:600; color:#fff; font-size:0.9rem;">${p.name}</div>
-            <div style="font-size:0.75rem; color:var(--text-muted);">${p.song_count || 0} songs</div>
-          </div>
-          <button id="addBtn_${p.id}" class="btn btn-secondary" style="padding:4px 12px; font-size:0.8rem;" onclick="addSongToPlaylist(${p.id}, ${songId})">
-            + Add
-          </button>
-        </div>
-      `).join('');
-    }
-    document.getElementById('addToPlaylistModal').classList.add('active');
-  }
-
-  function closeAddToPlaylistModal() {
-    document.getElementById('addToPlaylistModal').classList.remove('active');
-    activeAddingSongId = null;
-  }
-
-  async function addSongToPlaylist(playlistId, songId) {
-    try {
-      const btn = document.getElementById(`addBtn_${playlistId}`);
-      if (btn) btn.innerText = 'Adding...';
-      const res = await fetch(`/api/playlists/${playlistId}/songs`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ song_id: songId })
-      });
-      const data = await res.json();
-      if (btn) {
-        btn.innerText = 'Added ✓';
-        btn.style.color = '#4ade80';
-        btn.style.borderColor = 'rgba(74, 222, 128, 0.4)';
+    async function deletePlaylistDirect(e, id, name) {
+      e.stopPropagation();
+      if (!confirm(`Delete playlist "${name}"?`)) return;
+      const res = await safeFetchJson(`/api/playlists/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast('Playlist deleted');
+        loadPlaylists();
+        if (activePlaylistId === id) loadAllSongs();
       }
-      fetchPlaylists();
-      if (currentPlaylistId === playlistId) {
-        loadPlaylist(playlistId);
+    }
+
+    async function deleteActivePlaylist() {
+      if (!activePlaylistId || !activePlaylistMeta) return;
+      if (!confirm(`Delete playlist "${activePlaylistMeta.name}"?`)) return;
+      const res = await safeFetchJson(`/api/playlists/${activePlaylistId}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast('Playlist deleted');
+        loadPlaylists();
+        loadAllSongs();
       }
-    } catch (e) {
-      alert('Error adding song to playlist');
-    }
-  }
-
-  async function removeSongFromCurrentPlaylist(songId) {
-    if (!currentPlaylistId) return;
-    try {
-      await fetch(`/api/playlists/${currentPlaylistId}/songs/${songId}`, {
-        method: 'DELETE'
-      });
-      fetchPlaylists();
-      loadPlaylist(currentPlaylistId);
-    } catch (e) {
-      alert('Error removing song from playlist');
-    }
-  }
-
-  async function fetchSongs(query = '') {
-    try {
-      const url = query ? `/api/songs?q=${encodeURIComponent(query)}` : '/api/songs';
-      const res = await fetch(url);
-      songs = await res.json();
-      renderSongs();
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  function formatTime(secs) {
-    if (isNaN(secs) || secs <= 0) return '0:00';
-    const m = Math.floor(secs / 60);
-    const s = Math.floor(secs % 60);
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
-  }
-
-  function renderSongs() {
-    const tbody = document.getElementById('songsList');
-    if (!songs.length) {
-      const msg = currentPlaylistId 
-        ? `No songs in this playlist yet. Go to <a href="javascript:void(0)" onclick="loadAllSongs()" style="color:var(--accent-primary);">All Tracks</a> and click <b>+</b> to add songs!`
-        : `No songs found in library. <a href="/admin" style="color:var(--accent-primary);">Upload or download one now!</a>`;
-      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 40px; color: var(--text-muted);">${msg}</td></tr>`;
-      return;
     }
 
-    tbody.innerHTML = songs.map((s, idx) => `
-      <tr style="${currentIndex === idx ? 'background: rgba(139, 92, 246, 0.12);' : ''}">
-        <td>${idx + 1}</td>
-        <td>
-          <div class="song-row-title">
-            <img class="song-thumb" src="/api/cover/${s.id}" alt="Art">
-            <div>
-              <div style="font-weight: 700; color: #fff;">${s.title}</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">${s.filename}</div>
-            </div>
-          </div>
-        </td>
-        <td>${s.artist}</td>
-        <td>${s.album || '-'}</td>
-        <td><span class="badge ${s.source === 'spotdl' ? 'badge-green' : 'badge-purple'}">${s.source}</span></td>
-        <td>${formatTime(s.duration)}</td>
-        <td style="text-align:center;">
-          <div style="display:inline-flex; align-items:center; gap:8px;">
-            <button class="play-btn-circle" onclick="playSong(${idx})" title="Play Track">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-            <button class="play-btn-circle" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:#fff;" onclick="openAddToPlaylistModal(${s.id}, '${s.title.replace(/'/g, "\\'")}')" title="Add to Playlist">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </button>
-            ${currentPlaylistId ? `
-              <button class="play-btn-circle" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); color:#ef4444;" onclick="removeSongFromCurrentPlaylist(${s.id})" title="Remove from this playlist">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              </button>
-            ` : ''}
-          </div>
-        </td>
-      </tr>
-    `).join('');
-  }
-
-  function playSong(index) {
-    if (index < 0 || index >= songs.length) return;
-    currentIndex = index;
-    const song = songs[currentIndex];
-    
-    document.getElementById('playerTitle').innerText = song.title;
-    document.getElementById('playerArtist').innerText = song.artist;
-    document.getElementById('playerCover').src = `/api/cover/${song.id}`;
-    
-    audio.src = `/api/stream/${song.id}`;
-    audio.play();
-    updatePlayState(true);
-    renderSongs();
-  }
-
-  function togglePlay() {
-    if (!audio.src) {
-      if (songs.length > 0) playSong(0);
-      return;
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
     }
-    if (audio.paused) {
-      audio.play();
-      updatePlayState(true);
-    } else {
-      audio.pause();
-      updatePlayState(false);
+
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      if (e.code === 'Space') { e.preventDefault(); togglePlayPause(); }
+      else if (e.key === 'c' || e.key === 'C') { toggleCyberMiniPlayer(); }
+      else if (e.key === 'n' || e.key === 'N') { playNext(); }
+      else if (e.key === 'p' || e.key === 'P') { playPrev(); }
+      else if (e.key === 'm' || e.key === 'M') { toggleMute(); }
+    });
+
+    function formatTime(s) {
+      if (isNaN(s) || s <= 0) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${sec < 10 ? '0' : ''}${sec}`;
     }
-  }
 
-  function updatePlayState(isPlaying) {
-    document.getElementById('playIcon').style.display = isPlaying ? 'none' : 'block';
-    document.getElementById('pauseIcon').style.display = isPlaying ? 'block' : 'none';
-  }
-
-  function playNext() {
-    if (songs.length === 0) return;
-    const nextIdx = (currentIndex + 1) % songs.length;
-    playSong(nextIdx);
-  }
-
-  function playPrev() {
-    if (songs.length === 0) return;
-    const prevIdx = (currentIndex - 1 + songs.length) % songs.length;
-    playSong(prevIdx);
-  }
-
-  function playAll() {
-    if (songs.length > 0) playSong(0);
-  }
-
-  function setVolume(val) {
-    audio.volume = val;
-  }
-
-  function seekAudio(e) {
-    const container = e.currentTarget;
-    const rect = container.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const ratio = clickX / rect.width;
-    if (audio.duration) {
-      audio.currentTime = ratio * audio.duration;
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
-  }
 
-  let debounceTimer;
-  function handleSearch(val) {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      fetchSongs(val);
-    }, 250);
-  }
+    function escapeQuotes(str) {
+      return String(str || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
+    }
 
-  // Audio events
-  audio.addEventListener('timeupdate', () => {
-    const current = audio.currentTime;
-    const total = audio.duration || 0;
-    document.getElementById('currentTime').innerText = formatTime(current);
-    document.getElementById('totalDuration').innerText = formatTime(total);
-    const pct = total > 0 ? (current / total) * 100 : 0;
-    document.getElementById('progressFill').style.width = `${pct}%`;
-  });
-
-  audio.addEventListener('ended', () => {
-    playNext();
-  });
-
-  // Init
-  loadWorkerInfo();
-  fetchPlaylists();
-  fetchSongs();
-</script>
+    initApp();
+  </script>
 </body>
 </html>

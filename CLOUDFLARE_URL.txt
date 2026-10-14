@@ -1,0 +1,4 @@
+Your Live App URL: https://drink-metallic-queen-apache.trycloudflare.com
+Desktop Player: https://drink-metallic-queen-apache.trycloudflare.com/desktop
+Mobile Player:  https://drink-metallic-queen-apache.trycloudflare.com/mobile
+Admin Portal:   https://drink-metallic-queen-apache.trycloudflare.com/admin
