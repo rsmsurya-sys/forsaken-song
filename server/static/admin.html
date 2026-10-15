@@ -270,6 +270,71 @@
     .modal-overlay.active .modal-content {
       transform: scale(1);
     }
+
+    .storage-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .storage-tab-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: var(--transition-smooth);
+    }
+
+    .storage-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .storage-tab-btn.active {
+      background: rgba(14, 165, 233, 0.18);
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+
+    .storage-tab-content {
+      display: none;
+    }
+
+    .storage-tab-content.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .storage-feature-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: #34d399;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
   </style>
 </head>
 <body>
@@ -284,10 +349,10 @@
       </a>
     </div>
     <div style="display:flex; gap: 12px; align-items:center;">
-      <button class="btn btn-secondary" onclick="openTgModal()" style="display:inline-flex; align-items:center; gap:8px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#38bdf8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .34z"/></svg>
-        <span>Telegram Cloud</span>
-        <span id="tgNavBadge" class="badge badge-purple" style="font-size:0.75rem; padding:2px 8px;">Checking...</span>
+      <button class="btn btn-secondary" onclick="openStorageModal()" style="display:inline-flex; align-items:center; gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#38bdf8"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
+        <span>Cloud Storage</span>
+        <span id="storageNavBadge" class="badge badge-purple" style="font-size:0.75rem; padding:2px 8px;">Checking...</span>
       </button>
       <a href="/desktop" class="btn btn-secondary">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
@@ -389,32 +454,124 @@
   </div>
 </div>
 
-<!-- Telegram Cloud Settings Modal -->
-<div class="modal-overlay" id="tgModal" onclick="closeTgModalOnBackdrop(event)">
-  <div class="modal-content">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+<!-- Free Cloud Storage Settings Modal -->
+<div class="modal-overlay" id="storageModal" onclick="closeStorageModalOnBackdrop(event)">
+  <div class="modal-content" style="max-width: 640px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
       <div style="display:flex; align-items:center; gap:10px;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="#38bdf8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .34z"/></svg>
-        <h3 style="margin:0; font-size:1.25rem;">Telegram Cloud Storage</h3>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#38bdf8"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg>
+        <h3 style="margin:0; font-size:1.25rem;">AWS & GitHub Cloud Storage</h3>
       </div>
-      <button class="btn btn-secondary" onclick="closeTgModal()" style="padding:6px 12px; border-radius:50%; font-size:1rem; line-height:1;">✕</button>
+      <button class="btn btn-secondary" onclick="closeStorageModal()" style="padding:6px 12px; border-radius:50%; font-size:1rem; line-height:1;">✕</button>
     </div>
-    <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:18px;">
-      When configured, songs are uploaded directly to your Telegram Cloud for <strong>free unlimited storage</strong> and deleted from your PC immediately (0 MB used on PC)!
-    </p>
-    <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:20px;">
-      <div>
-        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:6px;">BOT TOKEN (from @BotFather)</label>
-        <input type="text" id="tgBotToken" class="text-input" style="width:100%;" placeholder="e.g. 7839210452:AAH93k...">
+
+    <!-- Provider Selection Tabs -->
+    <div class="storage-tabs">
+      <button class="storage-tab-btn active" id="tabBtn-github" onclick="switchStorageTab('github')">
+        🐙 GitHub Cloud (100% Free)
+      </button>
+      <button class="storage-tab-btn" id="tabBtn-aws" onclick="switchStorageTab('aws')">
+        ☁️ AWS S3 Storage
+      </button>
+      <button class="storage-tab-btn" id="tabBtn-local" onclick="switchStorageTab('local')">
+        💻 Local PC
+      </button>
+    </div>
+
+    <!-- Tab 1: GitHub Releases Storage -->
+    <div class="storage-tab-content active" id="tabContent-github">
+      <div class="storage-feature-badge">
+        <span>✨ 100% Free Forever • Unlimited Audio Cloud • 2GB / Song • PC-ல் 0 MB</span>
       </div>
-      <div>
-        <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:6px;">CHANNEL / CHAT ID (from @userinfobot)</label>
-        <input type="text" id="tgChatId" class="text-input" style="width:100%;" placeholder="e.g. 7254979095 or -100xxxxxxxxxx">
+      <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:16px;">
+        பாடல்கள் தானாக <strong>GitHub Releases Cloud</strong>-ல் சேமிக்கப்படும் (2GB / பாடல் வரை). 
+        கணினியில் 0 MB இடம் பிடிக்கும். நேரடி உலகளாவிய Fast CDN ஸ்ட்ரீமிங் & Seeking சப்போர்ட் உள்ளது!
+      </p>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:18px;">
+        <div>
+          <label style="font-size:0.78rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">
+            GITHUB PERSONAL ACCESS TOKEN (PAT)
+          </label>
+          <input type="password" id="ghToken" class="text-input" style="width:100%;" placeholder="e.g. ghp_xxxxxxxxxxxxxxxxxxxx (github.com/settings/tokens with 'repo' scope)">
+        </div>
+        <div style="display:grid; grid-template-columns:2fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.78rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">
+              GITHUB REPOSITORY
+            </label>
+            <input type="text" id="ghRepo" class="text-input" style="width:100%;" value="rsmsurya-sys/forsaken-song" placeholder="username/repo-name">
+          </div>
+          <div>
+            <label style="font-size:0.78rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:5px;">
+              RELEASE TAG
+            </label>
+            <input type="text" id="ghTag" class="text-input" style="width:100%;" value="music-vault" placeholder="music-vault">
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="btn btn-secondary" onclick="testStorage('github')">🔍 Test GitHub</button>
+        <button class="btn btn-primary" onclick="saveGitHubSettings()">🐙 Activate GitHub Cloud</button>
       </div>
     </div>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span id="tgStatusBadge" class="badge badge-purple">Checking Cloud...</span>
-      <button class="btn btn-primary" onclick="saveTelegramSettings()">Save Cloud Config</button>
+
+    <!-- Tab 2: AWS S3 Storage -->
+    <div class="storage-tab-content" id="tabContent-aws">
+      <div class="storage-feature-badge" style="background:rgba(56, 189, 248, 0.12); border-color:rgba(56, 189, 248, 0.3); color:#38bdf8;">
+        <span>☁️ Amazon Web Services (AWS S3 Bucket)</span>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+        உங்கள் AWS S3 Bucket விவரங்களை உள்ளிடவும். CloudFront மூலமாகவும் ஸ்ட்ரீம் செய்யலாம்.
+      </p>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+        <div style="display:grid; grid-template-columns:2fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">AWS S3 BUCKET NAME</label>
+            <input type="text" id="awsBucket" class="text-input" style="width:100%;" placeholder="e.g. my-music-bucket">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">AWS REGION</label>
+            <input type="text" id="awsRegion" class="text-input" style="width:100%;" value="ap-south-1" placeholder="e.g. ap-south-1 / us-east-1">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">AWS ACCESS KEY ID</label>
+            <input type="text" id="awsAccessKey" class="text-input" style="width:100%;" placeholder="e.g. AKIAIOSFODNN7EXAMPLE">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">AWS SECRET ACCESS KEY</label>
+            <input type="password" id="awsSecretKey" class="text-input" style="width:100%;" placeholder="AWS Secret Key">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">CLOUDFRONT / PUBLIC URL PREFIX (Optional)</label>
+          <input type="text" id="awsPublicPrefix" class="text-input" style="width:100%;" placeholder="e.g. https://d123.cloudfront.net">
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button class="btn btn-secondary" onclick="testStorage('aws')">🔍 Test AWS S3</button>
+        <button class="btn btn-primary" onclick="saveAwsSettings()">☁️ Save AWS S3 Config</button>
+      </div>
+    </div>
+
+    <!-- Tab 3: Local PC Storage -->
+    <div class="storage-tab-content" id="tabContent-local">
+      <div class="storage-feature-badge" style="background:rgba(168, 85, 247, 0.12); border-color:rgba(168, 85, 247, 0.3); color:#c084fc;">
+        <span>💻 Offline / Local Hard Drive Storage</span>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5; margin-bottom:16px;">
+        எந்த கிளவுட் ஸ்டோரேஜும் இல்லாமல் உங்கள் கம்ப்யூட்டரின் Hard Disk-லேயே (<code>music_library/songs/</code>) அனைத்து ஆடியோக்களையும் சேமிக்க விரும்பினால் இதை தேர்வு செய்யவும்.
+      </p>
+      <div style="display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="saveLocalSettings()">💻 Switch to Local PC Storage</button>
+      </div>
+    </div>
+
+    <!-- Footer Status Banner -->
+    <div style="margin-top:20px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
+      <span id="storageStatusBadge" class="badge badge-green">Checking Storage...</span>
+      <span style="font-size:0.75rem; color:var(--text-muted);" id="storageActiveLabel">Active: Catbox Free</span>
     </div>
   </div>
 </div>
@@ -476,20 +633,41 @@
       return;
     }
 
-    tbody.innerHTML = list.map(s => `
-      <tr>
-        <td><img src="/api/cover/${s.id}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'"></td>
-        <td><strong style="color:#fff;">${s.title}</strong><div style="font-size:0.75rem; color:var(--text-muted);">${s.filename}</div></td>
-        <td>${s.artist}</td>
-        <td><span class="badge ${s.source === 'spotdl' ? 'badge-green' : 'badge-purple'}">${s.source}</span></td>
-        <td>${(s.filesize ? (s.filesize / (1024 * 1024)).toFixed(2) + ' MB' : '-')}</td>
-        <td>
-          <button class="btn btn-danger" style="padding:6px 14px; font-size:0.8rem;" onclick="deleteSong(${s.id})">
-            Delete
-          </button>
-        </td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = list.map(s => {
+      let sourceBadge = `<span class="badge badge-purple">${s.source || 'upload'}</span>`;
+      if (s.source === 'github') {
+        sourceBadge = `<span class="badge badge-green">🐙 GitHub</span>`;
+      } else if (s.source === 'aws' || s.source === 's3') {
+        sourceBadge = `<span class="badge badge-green">☁️ AWS S3</span>`;
+      } else if (s.cloud_url || s.source === 'catbox') {
+        sourceBadge = `<span class="badge badge-green">☁️ Cloud</span>`;
+      } else if (s.telegram_file_id || s.source === 'telegram') {
+        sourceBadge = `<span class="badge badge-purple">✈️ Telegram</span>`;
+      } else if (s.source === 'local') {
+        sourceBadge = `<span class="badge badge-purple">💻 Local PC</span>`;
+      }
+
+      const sizeText = (s.filesize ? (s.filesize / (1024 * 1024)).toFixed(2) + ' MB' : '-');
+      const isCloud = Boolean(s.cloud_url || s.telegram_file_id || s.source === 'github' || s.source === 'aws' || s.source === 's3' || s.source === 'catbox' || s.source === 'telegram');
+
+      return `
+        <tr>
+          <td><img src="/api/cover/${s.id}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;" onerror="this.src='/static/logo.png'"></td>
+          <td>
+            <strong style="color:#fff;">${s.title}</strong>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${s.filename} ${isCloud ? '• <span style="color:#38bdf8;">☁️ Cloud</span>' : ''}</div>
+          </td>
+          <td>${s.artist}</td>
+          <td>${sourceBadge}</td>
+          <td>${sizeText} ${isCloud ? '<div style="font-size:0.7rem; color:#34d399;">(0 MB PC)</div>' : ''}</td>
+          <td>
+            <button class="btn btn-danger" style="padding:6px 14px; font-size:0.8rem;" onclick="deleteSong(${s.id})">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
 
   function filterSongs(q) {
@@ -604,80 +782,216 @@
     }
   }
 
-  function openTgModal() {
-    document.getElementById('tgModal').classList.add('active');
+  // ==========================================
+  // Storage Modal & Configuration Controls (AWS & GitHub)
+  // ==========================================
+  let currentStorageConfig = null;
+
+  function openStorageModal() {
+    document.getElementById('storageModal').classList.add('active');
   }
 
-  function closeTgModal() {
-    document.getElementById('tgModal').classList.remove('active');
+  function closeStorageModal() {
+    document.getElementById('storageModal').classList.remove('active');
   }
 
-  function closeTgModalOnBackdrop(e) {
-    if (e.target.id === 'tgModal') {
-      closeTgModal();
+  function closeStorageModalOnBackdrop(e) {
+    if (e.target.id === 'storageModal') {
+      closeStorageModal();
     }
   }
 
-  async function loadTelegramSettings() {
-    const res = await safeFetchJson('/api/telegram/config');
+  function switchStorageTab(tab) {
+    const tabs = ['github', 'aws', 'local'];
+    tabs.forEach(t => {
+      const btn = document.getElementById(`tabBtn-${t}`);
+      const content = document.getElementById(`tabContent-${t}`);
+      if (btn) btn.classList.toggle('active', t === tab);
+      if (content) content.classList.toggle('active', t === tab);
+    });
+  }
+
+  async function loadStorageSettings() {
+    const res = await safeFetchJson('/api/storage/config');
     if (res.ok && res.data) {
       const data = res.data;
-      const badge = document.getElementById('tgStatusBadge');
-      const navBadge = document.getElementById('tgNavBadge');
-      if (data.configured) {
-        if (badge) {
-          badge.innerText = 'Cloud Active (0 PC Storage)';
-          badge.className = 'badge badge-green';
-        }
-        if (navBadge) {
-          navBadge.innerText = 'Active (0 PC)';
-          navBadge.className = 'badge badge-green';
-        }
-        if (data.chat_id) document.getElementById('tgChatId').value = data.chat_id;
-        if (data.token_preview) document.getElementById('tgBotToken').placeholder = data.token_preview;
-      } else {
-        if (badge) {
-          badge.innerText = 'Not Configured (Stores on PC)';
-          badge.className = 'badge badge-purple';
-        }
-        if (navBadge) {
-          navBadge.innerText = 'Configure';
-          navBadge.className = 'badge badge-purple';
-        }
+      currentStorageConfig = data;
+      const provider = data.provider || 'github';
+
+      const navBadge = document.getElementById('storageNavBadge');
+      const statusBadge = document.getElementById('storageStatusBadge');
+      const activeLabel = document.getElementById('storageActiveLabel');
+
+      let labelText = 'GitHub Cloud (0 PC)';
+      let badgeClass = 'badge badge-green';
+
+      if (provider === 'github') {
+        labelText = 'GitHub Cloud (0 PC)';
+        badgeClass = 'badge badge-green';
+        const gh = data.github || {};
+        if (gh.token_preview) document.getElementById('ghToken').placeholder = gh.token_preview;
+        if (gh.repo) document.getElementById('ghRepo').value = gh.repo;
+        if (gh.tag) document.getElementById('ghTag').value = gh.tag;
+      } else if (provider === 'aws' || provider === 's3') {
+        labelText = 'AWS S3 (0 PC)';
+        badgeClass = 'badge badge-green';
+        const aws = data.aws || data.s3 || {};
+        if (aws.bucket_name) document.getElementById('awsBucket').value = aws.bucket_name;
+        if (aws.region) document.getElementById('awsRegion').value = aws.region;
+        if (aws.access_key_id) document.getElementById('awsAccessKey').value = aws.access_key_id;
+        if (aws.secret_access_key_preview) document.getElementById('awsSecretKey').placeholder = aws.secret_access_key_preview;
+        if (aws.public_url_prefix) document.getElementById('awsPublicPrefix').value = aws.public_url_prefix;
+      } else if (provider === 'local') {
+        labelText = 'Local PC Storage';
+        badgeClass = 'badge badge-purple';
       }
+
+      if (navBadge) {
+        navBadge.innerText = labelText;
+        navBadge.className = badgeClass;
+      }
+      if (statusBadge) {
+        statusBadge.innerText = `Active: ${labelText}`;
+        statusBadge.className = badgeClass;
+      }
+      if (activeLabel) {
+        activeLabel.innerText = `Active: ${provider.toUpperCase()}`;
+      }
+
+      switchStorageTab(provider === 's3' ? 'aws' : provider);
     }
   }
 
-  async function saveTelegramSettings() {
-    const token = document.getElementById('tgBotToken').value.trim();
-    const chatId = document.getElementById('tgChatId').value.trim();
-    if (!token || !chatId) {
-      showToast('Bot Token மற்றும் Channel ID இரண்டையும் உள்ளிடவும்!');
+  async function saveGitHubSettings() {
+    const token = document.getElementById('ghToken').value.trim();
+    const repo = document.getElementById('ghRepo').value.trim();
+    const tag = document.getElementById('ghTag').value.trim() || 'music-vault';
+
+    if (!repo) {
+      showToast('GitHub Repository பெயரை உள்ளிடவும் (e.g. username/repo)!');
       return;
     }
 
-    const badge = document.getElementById('tgStatusBadge');
-    if (badge) badge.innerText = 'Testing Connection...';
-    showToast('Testing Telegram Connection...');
-
-    const res = await safeFetchJson('/api/telegram/config', {
+    showToast('Testing & Activating GitHub Cloud...');
+    const res = await safeFetchJson('/api/storage/config', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bot_token: token, chat_id: chatId })
+      body: JSON.stringify({
+        provider: 'github',
+        github: { token: token, repo: repo, tag: tag }
+      })
     });
 
     if (!res.ok) {
-      showToast(res.error || 'Telegram Connection Failed');
-      if (badge) {
-        badge.innerText = 'Connection Failed';
-        badge.className = 'badge btn-danger';
-      }
+      showToast(res.error || 'GitHub connection failed');
       return;
     }
-    showToast(res.data.message || 'Telegram Cloud Connected!');
-    loadTelegramSettings();
-    setTimeout(closeTgModal, 1000);
+    showToast(res.data.message || 'GitHub Cloud Activated!');
+    await loadStorageSettings();
+    setTimeout(closeStorageModal, 1000);
   }
+
+  async function saveAwsSettings() {
+    const bucket = document.getElementById('awsBucket').value.trim();
+    const region = document.getElementById('awsRegion').value.trim() || 'ap-south-1';
+    const accessKey = document.getElementById('awsAccessKey').value.trim();
+    const secretKey = document.getElementById('awsSecretKey').value.trim();
+    const publicPrefix = document.getElementById('awsPublicPrefix').value.trim();
+
+    if (!bucket) {
+      showToast('AWS S3 Bucket Name உள்ளிடவும்!');
+      return;
+    }
+
+    showToast('Testing & Saving AWS S3 Storage...');
+    const res = await safeFetchJson('/api/storage/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        provider: 'aws',
+        aws: {
+          bucket_name: bucket,
+          region: region,
+          access_key_id: accessKey,
+          secret_access_key: secretKey,
+          public_url_prefix: publicPrefix
+        }
+      })
+    });
+
+    if (!res.ok) {
+      showToast(res.error || 'AWS S3 configuration failed');
+      return;
+    }
+    showToast(res.data.message || 'AWS S3 Storage Saved!');
+    await loadStorageSettings();
+    setTimeout(closeStorageModal, 1000);
+  }
+
+  async function saveLocalSettings() {
+    showToast('Switching to Local PC Storage...');
+    const res = await safeFetchJson('/api/storage/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: 'local' })
+    });
+
+    if (!res.ok) {
+      showToast(res.error || 'Failed to switch storage');
+      return;
+    }
+    showToast('Switched to Local PC Storage!');
+    await loadStorageSettings();
+    setTimeout(closeStorageModal, 1000);
+  }
+
+  async function testStorage(provider) {
+    showToast(`Testing ${provider.toUpperCase()} connection...`);
+    const statusBadge = document.getElementById('storageStatusBadge');
+    if (statusBadge) statusBadge.innerText = `Testing ${provider}...`;
+
+    let payload = { provider: provider };
+    if (provider === 'github') {
+      payload.github = {
+        token: document.getElementById('ghToken').value.trim(),
+        repo: document.getElementById('ghRepo').value.trim(),
+        tag: document.getElementById('ghTag').value.trim()
+      };
+    } else if (provider === 'aws') {
+      payload.aws = {
+        bucket_name: document.getElementById('awsBucket').value.trim(),
+        region: document.getElementById('awsRegion').value.trim() || 'ap-south-1',
+        access_key_id: document.getElementById('awsAccessKey').value.trim(),
+        secret_access_key: document.getElementById('awsSecretKey').value.trim(),
+        public_url_prefix: document.getElementById('awsPublicPrefix').value.trim()
+      };
+    }
+
+    const res = await safeFetchJson('/api/storage/test', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok && res.data && res.data.ok) {
+      showToast(res.data.message || `${provider.toUpperCase()} Connection Successful!`);
+      if (statusBadge) {
+        statusBadge.innerText = 'Connection OK';
+        statusBadge.className = 'badge badge-green';
+      }
+    } else {
+      showToast(res.error || (res.data && res.data.error) || 'Connection Failed');
+      if (statusBadge) {
+        statusBadge.innerText = 'Test Failed';
+        statusBadge.className = 'badge btn-danger';
+      }
+    }
+  }
+
+  // Backward compatibility alias
+  function openTgModal() { openStorageModal(); }
+  function closeTgModal() { closeStorageModal(); }
+  function loadTelegramSettings() { loadStorageSettings(); }
 
   // Auto-refresh tasks every 3 seconds
   setInterval(fetchTasks, 3000);
@@ -686,7 +1000,7 @@
   loadWorker();
   fetchAdminData();
   fetchTasks();
-  loadTelegramSettings();
+  loadStorageSettings();
 </script>
 </body>
 </html>

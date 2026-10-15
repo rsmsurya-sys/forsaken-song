@@ -204,38 +204,42 @@ async def stream_song(song_id: int, request: Request):
     if not song:
         raise HTTPException(status_code=404, detail="Song not found")
 
-    # If hosted on Telegram Cloud, stream directly as same-origin with range support & CORS
-    if song.get("telegram_file_id"):
-        from server.telegram_storage import get_telegram_file_stream_url
-        import requests
-        tg_url = get_telegram_file_stream_url(song["telegram_file_id"])
-        if tg_url:
-            range_header = request.headers.get("Range")
-            headers = {"Range": range_header} if range_header else {}
-            try:
-                tg_res = requests.get(tg_url, headers=headers, stream=True, timeout=20)
-                resp_headers = {
-                    "Accept-Ranges": "bytes",
-                    "Content-Type": "audio/mpeg",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
-                    "Access-Control-Allow-Headers": "Range, Accept-Ranges"
-                }
-                if "Content-Length" in tg_res.headers:
-                    resp_headers["Content-Length"] = tg_res.headers["Content-Length"]
-                if "Content-Range" in tg_res.headers:
-                    resp_headers["Content-Range"] = tg_res.headers["Content-Range"]
+    # If hosted on Cloud (Catbox, S3, or Telegram), stream directly as same-origin with range support & CORS
+    cloud_stream_url = None
+    if song.get("cloud_url"):
+        cloud_stream_url = song["cloud_url"]
+    elif song.get("telegram_file_id"):
+        from server.cloud_storage import get_telegram_file_stream_url
+        cloud_stream_url = get_telegram_file_stream_url(song["telegram_file_id"])
 
-                return StreamingResponse(
-                    tg_res.iter_content(chunk_size=65536),
-                    status_code=tg_res.status_code,
-                    headers=resp_headers,
-                    media_type="audio/mpeg"
-                )
-            except Exception as e:
-                print(f"Error streaming song {song_id} from Telegram: {e}")
-                from fastapi.responses import RedirectResponse
-                return RedirectResponse(url=tg_url, status_code=307)
+    if cloud_stream_url:
+        import requests
+        range_header = request.headers.get("Range")
+        headers = {"Range": range_header} if range_header else {}
+        try:
+            c_res = requests.get(cloud_stream_url, headers=headers, stream=True, timeout=25)
+            resp_headers = {
+                "Accept-Ranges": "bytes",
+                "Content-Type": c_res.headers.get("Content-Type", "audio/mpeg"),
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+                "Access-Control-Allow-Headers": "Range, Accept-Ranges"
+            }
+            if "Content-Length" in c_res.headers:
+                resp_headers["Content-Length"] = c_res.headers["Content-Length"]
+            if "Content-Range" in c_res.headers:
+                resp_headers["Content-Range"] = c_res.headers["Content-Range"]
+
+            return StreamingResponse(
+                c_res.iter_content(chunk_size=65536),
+                status_code=c_res.status_code,
+                headers=resp_headers,
+                media_type=resp_headers["Content-Type"]
+            )
+        except Exception as e:
+            print(f"Error streaming song {song_id} from Cloud: {e}")
+            from fastapi.responses import RedirectResponse
+            return RedirectResponse(url=cloud_stream_url, status_code=307)
 
     file_path = SONGS_DIR / song["filename"]
     if not file_path.exists():
@@ -322,13 +326,18 @@ async def upload_songs(files: List[UploadFile] = File(...)):
         title, artist, album, duration, cover_fn = extract_metadata(saved_path, COVERS_DIR)
         filesize = len(content)
 
-        # Upload to Telegram Cloud if configured (saves 0 bytes on PC!)
-        from server.telegram_storage import upload_audio_to_telegram, get_telegram_config
-        tg_cfg = get_telegram_config()
+        # Upload to Cloud if configured (saves 0 bytes on PC!)
+        from server.cloud_storage import upload_audio_file
+        upload_res = upload_audio_file(saved_path, title, artist, int(duration))
+        cloud_url = None
         tg_file_id = None
-        if tg_cfg.get("bot_token") and tg_cfg.get("chat_id"):
-            tg_file_id = upload_audio_to_telegram(saved_path, title, artist, int(duration))
-            if tg_file_id:
+        source = "upload"
+        if upload_res:
+            cloud_url = upload_res.get("url")
+            tg_file_id = upload_res.get("file_id")
+            provider = upload_res.get("provider", "cloud")
+            if provider != "local" and (cloud_url or tg_file_id):
+                source = provider
                 # Delete from PC disk immediately - 0 bytes used on PC!
                 try:
                     saved_path.unlink()
@@ -343,8 +352,9 @@ async def upload_songs(files: List[UploadFile] = File(...)):
             filename=safe_name,
             cover_filename=cover_fn,
             filesize=filesize,
-            source="telegram" if tg_file_id else "upload",
-            telegram_file_id=tg_file_id
+            source=source,
+            telegram_file_id=tg_file_id,
+            cloud_url=cloud_url
         )
         
         results.append({
@@ -352,10 +362,100 @@ async def upload_songs(files: List[UploadFile] = File(...)):
             "title": title, 
             "artist": artist, 
             "filename": safe_name, 
-            "cloud": bool(tg_file_id)
+            "cloud": bool(cloud_url or tg_file_id)
         })
         
     return {"uploaded": len(results), "songs": results}
+
+class StorageSettingsReq(BaseModel):
+    provider: str  # "github", "aws", "local"
+    github: Optional[Dict[str, Any]] = None
+    aws: Optional[Dict[str, Any]] = None
+    s3: Optional[Dict[str, Any]] = None
+    catbox: Optional[Dict[str, Any]] = None
+    telegram: Optional[Dict[str, Any]] = None
+
+@app.get("/api/storage/config")
+async def get_storage_settings():
+    from server.cloud_storage import get_storage_config
+    cfg = get_storage_config()
+    provider = cfg.get("provider", "github")
+
+    gh_info = dict(cfg.get("github", {}))
+    if gh_info.get("token"):
+        t = gh_info["token"]
+        gh_info["token_preview"] = f"{t[:4]}...{t[-4:]}" if len(t) > 8 else "Configured"
+        gh_info["token"] = ""  # Do not return full token in GET
+    else:
+        gh_info["token_preview"] = ""
+
+    aws_info = dict(cfg.get("aws", {}))
+    if aws_info.get("secret_access_key"):
+        sec = aws_info["secret_access_key"]
+        aws_info["secret_access_key_preview"] = f"{sec[:3]}...{sec[-3:]}" if len(sec) > 6 else "Configured"
+        aws_info["secret_access_key"] = ""  # Do not return full secret in GET
+    else:
+        aws_info["secret_access_key_preview"] = ""
+
+    return {
+        "provider": provider,
+        "github": gh_info,
+        "aws": aws_info,
+        "catbox": cfg.get("catbox", {}),
+        "telegram": cfg.get("telegram", {})
+    }
+
+@app.post("/api/storage/config")
+async def save_storage_settings(req: StorageSettingsReq):
+    from server.cloud_storage import save_storage_config, test_storage_connection, get_storage_config
+    req_dict = req.dict(exclude_none=True)
+    provider = req.provider.lower().strip()
+
+    existing = get_storage_config()
+    # Preserve existing secrets if empty string passed in update
+    if provider == "github" and "github" in req_dict:
+        if not req_dict["github"].get("token") and existing.get("github", {}).get("token"):
+            req_dict["github"]["token"] = existing["github"]["token"]
+
+    if provider in ("aws", "s3"):
+        target_dict = req_dict.get("aws") or req_dict.get("s3") or {}
+        if not target_dict.get("secret_access_key") and existing.get("aws", {}).get("secret_access_key"):
+            target_dict["secret_access_key"] = existing["aws"]["secret_access_key"]
+        req_dict["aws"] = target_dict
+
+    test = test_storage_connection(provider, req_dict)
+    if not test.get("ok"):
+        raise HTTPException(status_code=400, detail=test.get("error", "Storage connection test failed"))
+
+    save_storage_config(req_dict)
+    return {
+        "ok": True,
+        "provider": provider,
+        "message": test.get("message", f"Storage provider '{provider}' activated successfully!"),
+        "status": "active"
+    }
+
+@app.post("/api/storage/test")
+async def test_storage_endpoint(req: StorageSettingsReq):
+    from server.cloud_storage import test_storage_connection, get_storage_config
+    req_dict = req.dict(exclude_none=True)
+    provider = req.provider.lower().strip()
+
+    existing = get_storage_config()
+    if provider == "github" and "github" in req_dict:
+        if not req_dict["github"].get("token") and existing.get("github", {}).get("token"):
+            req_dict["github"]["token"] = existing["github"]["token"]
+
+    if provider in ("aws", "s3"):
+        target_dict = req_dict.get("aws") or req_dict.get("s3") or {}
+        if not target_dict.get("secret_access_key") and existing.get("aws", {}).get("secret_access_key"):
+            target_dict["secret_access_key"] = existing["aws"]["secret_access_key"]
+        req_dict["aws"] = target_dict
+
+    test = test_storage_connection(provider, req_dict)
+    if not test.get("ok"):
+        raise HTTPException(status_code=400, detail=test.get("error", "Storage test failed"))
+    return test
 
 class TelegramSettingsReq(BaseModel):
     bot_token: str
@@ -363,7 +463,7 @@ class TelegramSettingsReq(BaseModel):
 
 @app.get("/api/telegram/config")
 async def get_tg_settings():
-    from server.telegram_storage import get_telegram_config
+    from server.cloud_storage import get_telegram_config
     cfg = get_telegram_config()
     token = cfg.get("bot_token", "")
     masked_token = f"{token[:6]}...{token[-4:]}" if len(token) > 10 else ("Configured" if token else "")
@@ -371,7 +471,7 @@ async def get_tg_settings():
 
 @app.post("/api/telegram/config")
 async def save_tg_settings(req: TelegramSettingsReq):
-    from server.telegram_storage import save_telegram_config, test_telegram_connection
+    from server.cloud_storage import save_telegram_config, test_telegram_connection
     test = test_telegram_connection(req.bot_token, req.chat_id)
     if not test.get("ok"):
         raise HTTPException(status_code=400, detail=test.get("error", "Telegram connection failed"))

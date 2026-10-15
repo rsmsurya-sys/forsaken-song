@@ -86,9 +86,10 @@ uv run python -m uvicorn server.main:app --port 8000 --reload
 ```
 
 ### App URLs:
-- **Desktop Studio (Full Experience)**: `http://localhost:8000/desktop`
-- **Mobile Responsive Player**: `http://localhost:8000/mobile`
-- **Admin Hub & Telegram Cloud**: `http://localhost:8000/admin`
+- **Desktop Studio (Pure Listener Experience)**: `http://localhost:8000/desktop`
+- **Mobile Responsive Player (Pure Listener Experience)**: `http://localhost:8000/mobile`
+- **Admin Hub & Cloud Storage (Direct / Separate Access)**: `http://localhost:8000/admin`
+  - *Supported Storage*: **GitHub Releases Cloud Vault** (100% Free Unlimited Storage, 2GB / song) or **AWS S3 Bucket**!
 
 ---
 

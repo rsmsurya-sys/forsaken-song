@@ -54,13 +54,18 @@ def scan_and_index_directory(songs_dir: Path, covers_dir: Path) -> int:
                     title, artist, album, duration, cover_fn = extract_metadata(file_path, covers_dir)
                     filesize = file_path.stat().st_size
 
-                    # Check Telegram Cloud storage
-                    from server.telegram_storage import upload_audio_to_telegram, get_telegram_config
-                    tg_cfg = get_telegram_config()
+                    # Check Cloud storage (Catbox Free, S3, or Telegram)
+                    from server.cloud_storage import upload_audio_file
+                    upload_res = upload_audio_file(file_path, title, artist, int(duration))
+                    cloud_url = None
                     tg_file_id = None
-                    if tg_cfg.get("bot_token") and tg_cfg.get("chat_id"):
-                        tg_file_id = upload_audio_to_telegram(file_path, title, artist, int(duration))
-                        if tg_file_id:
+                    source = "spotdl"
+                    if upload_res:
+                        cloud_url = upload_res.get("url")
+                        tg_file_id = upload_res.get("file_id")
+                        provider = upload_res.get("provider", "cloud")
+                        if provider != "local" and (cloud_url or tg_file_id):
+                            source = provider
                             # Remove file from disk immediately! 0 bytes on PC!
                             try:
                                 file_path.unlink()
@@ -75,8 +80,9 @@ def scan_and_index_directory(songs_dir: Path, covers_dir: Path) -> int:
                         filename=file_path.name,
                         cover_filename=cover_fn,
                         filesize=filesize,
-                        source="telegram" if tg_file_id else "spotdl",
-                        telegram_file_id=tg_file_id
+                        source=source,
+                        telegram_file_id=tg_file_id,
+                        cloud_url=cloud_url
                     )
                     indexed_count += 1
                 except Exception as e:

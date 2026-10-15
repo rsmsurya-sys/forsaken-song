@@ -303,7 +303,6 @@
     </div>
     <div style="display:flex; align-items:center; gap:8px;">
       <a href="/desktop" class="badge badge-purple" style="text-decoration:none;">Desktop</a>
-      <a href="/admin" class="badge badge-green" style="text-decoration:none;">Admin</a>
     </div>
   </header>
 
@@ -409,10 +408,6 @@
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <span>Discover</span>
     </button>
-    <button class="nav-btn" onclick="window.location.href='/admin'">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      <span>Admin</span>
-    </button>
   </nav>
 
   <!-- MOBILE AI PROMPT MODAL -->
@@ -467,7 +462,7 @@
       if (activeFilter === 'liked') {
         displayed = songs.filter(s => liked.has(s.id));
       } else if (activeFilter === 'cloud') {
-        displayed = songs.filter(s => s.telegram_file_id || s.source === 'telegram');
+        displayed = songs.filter(s => s.cloud_url || s.telegram_file_id || s.source === 'catbox' || s.source === 's3' || s.source === 'cloud' || s.source === 'telegram');
       } else if (typeof activeFilter === 'number') {
         // specific playlist
         loadPlaylistSongs(activeFilter);
@@ -498,7 +493,7 @@
             <img src="/api/cover/${s.id}" class="track-thumb" onerror="this.src='/static/logo.png'">
             <div class="track-meta">
               <div class="track-name">${escapeHtml(s.title)}</div>
-              <div class="track-artist">${escapeHtml(s.artist || 'Unknown')} ${s.telegram_file_id ? '• ☁️ Cloud' : ''}</div>
+              <div class="track-artist">${escapeHtml(s.artist || 'Unknown')} ${(s.cloud_url || s.telegram_file_id) ? '• ☁️ Cloud' : ''}</div>
             </div>
           </div>
           <span style="font-size:0.75rem; color:var(--sp-text-muted);">${formatTime(s.duration)}</span>

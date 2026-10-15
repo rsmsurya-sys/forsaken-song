@@ -34,6 +34,10 @@ def init_db():
         cursor.execute("ALTER TABLE songs ADD COLUMN telegram_file_id TEXT")
     except Exception:
         pass
+    try:
+        cursor.execute("ALTER TABLE songs ADD COLUMN cloud_url TEXT")
+    except Exception:
+        pass
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tasks (
@@ -92,13 +96,13 @@ def song_exists_by_filename(filename: str) -> bool:
 
 def add_song(title: str, artist: str, album: str, duration: float, 
              filename: str, cover_filename: Optional[str], filesize: int, source: str = 'upload',
-             telegram_file_id: Optional[str] = None) -> int:
+             telegram_file_id: Optional[str] = None, cloud_url: Optional[str] = None) -> int:
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO songs (title, artist, album, duration, filename, cover_filename, filesize, source, telegram_file_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (title, artist, album, duration, filename, cover_filename, filesize, source, telegram_file_id))
+        INSERT INTO songs (title, artist, album, duration, filename, cover_filename, filesize, source, telegram_file_id, cloud_url)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (title, artist, album, duration, filename, cover_filename, filesize, source, telegram_file_id, cloud_url))
     song_id = cursor.lastrowid
     conn.commit()
     conn.close()
